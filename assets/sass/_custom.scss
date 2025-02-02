@@ -1,0 +1,10 @@
+.author_picture {
+  width: 250px !important;  // Increased from 150px to 250px
+  height: 250px !important; // Keep equal to width
+  border-radius: 50% !important;  // Makes it circular
+  object-fit: cover !important;
+  border: 3px solid #2c3e50 !important;  // Adds a subtle border
+  box-shadow: 0 0 10px rgba(0,0,0,0.2) !important;  // Adds depth
+  margin: 10px auto !important;  // Centers the image
+  display: block !important;
+}

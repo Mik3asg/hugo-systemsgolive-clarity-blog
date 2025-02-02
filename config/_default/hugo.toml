@@ -1,0 +1,30 @@
+# set `baseurl` to your root domain
+# if you set it to "/" share icons won't work properly on production
+baseurl = "https://example.com/"  # Include trailing slash
+title = "SystemsGolive"  # Edit directly from config/_default/languages.toml # alternatively, uncomment this and remove `title` entry from the aforemention file.
+#copyright = "Copyright © 2008–2018, Steve Francia and the Hugo Authors; all rights reserved."
+#copyright = "© 2024-2025 SystemsGo.live | All rights reserved"
+copyright = "© 2025 SystemsGo.live and Mickael Asghar. All right reserved."
+
+# canonifyurls = true
+
+theme = "hugo-clarity"
+disqusShortname = ""
+
+DefaultContentLanguage = "en"
+# [languages]
+# config/_default/languages.toml
+
+# [menus]
+# config/_default/menus/menu.xx.toml
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[pagination]
+  pagerSize = 10
