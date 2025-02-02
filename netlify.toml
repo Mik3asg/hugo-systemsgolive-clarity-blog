@@ -1,6 +1,9 @@
 [build]
 publish = "public"
-command = "hugo --minify --debug"  # Changed to --debug instead of -v
+command = """
+    git submodule update --init --recursive --depth=1
+    hugo --minify
+"""
 
 [build.environment]
 HUGO_VERSION = "0.139.0"
