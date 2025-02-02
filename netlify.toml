@@ -1,6 +1,6 @@
 [build]
 publish = "public"
-command = "hugo -v --minify"  # Added -v for verbose output
+command = "hugo --minify --debug"  # Changed to --debug instead of -v
 
 [build.environment]
 HUGO_VERSION = "0.139.0"
