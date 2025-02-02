@@ -1,12 +1,13 @@
 [build]
 publish = "public"
-command = "hugo"
+command = "hugo --minify"  # Added minify flag
 
 [build.environment]
 HUGO_VERSION = "0.139.0"
 GO_VERSION = "1.23.4"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
+HUGO_EXTENDED = "true"    # Added to specify extended version
 
 [context.production.environment]
 HUGO_ENV = "production"
