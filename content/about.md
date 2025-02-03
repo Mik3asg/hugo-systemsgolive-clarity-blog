@@ -10,6 +10,8 @@ author = "Mickael Asghar"
 Welcome to SystemsGo.live! The purpose of this blog is to share technical insights, hands-on experiences, and solutions to real-world challenges in cloud computing, automation, networking, Linux, microservices, cybersecurity, and beyond.
 
 # Who am I?
+![Mickael Asghar](/images/mickael-pic-45.png)
+
 I'm Mickael Asghar, a DevOps Engineer with 14+ years of experience spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. With a Master's in Network Architecture and Security from ESIGELEC (France, 2010), I've built my career around creating robust technical solutions.
 My expertise focuses on:
 
@@ -22,7 +24,6 @@ My expertise focuses on:
 Born in France to Pakistani parents, I now call Bristol, UK home, where I live with my Spanish wife and three kids. This multicultural background has shaped me into an adaptable professional who thrives on new challenges. My ability to communicate fluently in French, English, Urdu, and Spanish brings valuable perspectives to collaborative projects.
 
 Beyond tech, I maintain a balanced life through regular walks, quality family time, and staying sharp with workouts and engaging podcasts.
-![Mickael Asghar](/images/mickael-pic-45.png)
 
 # Current Role & Expertise
 I'm currently working as a DevOps Engineer at Carebeans, a UK software company transforming the social care sector with innovative digital solutions.

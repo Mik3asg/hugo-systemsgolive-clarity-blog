@@ -2,7 +2,7 @@
 # if you set it to "/" share icons won't work properly on production
 
 #baseurl = "https://whimsical-muffin-b06fa5.netlify.app/"  # Updated to your Netlify URL
-baseurl = ""https://systemsgo.live/"  # Updated to your Netlify URL
+baseurl = "https://systemsgo.live/"  # Updated to your Netlify URL
 
 title = "SystemsGolive"  # Edit directly from config/_default/languages.toml # alternatively, uncomment this and remove `title` entry from the aforemention file.
 
