@@ -1,0 +1,10 @@
+We used the SVG code from the 'systemsgolive-logo-transparent.svg' file.
+
+To review the visual appearance, we used the online tool: 'https://www.svgviewer.dev/svg-to-png'
+
+Steps taken:
+    - Used the Preview and Adjust option at the bottom to modify the background (only for preview purposes).
+    - The original SVG file has a transparent background.
+    - Converted the SVG to PNG using the PNG tab and downloaded it in 0.5x and 1x resolutions.
+    - Imported both PNG and SVG files into the /logos directory.
+    - Updated the params.toml file accordingly.
