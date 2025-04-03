@@ -5,7 +5,7 @@ draft: false
 tags: ['Infrastructure','Reverse Proxy', 'Apache']
 categories: ['Linux']
 thumbnail: "images/reverse-proxy.png"
-summary: "This article outlines our server-side workaround in a non-production environment that enabled access to the TEST Tomcat application without modifying any network security rules, using Apache as a reverse proxy"
+summary: "This article outlines our server-side workaround in a non-production environment that enabled access to the TEST Tomcat application without modifying any network security rules, using Apache as a reverse proxy."
 ---
 ## Background
 During a test environment setup, we encountered a common network security constraint. Our AlmaLinux 8.10 test VM was part of a security group that only allowed TCP port 80 access from our corporate VPN IP. We needed to access a test Tomcat application running on port 8080, but we couldn’t modify the existing security group to open that port, as we lacked the necessary permissions.
