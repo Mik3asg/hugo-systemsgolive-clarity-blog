@@ -4,7 +4,7 @@ date: 2025-04-03T00:15:58Z
 draft: false
 tags: ['Infrastructure','Reverse Proxy', 'Apache']
 categories: ['Linux']
-thumbnail: "images/go-postgresql-docker.png"
+thumbnail: "images/reverse-proxy.png"
 summary: "This article outlines our server-side workaround in a non-production environment that enabled access to the TEST Tomcat application without modifying any network security rules, using Apache as a reverse proxy"
 ---
 ## Background
