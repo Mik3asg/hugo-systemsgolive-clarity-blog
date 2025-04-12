@@ -1,7 +1,7 @@
 ---
-date = '2025-04-11T18:13:00+01:00'
-draft = false
-title = "Never Pay for Forgotten AWS EC2 Instances Again: A Python Boto3 Script to Check and Terminate EC2 Instances"
+date: '2025-04-11T18:13:00+01:00'
+draft: false
+title: "Never Pay for Forgotten AWS EC2 Instances Again: A Python Boto3 Script to Check and Terminate EC2 Instances"
 tags: ['AWS, 'Billing', 'Cost Optimisation', 'EC2', 'Script', 'Python']
 categories: ['AWS']
 summary: "This article shows how to leverage a Python script that uses AWS SDK (Boto3) to check EC2 instance status across all regions. Learn to find, stop, and terminate forgotten instances to avoid unexpected AWS bills"
