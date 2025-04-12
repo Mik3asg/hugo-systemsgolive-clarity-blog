@@ -22,7 +22,7 @@ DefaultContentLanguage = "en"
 # [menus]
 # config/_default/menus/menu.xx.toml
 
-[taxonomies]
+[taxonomies]  
 category = "categories"
 tag = "tags"
 #series = "series"
