@@ -2,7 +2,7 @@
 date: '2025-04-11T18:13:00+01:00'
 draft: true
 title: "Never Pay for Forgotten AWS EC2 Instances Again: A Python Boto3 Script to Check and Terminate EC2 Instances"
-tags: ['AWS, 'Billing', 'Cost Optimisation', 'EC2', 'Script', 'Python']
+tags: ['AWS', 'Billing', 'Cost Optimisation', 'EC2', 'Script', 'Python']
 categories: ['AWS']
 summary: "This article shows how to leverage a Python script that uses AWS SDK (Boto3) to check EC2 instance status across all regions. Learn to find, stop, and terminate forgotten instances to avoid unexpected AWS bills"
 thumbail: "images/python-ec2-cost.png"
@@ -24,6 +24,7 @@ Before using this script, you'll need:
 
 1. Python Installation
 Since I am using Fedora distribution on my machine, you can install Python with:
+
 ```bash
 sudo dnf install python3 python3-pip
 ```
