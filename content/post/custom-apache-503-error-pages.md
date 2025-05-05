@@ -121,7 +121,7 @@ sudo systemctl stop tomcat
 
 #### Step 5 – Test
 - Visit: https://www.example.com
-- Clear your browser cache and refresh until you land on Tomcat-01
+- Clear your browser cache and refresh until you land on Tomcat-01.
 
 #### Step 6 – Verify:
 You should see the custom Planned Maintenance custom error page.
@@ -166,7 +166,7 @@ sudo systemctl stop tomcat
 
 #### Step 4 – Test
 - Visit: https://www.example.com
-- Clear your browser cache and refresh until you land on Tomcat-01
+- Clear your browser cache and refresh until you land on Tomcat-01.
 
 #### Step 5 – Verify:
 Validate if you see the custom Unexpected Outage error page. Now, the Unexpected Outage page will be the default page for all future 503 errors.
