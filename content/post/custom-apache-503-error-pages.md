@@ -4,7 +4,7 @@ date: 2025-05-05T09:41:56+01:00
 draft: false
 tags: ['Infrastructure','Web Applications', 'Apache']
 categories: ['Linux']
-thumbnail: ""
+thumbnail: "images/503-image.png"
 summary: "This article outlines the implementation and usage of custom Apache 503 error pages on production Tomcat web application instances"
 ---
 ## Overview
