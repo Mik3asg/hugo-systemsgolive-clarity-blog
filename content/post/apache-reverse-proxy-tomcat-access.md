@@ -1,7 +1,7 @@
 ---
 title: "Bypassing Security Group Restrictions: Using Apache as a Reverse Proxy to Access Tomcat in a Test Environment"
 date: 2025-04-03T00:15:58Z
-draft: false
+draft: true
 tags: ['Infrastructure','Reverse Proxy', 'Apache']
 categories: ['Linux']
 thumbnail: "images/reverse-proxy.png"
