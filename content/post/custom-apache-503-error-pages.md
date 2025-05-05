@@ -179,3 +179,6 @@ sudo systemctl start tomcat
 
 #### Step 7 – Repeat:
 Repeat the above steps on the required Tomcat web app instances.
+
+## Conclusion
+Custom Apache 503 error pages provide a clear and controlled way to communicate service interruptions. With proper setup, teams can switch between planned and unexpected outage messages based on operational needs.
