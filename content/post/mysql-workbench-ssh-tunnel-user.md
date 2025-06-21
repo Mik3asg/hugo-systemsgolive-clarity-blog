@@ -3,6 +3,7 @@ title: "Standardised MySQL Access via SSH Tunnel for Workbench in Non-Production
 date: 2025-06-21T15:37:38+01:00 
 draft: false 
 thumbnail: "images/mysql-workbench-ssh-tunnel.png" 
+summary: "A secure and standardised approach to accessing MySQL in non-production environments using SSH tunneling, with a focus on least privilege and improved access controls."
 categories: ['Infrastrucure','Database','Security']
 tags:
   - MySQL
