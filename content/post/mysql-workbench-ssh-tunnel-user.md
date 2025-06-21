@@ -1,13 +1,13 @@
 ---
 title: "Standardised MySQL Access via SSH Tunnel for Workbench in Non-Production Environments"
 date: 2025-06-21T15:37:38+01:00 
-draft: true # Sets whether to render this page. Draft of true will not be rendered.
-thumbnail: "/images/path/thumbnail.png" # Sets thumbnail image appearing inside card on homepage.
-categories:
-  - Technology
+draft: false 
+thumbnail: "images/mysql-workbench-ssh-tunnel.png" 
+categories: ['Infrastrucure','Database','Security']
 tags:
-  - Tag_name1
-  - Tag_name2
+  - MySQL
+  - Workbench
+  - SSH 
 ---
 ## Current Issue & Security Risk
 In the current UAT setup, a shared system account `vmadmin` is used for both SSH login to the VM and SSH tunneling for MySQL Workbench. Each trusted internal user (e.g., DevOps and Software Engineers, Support Team) uses a dedicated private SSH key with this account.
