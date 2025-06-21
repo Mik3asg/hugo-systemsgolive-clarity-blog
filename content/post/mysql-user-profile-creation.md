@@ -1,5 +1,5 @@
 ---
-title: "Mysql User Profile Creation Guide" # Title of the blog post.
+title: "MySQL User Profile Creation Guide" # Title of the blog post.
 date: 2025-06-21T16:52:43+01:00 # Date of post creation.
 description: "Article description." # Description used for search engine.
 draft: false 
