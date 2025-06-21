@@ -2,8 +2,8 @@
 title: "Mysql User Profile Creation" # Title of the blog post.
 date: 2025-06-21T16:52:43+01:00 # Date of post creation.
 description: "Article description." # Description used for search engine.
-draft: true # Sets whether to render this page. Draft of true will not be rendered.
-thumbnail: "images/mysql-user-profile-creation.png" # Sets thumbnail image appearing inside card on homepage.
+draft: false 
+thumbnail: "images/mysql-user-profile-creation.png" 
 summary: "Learn how to set up MySQL user accounts with role-based access profiles, secure configurations, and consistent privilege management across environments."
 categories:
   - Database Admininistration
