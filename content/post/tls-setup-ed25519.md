@@ -1,6 +1,6 @@
 ---
 title: "A Guide to TLS Client-Server Implementation with private CA, using Ed25519 Elliptic Curve Cryptography"
-date = '2025-07-10T11:37:03+01:00'
+date: 2025-07-10T11:37:03+01:00
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Ed25519']
 categories: ['Security']
