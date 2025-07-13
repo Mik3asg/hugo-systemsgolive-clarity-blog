@@ -13,8 +13,6 @@ This project showcases an end-to-end DevOps pipeline for deploying a basic Flask
 - [GitHub Repository for Continous Integration hosting our basic Flask application code](https://github.com/Mik3asg/Flask-App-Jenkins-CI-EKS.git)
 - [GitHub Repository for GitOps and Update of K8s Manifest](https://github.com/Mik3asg/Flask-App-Jenkins-GitOps-EKS.git)
 
-
-
 ## Pre-requisites/Assumptions:
 - AWS Account created
 - AWS CLI installed on local machine

@@ -1,5 +1,5 @@
 ---
-title: " Building a simple REST API in Golang with MUX, PostgreSQL and Docker"
+title: "Building a simple REST API in Golang with MUX, PostgreSQL and Docker"
 date: 2024-02-09T00:17:09Z
 draft: false
 tags: ['Golang', 'Docker', 'PostgreSQL', 'API']
