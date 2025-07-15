@@ -527,7 +527,8 @@ SECRET DATA: password123 - credit card: 1234-5678-9012-3456
 ## Conclusion
 
 This implementation demonstrates secure TLS 1.3 communication using Ed25519 elliptic curve cryptography and a private Certificate Authority (CA). 
-Key outcomes:
+
+The key outcomes are aummarised below:
 
 - **Ed25519**: Strong cryptographic security with fast key generation and smaller signatures.
 - **TLS 1.3**: Enforces modern encryption with forward secrecy and reduced handshake overhead.
