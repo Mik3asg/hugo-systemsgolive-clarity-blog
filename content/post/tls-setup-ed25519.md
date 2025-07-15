@@ -521,14 +521,14 @@ SECRET DATA: password123 - credit card: 1234-5678-9012-3456
 
  | Protocol (Client)         | Experience           | Network Security     | Attacker Visibility         |
 |----------------------------|-----------------------|------------------------|-----------------------------|
-| HTTPS (TLS 1.3 + Ed25519) | ✅ Normal data access | 🔒 Fully encrypted     | ❌ Encrypted gibberish only |
-| HTTP (Unencrypted)        | ✅ Normal data access | ❌ No protection       | ✅ All secrets visible      |
+| HTTPS (TLS 1.3 + Ed25519) | Normal data access | Fully encrypted     | Encrypted gibberish only |
+| HTTP (Unencrypted)        | Normal data access | No protection       | All secrets visible      |
 
 ## Conclusion
 
 This implementation demonstrates secure TLS 1.3 communication using Ed25519 elliptic curve cryptography and a private Certificate Authority (CA). 
 
-The key outcomes are aummarised below:
+The key outcomes are summarised below:
 
 - **Ed25519**: Strong cryptographic security with fast key generation and smaller signatures.
 - **TLS 1.3**: Enforces modern encryption with forward secrecy and reduced handshake overhead.
