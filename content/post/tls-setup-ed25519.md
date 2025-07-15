@@ -1,15 +1,15 @@
 ---
-title: "A Guide to TLS Client-Server Implementation with private CA, using Ed25519 Elliptic Curve Cryptography"
+title: "A Guide to Generating TLS Ed25519 (Elliptic Curve Cryptography) Certificates Using Private CA"
 date: 2025-07-10T11:37:03+01:00
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Ed25519']
 categories: ['Security']
 thumbnail: "images/tls-ed25519.png"
-summary: "This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve cryptography and a private Certificate Authority (CA). It covers encrypted client-server communication using modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network setups."
+summary: "This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve certificates and a private Certificate Authority (CA). It covers encrypted client-server communication with modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network architectures."
 ---
 ## Overview
 
-This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve cryptography and a private Certificate Authority (CA). It covers encrypted client-server communication using modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network setups.
+This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve certificates and a private Certificate Authority (CA). It covers encrypted client-server communication with modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network architectures.
 
 ### What Is Ed25519 and How Does It Compare to RSA?
 
@@ -47,11 +47,14 @@ Below is a summary of the key aspects in a comparison table:
 
 ### Environment setup
 
-I built this environment locally on Fedora 42 using `libvirt` (Linux virtualization backend) and `Vagrant` (VM automation tool).
-You can adapt the setup to use other virtualisation or cloud platforms, as long as they support at least three nodes.
+I built this environment locally on Fedora 42 using `libvirt` (Linux virtualisation API) and `Vagrant` (VM automation tool) to provision 3 x AlmaLinux 9 nodes. The choice of virtualisation platform and OS are flexible — any setup that supports at least three VMs can be used, including cloud-based or alternative local environments.
 
-- Virtualisation: libvirt + Vagrant.
-- VM OS: 3 × AlmaLinux 9 nodes.
+- Virtualisation Platform: `libvirt`.
+- Orchestration VM tool: `Vagrant`.
+- VM OS: 3 x `AlmaLinux 9`.
+- Network: Private isolated network (`192.168.56.x` range).
+
+Note: This setup can be replicated using any virtualization platform (VMware, VirtualBox, cloud VMs, or physical machines). The key requirement is having three separate systems that can communicate over a network.
 
 - node-03 — Certificate Authority (CA)
     - Generates Ed25519 root certificate and signs CSRs.
@@ -68,17 +71,26 @@ You can adapt the setup to use other virtualisation or cloud platforms, as long 
 
 ### Architecture Flow Diagram
 
-![TLS ](images/tls-setup-ca-ed25519.png)
+The diagram below illustrates the complete TLS 1.3 setup flow using Ed25519 and a private Certificate Authority (CA), showing each step across the client, server, and CA nodes.
+
+ For each step shown in the diagram, the corresponding implementation commands are provided in the sections below.
+
+![TLS 1.3 Setup Flow Using Ed25519 and a Private Certificate Authority](images/tls-setup-ca-ed25519.png)
 
 ## Detailed Implementation
 
-### Step 1: Private Root Certificate Authority Setup (almalinux9-node-03)
+The following implementation steps assume you are operating as the `root` user in `/root` directory.
 
-Create the foundational private Root CA that will issue and sign all certificates.
+### Step 1–2: Private Root Certificate Authority Setup (almalinux9-node-03)
+
+Create the private Root Certificate Authority (CA) that will issue certificated for TLS.
 
 ```bash
+# Switch to root shell with root environment
+sudo -i
+
 # Install OpenSSL
-sudo dnf install -y openssl
+dnf install -y openssl
 
 # Create CA directory structure
 mkdir -p ~/ca/{certs,crl,newcerts,private}
@@ -162,94 +174,212 @@ openssl req -config openssl.cnf -key private/ca.key.pem -new -x509 -days 7300 -s
 chmod 444 certs/ca.cert.pem
 ```
 
-### Step 2: Server Certificate Generation (almalinux9-node-02)
-
+### Step 3–4: Server Key & CSR (almalinux9-node-02)
 Generate the server's private key and certificate signing request (CSR).
 
 ```bash
-# Install required packages
-sudo dnf install -y openssl nginx
+# Switch to root shell with root environment
+sudo -i
+
+# Install OpenSSL and NGINX
+dnf install -y openssl nginx
 
 # Generate Ed25519 server private key
 openssl genpkey -algorithm Ed25519 -out server.key.pem
 
 # Create certificate signing request
 openssl req -new -key server.key.pem -out server.csr -subj "/C=GB/ST=England/L=Bristol/O=MyOrg/CN=almalinux9-node-02"
+```
 
-# Transfer CSR to CA (using HTTP server) fron node-02 (server) to node-03 (Private Root CA) for sigining 
-# On almalinux9-node-02 - start HTTP server
-# Run the following command in the directory containing server.csr 
+### Step 5: CSR File Transfer (node-02 → node-03)
+
+Transfer the server's CSR to the CA for signining 
+
+```bash
+# On almalinux9-node-02 (server)
+# Start temporary HTTP server to share the CSR
 python3 -m http.server 8000
 ```
 
-### Step 3: Certificate Signing (almalinux9-node-03)
+### Step 6–7: Certificate Signing (almalinux9-node-03)
+
+Download and sign the CSR with the CA private key.
 
 ```bash
-# Download server CSR from node-02
+# Switch to root shell with root environment
+sudo -i
+
+# On almalinux9-node-03 (CA)
 cd ~/ca
-wget http://192.168.56.102:8000/server.csr  # 192.168.56.102 is our node-02 private IP address
+
+# Download CSR from node-02
+wget http://192.168.56.102:8000/server.csr      # 192.168.56.102 is node-02 (server) IP
 
 # Sign the server certificate
-cd ~/cq
 openssl ca -config openssl.cnf -extensions server_cert -days 365 -notext -md sha256 -in server.csr -out server.cert.pem
 
-# Serve signed certificates
+# Start HTTP server to distribute signed certificates to other nodes
 python3 -m http.server 8000
 ```
 
-### Step 4: NGINX TLS Configuration (almalinux9-node-02)
+### Step 8–9: Certificate Distribution (node-03 → node-02)
 
-Configure NGINX with TLS 1.3 and Ed25519 certificates.
+Download the signed certificate and CA certificate to the server.
 
 ```bash
-# Download signed certificates
-wget http://192.168.56.103:8000/server.cert.pem
-wget http://192.168.56.103:8000/certs/ca.cert.pem
+# On almalinux9-node-02
 
+# Download signed server certificate from CA
+wget http://192.168.56.103:8000/server.cert.pem     # 192.168.56.103 is node-03 (CA) IP
+
+# Download CA certificate 
+wget http://192.168.56.103:8000/certs/ca.cert.pem   # 192.168.56.103 is node-03 (CA) IP
+```
+
+### Step 10: Certificate Verification (almalinux9-node-02)
+
+Verify the signed certificate is valid and properly configured before using it with NGINX.
+
+```bash
+# 1. Verify certificate was signed by your CA
+openssl verify -CAfile ca.cert.pem server.cert.pem
+
+# Output expected
+server.cert.pem: OK
+```
+
+```bash
+# 2. Check certificate details
+openssl x509 -in server.cert.pem -noout -subject -issuer -dates -fingerprint
+
+# Output expected:
+subject=C=GB, ST=England, O=MyOrg, CN=almalinux9-node-02
+issuer=C=GB, ST=England, L=Bristol, O=MyOrg, CN=MyCA
+notBefore=Jul 14 20:00:35 2025 GMT
+notAfter=Jul 14 20:00:35 2026 GMT
+SHA1 Fingerprint=40:B3:BD:5D:3E:76:9C:FE:AE:08:92:5A:58:0B:53:35:CB:62:05:8E
+```
+
+``` bash
+# 3. Confirm Ed25519 is being used
+openssl x509 -in server.cert.pem -noout -text | grep "Public Key Algorithm"
+
+# Output expected
+Public Key Algorithm: ED25519
+```
+
+```bash
+# 4. View complete certificate information (optional)
+openssl x509 -in server.cert.pem -text -noout
+
+# Output expected:
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4096 (0x1000)
+        Signature Algorithm: ED25519
+        Issuer: C=GB, ST=England, L=Bristol, O=MyOrg, CN=MyCA
+        Validity
+            Not Before: Jul 14 20:00:35 2025 GMT
+            Not After : Jul 14 20:00:35 2026 GMT
+        Subject: C=GB, ST=England, O=MyOrg, CN=almalinux9-node-02
+        Subject Public Key Info:
+            Public Key Algorithm: ED25519
+                ED25519 Public-Key:
+                pub:
+                    9c:03:54:87:8c:4b:b2:39:ca:4c:79:b7:39:6e:40:
+                    eb:aa:3b:fb:4e:a7:7b:c1:7d:f9:3b:99:29:89:4b:
+                    e6:68
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                48:6C:A7:A9:8B:72:29:1E:90:75:3B:6C:FE:4C:DF:75:1F:0F:59:5D
+            X509v3 Authority Key Identifier: 
+                keyid:C4:72:73:3D:9D:CA:4A:CB:EF:77:D6:3F:D7:58:C9:B5:4A:A5:8C:DE
+                DirName:/C=GB/ST=England/L=Bristol/O=MyOrg/CN=MyCA
+                serial:43:D8:98:80:38:39:6E:1A:92:1E:31:CF:F8:1B:5B:E0:D0:BA:43:E7
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+    Signature Algorithm: ED25519
+    Signature Value:
+        fb:4d:f9:d3:68:bb:ab:34:d0:c1:6c:e8:9f:fe:4a:57:57:64:
+        a4:2c:90:60:04:0b:c5:10:e8:2c:a6:99:eb:4a:25:c8:ba:39:
+        54:7c:60:bd:e4:0f:d3:f1:e6:99:c4:06:9b:8e:01:bf:f1:05:
+        14:62:0f:3d:cb:3b:6f:35:90:08
+```
+
+### Step 11–12: NGINX Setup (almalinux9-node-02)
+
+Configure NGINX with TLS 1.3 with the Ed25519 certificate.
+
+```bash
 # Install certificates
-sudo mkdir -p /etc/nginx/ssl
-sudo cp server.cert.pem /etc/nginx/ssl/
-sudo cp server.key.pem /etc/nginx/ssl/
-sudo cp ca.cert.pem /etc/nginx/ssl/
-sudo chmod 600 /etc/nginx/ssl/server.key.pem
+mkdir -p /etc/nginx/ssl
+cp server.cert.pem /etc/nginx/ssl/
+cp server.key.pem /etc/nginx/ssl/
+cp ca.cert.pem /etc/nginx/ssl/
+chmod 600 /etc/nginx/ssl/server.key.pem
 
 # Configure NGINX for TLS 1.3
-sudo tee /etc/nginx/conf.d/https-server.conf << 'EOF'
+tee /etc/nginx/conf.d/https-server.conf << 'EOF'
+# HTTP Server (unencrypted) - for testing
+server {
+    listen 80;
+    server_name almalinux9-node-02;
+
+    location / {
+        return 200 "UNENCRYPTED HTTP Server - this data is visible!\n";
+        add_header Content-Type text/plain;
+    }
+
+    location /secret {
+        return 200 "SECRET DATA: password123 - credit card: 1234-5678-9012-3456\n";
+        add_header Content-Type text/plain;
+    }
+}
+
+# HTTPS Server (encrypted) - TLS 1.3
 server {
     listen 443 ssl http2;
     server_name almalinux9-node-02;
-    
+
     ssl_certificate /etc/nginx/ssl/server.cert.pem;
     ssl_certificate_key /etc/nginx/ssl/server.key.pem;
-    
-    # TLS 1.3 configuration
+
     ssl_protocols TLSv1.3;
     ssl_prefer_server_ciphers off;
-    
+
     location / {
         return 200 "HTTPS Server - TLS 1.3 + Ed25519 Encrypted!\n";
         add_header Content-Type text/plain;
     }
-    
+
     location /secret {
-        return 200 "ENCRYPTED SECRET DATA: admin_password=SuperSecret789 - credit_card=9876-5432-1098-7654\n";
+        return 200 "ENCRYPTED SECRET DATA: admin_password=SuperSecret789 - credit_card=9876-5432-1098-7654 - ssn=123-45-6789 - bank_account=987654321\n";
         add_header Content-Type text/plain;
     }
 }
 EOF
 
 # Start NGINX
-sudo systemctl start nginx
-sudo systemctl enable nginx
+systemctl start nginx
+systemctl enable nginx
+
+# Check NGINX status
+systemctl status nginz
 ```
 
-### Step 5: Client Setup (almalinux9-node-01)
 
-Configure the client with CA certificate for server verification.
+### Step 13: Client Setup (almalinux9-node-01)
+
+Configure the client to trust the CA and establish secure TLS.
 
 ```bash
 # Install client tools
-sudo dnf install -y openssl curl
+dnf install -y openssl curl
 
 # Create certificate directory
 mkdir -p ~/certs
@@ -258,26 +388,26 @@ mkdir -p ~/certs
 wget http://192.168.56.103:8000/certs/ca.cert.pem -O ~/certs/ca.cert.pem
 ```
 
-### Step 6: Security Testing and Verification
+### Steps 14–18: Secure Communication Phase
 
-In this step, we validate the secure TLS setup by testing connectivity, inspecting the TLS handshake, and comparing encrypted vs unencrypted traffic captures.
+Test secure HTTPS access, inspect handshake, and verify traffic encryption.
 
 ```bash
-# 1. Test basic HTTPS connection first (establish that TLS works)
+# 13. Test basic HTTPS connection first (establish that TLS works)
 curl --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/secret
 
-# 2. Verify TLS handshake details
+# 14. Verify TLS handshake details
 curl -v --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/
 
-# 3. CAPTURE HTTPS TRAFFIC - Start tcpdump FIRST, then make request
+# 15. Encrypted Packet Capture (HTTPS)
 echo "=== Capturing HTTPS Traffic (Encrypted) ==="
-sudo tcpdump -i any -A -c 10 host almalinux9-node-02 and port 443 &
+tcpdump -i any -A -c 10 host almalinux9-node-02 and port 443 &
 sleep 2  # Give tcpdump time to start
 curl --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/secret
 
-# 4. CAPTURE HTTP TRAFFIC - Start tcpdump FIRST, then make request
+# 16. Plaintext Packet Capture (HTTP)
 echo "=== Capturing HTTP Traffic (Unencrypted) ==="
-sudo tcpdump -i any -A -c 10 host almalinux9-node-02 and port 80 &
+tcpdump -i any -A -c 10 host almalinux9-node-02 and port 80 &
 sleep 2  # Give tcpdump time to start
 curl http://almalinux9-node-02/secret
 ```
@@ -286,7 +416,7 @@ curl http://almalinux9-node-02/secret
 ### Test 1: Basic HTTPS Connection
 
 ```bash
-$ curl --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/secret
+curl --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/secret
 ```
 
 ### Expected Output:
@@ -299,7 +429,7 @@ Client successfully receives decrypted data over secure TLS connection.
 ### Test 2: TLS Handshake Verification
 
 ```bash
-$ curl -v --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/
+curl -v --cacert ~/certs/ca.cert.pem https://almalinux9-node-02/
 ```
 
 ### Key Output Indicators:
