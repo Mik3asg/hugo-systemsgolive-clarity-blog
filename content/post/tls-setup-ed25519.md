@@ -56,15 +56,15 @@ I built this environment locally on Fedora 42 using `libvirt` (Linux virtualisat
 
 Note: This setup can be replicated using any virtualization platform (VMware, VirtualBox, cloud VMs, or physical machines). The key requirement is having three separate systems that can communicate over a network.
 
-- node-03 — Certificate Authority (CA)
+- node-03 — Certificate Authority (IP address: 192.168.56.103)
     - Generates Ed25519 root certificate and signs CSRs.
 
-- node-02 — Server
+- node-02 — Server (IP address: 192.168.56.102)
    - Generates Ed25519 private key and CSR.
    - Receives signed certificate from CA.
    - Hosts HTTPS service using NGINX with TLS 1.3.
 
-- node-01 — Client
+- node-01 — Client (192.168.56.101)
    - Trusts CA certificate.
    - Initiates TLS connection to the server and validates the ed25519 certificate.
    - Verifies encrypted communication.
@@ -310,6 +310,16 @@ Certificate:
         54:7c:60:bd:e4:0f:d3:f1:e6:99:c4:06:9b:8e:01:bf:f1:05:
         14:62:0f:3d:cb:3b:6f:35:90:08
 ```
+### Certificate Validation Checklist
+The outputs above confirm that our Ed25519 certificate setup is fully operational and secure:
+
+- Certificate Verification: server.cert.pem: OK - Valid CA signature
+- Identity Match: Subject CN=almalinux9-node-02 matches server hostname
+- Trusted Issuer: Certificate signed by our private CA CN=MyCA
+- Ed25519 Confirmed: Modern elliptic curve cryptography active
+- TLS Ready: Proper extensions for HTTPS server authentication
+
+**Result**: Server Certificate successfully validated - ready for NGINX TLS 1.3 deployment.
 
 ### Step 11–12: NGINX Setup (almalinux9-node-02)
 
