@@ -47,7 +47,7 @@ Below is a summary of the key aspects in a comparison table:
 
 ### Environment setup
 
-I built this environment locally on Fedora 42 using `libvirt` (Linux virtualisation API) and `Vagrant` (VM automation tool) to provision 3 x AlmaLinux 9 nodes. The choice of virtualisation platform and OS are flexible — any setup that supports at least three VMs can be used, including cloud-based or alternative local environments.
+I built this environment locally on Fedora 42 using `libvirt` (Linux virtualisation API) and `Vagrant` (VM automation tool) to provision 3 x AlmaLinux OS 9 nodes. The choice of virtualisation platform and OS are flexible — any setup that supports at least three VMs can be used, including cloud-based or alternative local environments.
 
 - Virtualisation Platform: `libvirt`.
 - Orchestration VM tool: `Vagrant`.
