@@ -125,6 +125,7 @@ blogDir = "post"
  giscusReactionsEnabled = "1" # Default: 1 = true
  giscusTheme = "preferred_color_scheme" # Default: dark_dimmed
  giscusLang = "en" # Default: en
+ showContactForm = true
 
 
 # Maximum number of recent posts. (default: 8)
