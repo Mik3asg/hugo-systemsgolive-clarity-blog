@@ -123,9 +123,8 @@ blogDir = "post"
  giscusCategoryId = "DIC_kwDONzFvHc4CtFo8" # Required for Giscus to work
  giscusMapping = "pathname" # Default: pathname
  giscusReactionsEnabled = "1" # Default: 1 = true
- giscusTheme = "preferred_color_scheme" # Default: dark_dimmed
+ giscusTheme = "dark_dimmed" # Default: dark_dimmed
  giscusLang = "en" # Default: en
- showContactForm = true
 
 
 # Maximum number of recent posts. (default: 8)
