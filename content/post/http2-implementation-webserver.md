@@ -30,9 +30,9 @@ Our pre-production environment (hosted on Vultr without a load balancer) worked 
 
 The following diagram illustrates our complete deployment journey from the initial problem through to the final HTTP/2-enabled state. Each phase shows the traffic flow from Cloudflare through the ANS Load Balancer to our four Tomcat backend servers. The diagram clearly shows customer traffic and health check paths, ports, and protocols at each stage.
 
-![HTTP/2 deployment - the problem & phase 01](images/http2-01.png)
-![HTTP/2 deployment - phase 02 & phase 03](images/http2-02.png)
-![HTTP/2 deployment - phase 04 & phase 05](images/http2-03.png)
+![HTTP/2 deployment - the problem and phase 01](images/http2-01.png)
+![HTTP/2 deployment - phase 02 and phase 03](images/http2-02.png)
+![HTTP/2 deployment - phase 04 and phase 05](images/http2-03.png)
 ![HTTP/2 deployment - phase 06](images/http2-04.png)
 
 
