@@ -35,7 +35,6 @@ The following diagram illustrates our complete deployment journey from the initi
 ![HTTP/2 deployment - phase 04 and phase 05](images/http2-03.png)
 ![HTTP/2 deployment - phase 06](images/http2-04.png)
 
-
 *Figure 1: Complete HTTP/2 deployment progression showing seven phases: The Problem (protocol mismatch causing outage), Phase 1 (initial HTTP/1.1 state), Phase 2 (Tomcat-01 isolated in DRAIN mode), Phase 3 (dual-port configuration tested), Phase 4 (parallel infrastructure rolled out), Phase 5 (seamless listener cutover), and Phase 6 (HTTP/2 enabled with dedicated health check port). The diagram clearly distinguishes between customer traffic (port 443) and health check traffic (port 8443), showing how the solution separates these concerns to prevent protocol mismatch.*
 
 ---
