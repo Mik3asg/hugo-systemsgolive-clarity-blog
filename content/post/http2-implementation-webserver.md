@@ -8,13 +8,11 @@ thumbnail: "images/http2-logo.png"
 summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy."
 ---
 
-# Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study
-
-> **Note:** Domain names have been anonymised for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
-
 ## Summary
 
 This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. When we discovered that our ANS-hosted HAProxy application load balancer's health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment.
+
+> **Note:** Domain names have been anonymised for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
 
 ## The Problem
 
