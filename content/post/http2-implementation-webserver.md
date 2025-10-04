@@ -1,11 +1,17 @@
-+++
-date = '2025-10-03T23:16:30+01:00'
-draft = true
-title = 'Http2 Implementation Webserver'
-+++
+---
+title: "Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study"
+date: 2025-04-03T00:15:58Z
+draft: false
+tags: ['Infrastructure','HTTP/2', 'Apache']
+categories: ['Linux']
+thumbnail: "images/reverse-proxy.png"
+summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. After discovering that HAProxy health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment"
+---
 
 
 # Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study
+
+This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. After discovering that HAProxy health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment
 
 > **Note:** Domain names have been anonymized for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
 
@@ -25,7 +31,6 @@ The following diagram illustrates our complete deployment journey from the initi
 
 Each phase shows the traffic flow from Cloudflare through the ANS Load Balancer to our four Tomcat backend servers, with clear visualization of customer traffic and health check paths, ports, and protocols at each stage.
 
-**[INSERT IMAGE: http2-deployment-phases-complete.png]**
 ![HTTP/2 Deployment Phases](images/http2-01.png)
 ![HTTP/2 Deployment Phases](images/http2-02.png)
 ![HTTP/2 Deployment Phases](images/http2-03.png)
