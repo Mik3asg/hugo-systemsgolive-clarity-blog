@@ -1,11 +1,11 @@
 ---
 title: "Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study"
-date: 2025-04-03T00:15:58Z
+date: 2025-10-04T15:37:02+01:00
 draft: false
 tags: ['Infrastructure','HTTP/2', 'Apache']
 categories: ['Linux']
 thumbnail: "images/reverse-proxy.png"
-summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. After discovering that HAProxy health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment"
+summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy."
 ---
 
 # Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study
