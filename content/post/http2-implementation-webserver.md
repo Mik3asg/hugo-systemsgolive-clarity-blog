@@ -4,7 +4,7 @@ date: 2025-10-04T15:37:02+01:00
 draft: false
 tags: ['Infrastructure','HTTP/2', 'Apache']
 categories: ['Linux']
-thumbnail: "images/reverse-proxy.png"
+thumbnail: "images/http2-logo.png"
 summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy."
 ---
 
@@ -30,12 +30,10 @@ Our pre-production environment (hosted on Vultr without a load balancer) worked 
 
 The following diagram illustrates our complete deployment journey from the initial problem through to the final HTTP/2-enabled state. Each phase shows the traffic flow from Cloudflare through the ANS Load Balancer to our four Tomcat backend servers. The diagram clearly shows customer traffic and health check paths, ports, and protocols at each stage.
 
-**[INSERT IMAGE: http2-deployment-phases-complete.png]**
-
-![HTTP/2 deployment phases](images/http2-01.png)
-![HTTP/2 deployment phases](images/http2-02.png)
-![HTTP/2 deployment phases](images/http2-03.png)
-![HTTP/2 deployment phases](images/http2-04.png)
+![HTTP/2 deployment - the problem & phase 01](images/http2-01.png)
+![HTTP/2 deployment - phase 02 & phase 03](images/http2-02.png)
+![HTTP/2 deployment - phase 04 & phase 05](images/http2-03.png)
+![HTTP/2 deployment - phase 06](images/http2-04.png)
 
 
 *Figure 1: Complete HTTP/2 deployment progression showing seven phases: The Problem (protocol mismatch causing outage), Phase 1 (initial HTTP/1.1 state), Phase 2 (Tomcat-01 isolated in DRAIN mode), Phase 3 (dual-port configuration tested), Phase 4 (parallel infrastructure rolled out), Phase 5 (seamless listener cutover), and Phase 6 (HTTP/2 enabled with dedicated health check port). The diagram clearly distinguishes between customer traffic (port 443) and health check traffic (port 8443), showing how the solution separates these concerns to prevent protocol mismatch.*
@@ -296,6 +294,8 @@ We enabled HTTP/2 on port 443 one server at a time using graceful Apache reloads
 10.0.0.7 - - [29/Sep/2025:11:33:42 +0100] "GET /healthcheck/ HTTP/1.1" 200 88
 ```
 
+---
+
 ## Results and Key Takeaways
 
 **Achievements:**
@@ -316,6 +316,8 @@ We enabled HTTP/2 on port 443 one server at a time using graceful Apache reloads
 - Kept legacy `tomcats` target group for one week as rollback safety net
 - Restricted DMZ network policy to allow only TCP/8443 for health checks (security best practice)
 - Load balancer OS upgrade postponed until HTTP/2 implementation proven stable
+
+---
 
 ## Conclusion
 
