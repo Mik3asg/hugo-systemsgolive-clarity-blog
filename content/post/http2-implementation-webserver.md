@@ -10,7 +10,7 @@ summary: "This case study demonstrates how we implemented HTTP/2 on production A
 
 ## Summary
 
-This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. When we discovered that our ANS-hosted HAProxy application load balancer's health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment.
+This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. When we discovered that our vendor-hosted HAProxy application load balancer's health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment.
 
 > **Note:** Domain names have been anonymised for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
 
@@ -18,7 +18,7 @@ This case study demonstrates how we implemented HTTP/2 on production Apache serv
 
 We enabled HTTP/2 on our Apache web servers for `login.companyabc.com` to improve performance. When we configured Apache with `Protocols h2 http/1.1` on port 443, our load balancer's health checks immediately failed. All servers were marked as DOWN, causing a complete service outage.
 
-**Root Cause:** HAProxy (our ANS-hosted application load balancer) health check process only supports HTTP/1.1. When it tried to communicate with HTTP/2-enabled ports, the protocol mismatch caused all health checks to fail with "invalid response" errors.
+**Root Cause:** HAProxy (our vendor-hosted application load balancer) health check process only supports HTTP/1.1. When it tried to communicate with HTTP/2-enabled ports, the protocol mismatch caused all health checks to fail with "invalid response" errors.
 
 Our pre-production environment (hosted on Vultr without a load balancer) worked perfectly with the same Apache HTTP/2 configuration. This confirmed the issue was specific to the load balancer health check mechanism.
 
@@ -26,7 +26,7 @@ Our pre-production environment (hosted on Vultr without a load balancer) worked 
 
 ## Deployment Journey Overview
 
-The following diagram illustrates our complete deployment journey from the initial problem through to the final HTTP/2-enabled state. Each phase shows the traffic flow from Cloudflare through the ANS Load Balancer to our four Tomcat backend servers. The diagram clearly shows customer traffic and health check paths, ports, and protocols at each stage.
+The following diagram illustrates our complete deployment journey from the initial problem through to the final HTTP/2-enabled state. Each phase shows the traffic flow from Cloudflare through the vendor Load Balancer to our four Tomcat backend servers. The diagram clearly shows customer traffic and health check paths, ports, and protocols at each stage.
 
 ![HTTP/2 deployment - the problem and phase 01](images/http2-01.png)
 ![HTTP/2 deployment - phase 02 and phase 03](images/http2-02.png)
@@ -39,7 +39,7 @@ The following diagram illustrates our complete deployment journey from the initi
 
 ## The Solution: Dual-Port Architecture
 
-In partnership with our ANS technical team, we designed a workaround that separates customer traffic from health check infrastructure. We created **two dedicated VirtualHosts**:
+In partnership with our vendor technical team, we designed a workaround that separates customer traffic from health check infrastructure. We created **two dedicated VirtualHosts**:
 
 - **Port 443:** Customer traffic (eventually HTTP/2-enabled)
 - **Port 8443:** Dedicated HTTP/1.1-only health checks with a lightweight `/healthcheck` endpoint
@@ -164,7 +164,7 @@ httpd -t  # Validate syntax
 systemctl reload httpd  # Graceful reload - no connection drops
 ```
 
-Our ANS technical team created a new target group `tomcatshttp2` with health checks pointing to `GET login.companyabc.com:8443/healthcheck/`. We validated that Tomcat-01 passed health checks in both the old (`tomcats`) and new (`tomcatshttp2`) target groups simultaneously.
+Our vendor technical team created a new target group `tomcatshttp2` with health checks pointing to `GET login.companyabc.com:8443/healthcheck/`. We validated that Tomcat-01 passed health checks in both the old (`tomcats`) and new (`tomcatshttp2`) target groups simultaneously.
 
 ### Phase 2: Production Rollout
 
@@ -174,7 +174,7 @@ After successful pilot testing, we rolled out the same configuration to producti
 1. Applied identical dual-VirtualHost configuration to each server
 2. Created `/healthcheck` directory and endpoint on each server
 4. Used `systemctl reload httpd` for graceful, zero-downtime updates
-5. Our ANS team added each server to `tomcatshttp2` target group after completion
+5. Our vendor team added each server to `tomcatshttp2` target group after completion
 6. Verified health check status for each server before proceeding to the next
 
 **Infrastructure State After Rollout:**
@@ -189,7 +189,7 @@ As shown in Phase 5 of the deployment diagram, the listener cutover was the crit
 
 **Load Balancer Configuration Change:**
 
-In collaboration with our ANS vendor, we switched the listener's default target group from `tomcats` to `tomcatshttp2`. This was a single configuration change in the load balancer UI that took approximately 30 seconds.
+In collaboration with our vendor, we switched the listener's default target group from `tomcats` to `tomcatshttp2`. This was a single configuration change in the load balancer UI that took approximately 30 seconds.
 
 **Why Zero Downtime:**
 - Same servers in both target groups
@@ -307,7 +307,6 @@ We enabled HTTP/2 on port 443 one server at a time using graceful Apache reloads
 3. **Staged approach** separated infrastructure changes from protocol changes
 4. **Graceful Apache reloads** eliminated service interruptions
 5. **Dedicated VirtualHosts** provided clear separation between customer traffic and health checks
-6. **Strong vendor partnership** with ANS provided expert guidance
 
 **Post-Implementation:**
 - Kept legacy `tomcats` target group for one week as rollback safety net
