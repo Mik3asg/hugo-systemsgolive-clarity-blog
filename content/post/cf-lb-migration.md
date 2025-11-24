@@ -1,19 +1,26 @@
 ---
-title: "Cloudflare Load Balancer Migration: A Seamless Transition"
+title: "Seamless Production Migration: Moving to Cloudflare Load Balancer"
 date: 2025-11-23T11:44:31+01:00
 draft: false
 tags: ['Cloudflare', Load Balancer', 'Migration', 'SSL', 'TLS', 'Certificate Management', 'Zero Downtime']
 categories: ['Infrastructure Migration', 'DevOps', 'Operations', 'Site Reliability Engineering']
-
-thumbnail: ""
-summary: "Our journey migrating our production care management platform from ANS to Cloudflare Load Balancer—eliminating manual certificate management, resolving security concerns, and achieving a seamless zero-downtime cutover."
+thumbnail: "images/cf-lb-picture.png"
+summary: "Our journey migrating our production care management platform from ANS to Cloudflare Load Balancer—eliminating manual certificate management, resolving security concerns, and achieving a seamless cutover."
 ---
-
-# How We Successfully Migrated from ANS Load Balancer to Cloudflare Load Balancer
 
 ## Overview
 
-This article documents our migration from ANS Load Balancer to Cloudflare Load Balancer for our production care management web application hosted at `login.eplancare.com`. This is our main customer-facing application that serves healthcare providers and care managers accessing our platform. The migration was driven by operational overhead, security concerns, and the need for automated certificate management. The cutover was executed successfully with zero downtime during a planned maintenance window.
+This article documents our seamless production migration from ANS Load Balancer to Cloudflare Load Balancer for our production care management web application.
+
+### Current Setup
+
+Our domain `eplancare.com` is hosted on Cloudflare as our DNS provider. The production application is accessible at `login.eplancare.com`, which is our main customer-facing application serving healthcare providers and care managers who access our platform daily.
+
+Currently, `login.eplancare.com` points to a Virtual IP (VIP) address managed by ANS, a third-party cloud provider in the UK. This VIP routes traffic to the ANS Load Balancer, which then distributes requests across our backend Tomcat web servers.
+
+### Migration Goal
+
+We needed to migrate from the ANS Load Balancer to Cloudflare Load Balancer while maintaining the same application endpoint (`login.eplancare.com`). This migration was driven by operational overhead, security concerns, and the need for automated certificate management. The cutover was executed successfully with zero downtime during a planned maintenance window (10th November 2024, 04:30-05:15 UK Time).
 
 ---
 
@@ -46,6 +53,15 @@ This article documents our migration from ANS Load Balancer to Cloudflare Load B
 
 ⚠️ **Potential Cloudflare Outage** - If Cloudflare experiences issues, we could face downtime
 - **Mitigation**: We kept ANS LB as a backup solution (requires manual switchover, though).
+
+---
+
+## Architecture Overview
+
+The following diagram illustrates the final Cloudflare Load Balancer architecture after migration:
+
+![Cloudflare Load Balancer Architecture](images/cf-lb-architecture.png)
+*Traffic flow from visitors through Cloudflare Load Balancer to backend Tomcat servers with configured weights*
 
 ---
 
@@ -189,6 +205,10 @@ The following screenshots from Cloudflare Analytics demonstrate consistent load 
 ![Traffic Distribution Post-Migration 15:00](images/cf-lb-1500.png)
 *Sustained distribution throughout afternoon operations*
 
+**72 Hours Post-Migration - Sustained Performance**
+![Traffic Distribution 72 Hours Post-Migration](images/cf-lb-72hours.png)
+*Three-day view showing consistent traffic patterns and stable load distribution across all Tomcat endpoints. The graph demonstrates normal business hour peaks with the load balancer maintaining the configured weight distribution (tomcat-02, tomcat-03, tomcat-04 each handling ~28.5% of traffic, and tomcat-01 handling ~14%). Total requests processed: 2.29M over 72 hours with no performance issues or anomalies detected.*
+
 Traffic was monitored continuously through peak hours on migration day and for the entire week post-migration to ensure sustained performance and stability.
 
 **No Issues Observed**
@@ -202,13 +222,13 @@ Traffic was monitored continuously through peak hours on migration day and for t
 
 ### What Made This Migration Successful
 
-1. ** Thorough Testing** - Proof of concept in lower environment validated the approach.
-2. ** Meticulous Planning** - Detailed implementation and rollback procedures.
-3. ** Pre-Configuration Strategy** - Using dummy hostname allowed us to configure everything in advance.
-4. ** Timing** - Executed during off-hours maintenance window
-5. ** Team Coordination** - Proper change control and stakeholder communication.
-6. ** Extended Monitoring** - Week-long monitoring ensured sustained success.
-7. ** User Communication** - Custom 503 maintenance page kept users informed during migration.
+1. **Thorough Testing** - Proof of concept in lower environment validated the approach.
+2. **Meticulous Planning** - Detailed implementation and rollback procedures.
+3. **Pre-Configuration Strategy** - Using dummy hostname allowed us to configure everything in advance.
+4. **Timing** - Executed during off-hours maintenance window
+5. **Team Coordination** - Proper change control and stakeholder communication.
+6. **Extended Monitoring** - Week-long monitoring ensured sustained success.
+7. **User Communication** - Custom 503 maintenance page kept users informed during migration.
 
 ---
 
