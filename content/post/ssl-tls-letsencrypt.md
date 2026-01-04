@@ -4,12 +4,9 @@ date: 2026-01-03T23:32:31Z
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Automation', 'Cloudflare']
 categories: ['Security']
-thumbnail: "images/"
+thumbnail: "images/letsencrypt-thumbnail.png"
 summary: "This article demonstrates how to implement Full (Strict) SSL/TLS encryption by combining Cloudflare's managed frontend certificates with Let's Encrypt wildcard certificates on your origin server."
 ---
-
-# Case Study - Automating Let's Encrypt Wildcard Certificates with Cloudflare DNS and Full (Strict) TLS Encryption
-
 
 ## Overview
 
@@ -276,8 +273,6 @@ sudo certbot certonly \
   -d '*.virtualscale.dev' \
   -d virtualscale.dev
 ```
-
-
 
 **What happens during this process:**
 
@@ -618,8 +613,8 @@ openssl s_client -connect localhost:443 2>/dev/null | \
 
 Once configured correctly, your browser will display a secure connection indicator. Here's what a successful implementation looks like:
 
-![Successful TLS Certificate Implementation](images/virtualscale-tls-verification-01.png)
-![Successful TLS Certificate Implementation](images/virtualscale-tls-verification-02.png)
+![Successful TLS Certificate Implementation - Pic 01](images/virtualscale-tls-verification-01.png)
+![Successful TLS Certificate Implementation- Pic 02](images/virtualscale-tls-verification-02.png)
 
 **What to look for in the browser:**
 - **Padlock icon** in the address bar (indicates HTTPS)
@@ -666,7 +661,7 @@ sudo certbot renew --dry-run
 ## Additional Resources
 
 - [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
-- [Cloudflare SSL/TLS Documentation](https://developers.cloudflare.com/ssl/)
+- [Cloudflare TLS Full Strict Mode Documentation](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full-strict/)
 - [Certbot Documentation](https://eff-certbot.readthedocs.io/)
 - [Nginx SSL Configuration Generator](https://ssl-config.mozilla.org/)
 
