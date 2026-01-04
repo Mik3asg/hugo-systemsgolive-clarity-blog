@@ -614,7 +614,7 @@ openssl s_client -connect localhost:443 2>/dev/null | \
 Once configured correctly, your browser will display a secure connection indicator. Here's what a successful implementation looks like:
 
 ![Successful TLS Certificate Implementation - Pic 01](images/virtualscale-tls-verification-01.png)
-![Successful TLS Certificate Implementation- Pic 02](images/virtualscale-tls-verification-02.png)
+![Successful TLS Certificate Implementation - Pic 02](images/virtualscale-tls-verification-02.png)
 
 **What to look for in the browser:**
 - **Padlock icon** in the address bar (indicates HTTPS)
@@ -667,4 +667,5 @@ sudo certbot renew --dry-run
 
 ---
 
-**Need Help?** Check the Troubleshooting section above or review the log files for specific error messages.
+**If this helped you**, follow me on [LinkedIn](https://www.linkedin.com/in/m-asghar/) for more DevOps & cloud articles.  
+If you’re implementing something similar and want to discuss real-world tradeoffs, **feel free to DM me on LinkedIn**.
