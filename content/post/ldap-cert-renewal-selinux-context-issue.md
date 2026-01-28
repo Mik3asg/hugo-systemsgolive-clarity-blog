@@ -8,9 +8,7 @@ thumbnail: "images/selinux-ldap-issue.png"
 summary: "An internal LDAP certificate renewal failed due to incorrect SELinux contexts on transferred certificate files. Despite correct permissions and ownership, OpenLDAP couldn't initialise TLS. Using `restorecon` to fix the security context resolved the issue immediately, highlighting the importance of SELinux context verification in certificate deployments."
 ---
 
-
-We recently had to renew an SSL certificate used for internal LDAP access on one of our production web servers (e.g., `prod-web-01`). This certificate is not public-facing and is used only by the Support and DevOps teams internally, when connecting to the LDAP directory via Apache Directory Studio.
-
+We recently had to renew a private SSL certificate used for internal LDAP access on one of our production web servers (e.g., `prod-web-01`). This certificate is not public-facing and is used only by the Support and DevOps teams internally, when connecting to the LDAP directory via Apache Directory Studio (i.e. LDAP client).
 
 The certificate secures the LDAPS connection (port 636) between the LDAP client (GUI) and the LDAP service running on `prod-web-01`. This host provides internal LDAP services only, and the certificate is not shared with any external systems or applications. The certificate was issued by our private Root CA, hosted on a separate virtual machine and used solely for internal infrastructure.
 
@@ -61,6 +59,10 @@ That's when the problem became clear.
 
 ## The Culprit: SELinux Contexts
 
+> **Note:** This article focuses on the practical troubleshooting of SELinux context issues. For a comprehensive understanding of SELinux and how it works, see Red Hat's guide: [What is SELinux?](https://www.redhat.com/en/topics/linux/what-is-selinux)
+
+**What is SELinux?** Security-Enhanced Linux (SELinux) is a security module that enforces mandatory access control policies by labeling files and processes with security contexts, adding an additional layer of security beyond traditional file permissions.
+
 The newly generated certificate files had the SELinux context:
 ```
 user_home_t
@@ -73,7 +75,7 @@ cert_t
 
 Because the certificates were generated and transferred from a different system, they retained a home directory–style security label when placed on the LDAP server.
 
-SELinux enforces access based on security contexts, not just permissions. OpenLDAP requires certificate files to be labeled correctly; without the proper context, access is denied and TLS initialization fails—even though everything else appears correct.
+SELinux enforces access based on security contexts, not just permissions. OpenLDAP requires certificate files to be labeled correctly; without the proper context, access is denied and TLS initialisation fails — even though everything else appears correct.
 
 ## The Fix
 
