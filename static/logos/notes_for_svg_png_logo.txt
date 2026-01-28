@@ -8,3 +8,17 @@ Steps taken:
     - Converted the SVG to PNG using the PNG tab and downloaded it in 0.5x and 1x resolutions.
     - Imported both PNG and SVG files into the /logos directory.
     - Updated the params.toml file accordingly.
+
+
+---
+
+To change colour and background, use https://www.photopea.com/
+Currently, we have: #22c55e #002538 
+
+How to use
+Open Photopea
+File → Open → upload linkedin-logo-400x400.png
+Select Magic Wand or Color Range
+Click the green node
+Edit → Fill → Color → paste #22c55e and #002538
+Export PNG
