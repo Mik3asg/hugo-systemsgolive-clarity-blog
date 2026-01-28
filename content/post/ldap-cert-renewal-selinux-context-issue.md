@@ -1,5 +1,5 @@
 ---
-title: "LDAP Certificate Renewal Failure: Diagnosing and Resolving SELinux Context Issues"
+title: "SELinux Context Mismatch: The Hidden Culprit in LDAP Certificate Renewal"
 date: 2026-01-28T11:54:16Z
 draft: false
 tags: ["LDAP", "SELinux", "SSL/TLS", "OpenLDAP", "Certificate Management", "Linux Security", "Troubleshooting", "LDAPS"]
@@ -7,8 +7,6 @@ categories: ["System Administration", "Security", "Infrastructure"]
 thumbnail: "images/selinux-ldap-issue.png"
 summary: "An internal LDAP certificate renewal failed due to incorrect SELinux contexts on transferred certificate files. Despite correct permissions and ownership, OpenLDAP couldn't initialise TLS. Using `restorecon` to fix the security context resolved the issue immediately, highlighting the importance of SELinux context verification in certificate deployments."
 ---
-
-## Quick Post-Mortem: LDAP Certificate Renewal Gone Wrong (and Fixed!)
 
 
 We recently had to renew an SSL certificate used for internal LDAP access on one of our production web servers (e.g., `prod-web-01`). This certificate is not public-facing and is used only by the Support and DevOps teams internally, when connecting to the LDAP directory via Apache Directory Studio.
