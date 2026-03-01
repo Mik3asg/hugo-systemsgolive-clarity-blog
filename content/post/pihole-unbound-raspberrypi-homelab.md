@@ -1,5 +1,5 @@
 ---
-title: "Pi-hole and Unbound on Raspberry Pi 4 – Ad-blocking and Private DNS Resolver"
+title: "Pi-hole and Unbound on Raspberry Pi 4 – A Self-Hosted Ad-Blocking and Private DNS Resolver for a Tracker-Free Home Network"
 date: 2026-03-01T12:19:06Z
 draft: false
 tags: ["Pi-hole", "Unbound", "DNS", "Raspberry Pi", "Homelab", "Ad Blocking", "Privacy", "DNSSEC", "Recursive DNS", "Self-hosted"]
