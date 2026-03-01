@@ -1,0 +1,212 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.0">
+  <diagram id="fnFi1SWltp4O51SVUJ1w" name="Page-1">
+    <mxGraphModel dx="1640" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#1F4E79;" value="DNS Query Flow — Without vs With Pi-hole + Unbound" vertex="1">
+          <mxGeometry height="40" width="1254" x="200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="left-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;opacity=30;" value="" vertex="1">
+          <mxGeometry height="1060" width="620" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="left-title" parent="1" style="text;html=1;strokeColor=none;fillColor=#d6b656;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=14;fontStyle=1;fontColor=#7D4E00;" value="WITHOUT Pi-hole + Unbound" vertex="1">
+          <mxGeometry height="36" width="540" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="right-bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=30;" value="" vertex="1">
+          <mxGeometry height="1060" width="920" x="700" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="right-title" parent="1" style="text;html=1;strokeColor=none;fillColor=#82b366;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=14;fontStyle=1;fontColor=#2E5918;" value="WITH Pi-hole + Unbound" vertex="1">
+          <mxGeometry height="36" width="840" x="740" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="L-laptop" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;html=1;pointerEvents=1;dashed=0;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="💻 Laptop" vertex="1">
+          <mxGeometry height="50" width="60" x="110" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="L-phone" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.handheld;html=1;pointerEvents=1;dashed=0;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="📱 Phone" vertex="1">
+          <mxGeometry height="60" width="40" x="230" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="L-tv" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.terminal;html=1;pointerEvents=1;dashed=0;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="📺 Smart TV" vertex="1">
+          <mxGeometry height="50" width="60" x="360" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="L-step1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#7D4E00;fontStyle=2;" value="① Each device sends DNS queries" vertex="1">
+          <mxGeometry height="20" width="540" x="80" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="L-router" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;fontStyle=1;arcSize=10;" value="🌐 Home Router&#xa;(Plusnet Hub Two)" vertex="1">
+          <mxGeometry height="60" width="200" x="180" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr1a" edge="1" parent="1" source="L-laptop" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="L-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr1b" edge="1" parent="1" source="L-phone" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="L-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr1c" edge="1" parent="1" source="L-tv" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="L-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-isp-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;opacity=20;" value="" vertex="1">
+          <mxGeometry height="130" width="480" x="80" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="L-isp-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontStyle=1;fontColor=#b85450;" value="THIRD-PARTY DNS RESOLVER" vertex="1">
+          <mxGeometry height="16" width="480" x="80" y="402" as="geometry" />
+        </mxCell>
+        <mxCell id="L-google" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="🔍 Google 8.8.8.8&#xa;OR Cloudflare 1.1.1.1&#xa;OR ISP Resolver" vertex="1">
+          <mxGeometry height="80" width="220" x="160" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="L-log-warning" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;fontColor=#7D4E00;" value="⚠️ Logs every query&#xa;from every device" vertex="1">
+          <mxGeometry height="80" width="140" x="400" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr2" edge="1" parent="1" source="L-router" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#b85450;strokeWidth=3;fontSize=9;fontColor=#b85450;fontStyle=1;" target="L-google" value="DNS query">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-step2" parent="1" style="text;html=1;strokeColor=none;fillColor=#f8cecc;strokeColor=#b85450;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#b85450;fontStyle=1;" value="② Query goes straight to Google/ISP — they see and log everything" vertex="1">
+          <mxGeometry height="24" width="480" x="80" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="L-internet" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" value="☁️ Internet" vertex="1">
+          <mxGeometry height="80" width="160" x="200" y="588" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr3" edge="1" parent="1" source="L-google" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=9;fontColor=#6c8ebf;" target="L-internet" value="walks DNS tree">
+          <mxGeometry relative="1" x="0.1027" y="17" as="geometry">
+            <mxPoint x="-7" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L-root" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 Root Servers&#xa;(.)" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="749" as="geometry" />
+        </mxCell>
+        <mxCell id="L-tld" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 TLD Servers&#xa;(.org .com .uk)" vertex="1">
+          <mxGeometry height="60" width="140" x="220" y="749" as="geometry" />
+        </mxCell>
+        <mxCell id="L-auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 Authoritative&#xa;Servers" vertex="1">
+          <mxGeometry height="60" width="120" x="380" y="749" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr4a" edge="1" parent="1" source="L-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1;dashed=1;" target="L-root">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr4b" edge="1" parent="1" source="L-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1;dashed=1;" target="L-tld">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-arr4c" edge="1" parent="1" source="L-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=1;dashed=1;" target="L-auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L-ads" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;fontColor=#7D0000;" value="🚫 doubleclick.net resolves&#xa;Ad loads. Tracker fires." vertex="1">
+          <mxGeometry height="60" width="240" x="160" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="L-result" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;fontColor=#7D0000;" value="❌ Google logs your entire&#xa;browsing history.&#xa;Ads load. Trackers fire." vertex="1">
+          <mxGeometry height="80" width="360" x="120" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="R-laptop" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.pc;html=1;pointerEvents=1;dashed=0;fillColor=#d5e8d4;strokeColor=#82b366;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="💻 Laptop" vertex="1">
+          <mxGeometry height="50" width="60" x="770" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="R-phone" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.handheld;html=1;pointerEvents=1;dashed=0;fillColor=#d5e8d4;strokeColor=#82b366;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="📱 Phone" vertex="1">
+          <mxGeometry height="60" width="40" x="900" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="R-tv" parent="1" style="shape=mxgraph.cisco.computers_and_peripherals.terminal;html=1;pointerEvents=1;dashed=0;fillColor=#d5e8d4;strokeColor=#82b366;sketch=0;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;fontSize=11;fontStyle=1;" value="📺 Smart TV" vertex="1">
+          <mxGeometry height="50" width="60" x="1020" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="R-step1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#2E5918;fontStyle=2;" value="① Each device sends DNS queries to Pi-hole (via DHCP — automatic)" vertex="1">
+          <mxGeometry height="20" width="860" x="720" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="R-router" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;fontStyle=1;arcSize=10;" value="🌐 Home Router&#xa;(Plusnet Hub Two)&#xa;DHCP disabled" vertex="1">
+          <mxGeometry height="70" width="200" x="840" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr1a" edge="1" parent="1" source="R-laptop" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;" target="R-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr1b" edge="1" parent="1" source="R-phone" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;" target="R-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr1c" edge="1" parent="1" source="R-tv" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;" target="R-router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-pi-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;opacity=40;" value="" vertex="1">
+          <mxGeometry height="260" width="520" x="760" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="R-pi-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1F4E79;" value="🖥️  Raspberry Pi 4  —  192.168.1.143" vertex="1">
+          <mxGeometry height="24" width="520" x="760" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="R-pihole" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" value="🛡️ Pi-hole&#xa;Port 53&#xa;&#xa;Checks blocklist (gravity)&#xa;513,899 domains blocked" vertex="1">
+          <mxGeometry height="100" width="200" x="780" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="R-unbound" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;" value="🔒 Unbound&#xa;127.0.0.1:5335&#xa;&#xa;Recursive resolver&#xa;Walks tree directly" vertex="1">
+          <mxGeometry height="100" width="200" x="1020" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="R-blocked" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=1;fontColor=#7D0000;" value="❌ doubleclick.net&#xa;→ 0.0.0.0 BLOCKED" vertex="1">
+          <mxGeometry height="40" width="200" x="780" y="555" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr2" edge="1" parent="1" source="R-router" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6c8ebf;strokeWidth=3;fontSize=9;fontColor=#6c8ebf;fontStyle=1;" target="R-pihole" value="DNS query">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr3" edge="1" parent="1" source="R-pihole" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=9;fontColor=#2E5918;fontStyle=1;" target="R-unbound" value="allowed domain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-step2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#2E5918;fontStyle=2;" value="② Pi-hole checks blocklist. Blocked = dead end. Allowed = forwarded to Unbound." vertex="1">
+          <mxGeometry height="20" width="860" x="720" y="668" as="geometry" />
+        </mxCell>
+        <mxCell id="R-isp" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=2;fontColor=#666666;" value="☁️ ISP Network&#xa;(carries packets&#xa;in transit)" vertex="1">
+          <mxGeometry height="90" width="140" x="1260" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="R-isp-note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=9;fontColor=#666666;fontStyle=2;" value="⚠️ Can see traffic&#xa;in transit — but does&#xa;NOT log as a service" vertex="1">
+          <mxGeometry height="55" width="150" x="1255" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr-isp" edge="1" parent="1" source="R-unbound" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#999999;strokeWidth=1;dashed=1;fontSize=9;" target="R-isp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-root" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 Root Servers&#xa;(.) — see: .org query" vertex="1">
+          <mxGeometry height="60" width="160" x="760" y="843" as="geometry" />
+        </mxCell>
+        <mxCell id="R-tld" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 .org TLD Servers&#xa;— see: wikipedia.org" vertex="1">
+          <mxGeometry height="60" width="180" x="960" y="843" as="geometry" />
+        </mxCell>
+        <mxCell id="R-auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" value="🌍 ns0.wikimedia.org&#xa;— sees own domain only" vertex="1">
+          <mxGeometry height="60" width="180" x="1180" y="843" as="geometry" />
+        </mxCell>
+        <mxCell id="R-step3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=10;fontColor=#2E5918;fontStyle=2;" value="③ Unbound walks DNS tree directly. Each server sees only one piece. Nobody sees the full picture." vertex="1">
+          <mxGeometry height="20" width="860" x="720" y="715" as="geometry" />
+        </mxCell>
+        <mxCell id="R-internet" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" value="☁️ Internet" vertex="1">
+          <mxGeometry height="70" width="140" x="980" y="749" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr-internet" edge="1" parent="1" source="R-unbound" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=2;" target="R-internet">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr4a" edge="1" parent="1" source="R-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=2;fontSize=8;fontColor=#9673a6;" target="R-root" value="Step 1: who manages .org?">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr4b" edge="1" parent="1" source="R-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=2;fontSize=8;fontColor=#9673a6;" target="R-tld" value="Step 2: who manages wikipedia.org?">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr4c" edge="1" parent="1" source="R-internet" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#9673a6;strokeWidth=2;fontSize=8;fontColor=#9673a6;" target="R-auth" value="Step 3: what is en.wikipedia.org?">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="R-result" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;fontColor=#2E5918;" value="✅ Ads blocked. DNS private.&#xa;No third party logs your history.&#xa;Answer: 185.15.59.224" vertex="1">
+          <mxGeometry height="80" width="360" x="831" y="934" as="geometry" />
+        </mxCell>
+        <mxCell id="R-arr5" edge="1" parent="1" source="R-result" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=9;fontColor=#2E5918;fontStyle=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="answer returned">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880.0588235294117" y="593.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="" vertex="1">
+          <mxGeometry height="40" width="1580" x="40" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#333333;" value="KEY:" vertex="1">
+          <mxGeometry height="26" width="40" x="55" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#333333;" value="🛡️ Pi-hole = ad blocker at DNS level (port 53)" vertex="1">
+          <mxGeometry height="26" width="300" x="100" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#333333;" value="🔒 Unbound = recursive resolver (127.0.0.1:5335) — your own Google DNS replacement" vertex="1">
+          <mxGeometry height="26" width="480" x="420" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#333333;" value="TLD = Top-Level Domain (.org .com .uk)" vertex="1">
+          <mxGeometry height="26" width="280" x="920" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-4" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#333333;" value="DHCP disabled on router = all devices auto-use Pi-hole for DNS" vertex="1">
+          <mxGeometry height="26" width="380" x="1220" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="b8VwzXaeKGzRCv9vTYat-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#1F4E79;" value="Home Router GW IP —  192.168.1.254" vertex="1">
+          <mxGeometry height="24" width="520" x="380" y="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

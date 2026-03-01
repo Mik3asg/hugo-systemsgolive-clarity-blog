@@ -1,0 +1,75 @@
+[33m8d12d8f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m ldap-cert-selinux-added-03
+[33m1146a8b[m ldap-cert-selinux-added-02
+[33m784eda6[m ldap-cert-selinux-added-01
+[33mdc9b534[m updated favicon and footer 03
+[33m7b4650b[m updated favicon and footer 01
+[33m7ca9b30[m letsencrypt-article-05
+[33m1b3069c[m letsencrypt-article-04
+[33m4a5c38b[m letsencrypt-article-03
+[33mf6774af[m letsencrypt-article-02
+[33mdc01287[m letsencrypt-article-01
+[33m136f575[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m cf-article-04
+[33m2f7a8bb[m cf-article-04
+[33m18d0a8f[m cf-article-03
+[33m13b737e[m cf-article-02
+[33m20a4f81[m cf-article-01
+[33m9d7d22a[m http2 article updates 06
+[33m0897423[m http2 article updates 04
+[33m7a55607[m http2 article updates 03
+[33mc7dfd87[m http2 article updates 02
+[33m20cf02f[m http2 article updates
+[33m6395ab2[m http2 pictures uploaded
+[33m0f912b9[m http2 article added 01
+[33mb9b165d[m http2 article added 02
+[33me19b17e[m http2 article added 01
+[33mddf7ebd[m http2 article added
+[33m17caece[m comment box 02
+[33m2baaab8[m comment box 01
+[33medf377f[m added show contact form
+[33m4995d95[m Add Giscus comments system
+[33md777b17[m add google analytics tracking ID
+[33m1c5c5e3[m tls-article-10
+[33m54e116b[m tls-article-09
+[33mb8ffcfd[m tls-article-06
+[33m925647f[m tls-article-06
+[33m3d8917b[m tls-article-05
+[33m1a89c5a[m tls-article-04
+[33m770d70b[m tls-article-03
+[33m84ca54d[m tls-article-02
+[33mbcf34fb[m tls-article-01
+[33m1abc150[m mysql-user-profile-creation-added-04
+[33m17eecf1[m mysql-workbench-ssh-tunnel added 04
+[33m3f5df7b[m mysql-user-profile-creation-added-02
+[33mc03282c[m mysql-user-profile-creation-added-01
+[33m7fb934c[m mysql-workbench-ssh-tunnel added 03
+[33mb4e9226[m mysql-workbench-ssh-tunnel added 03
+[33m7573c3d[m mysql-workbench-ssh-tunnel added
+[33me74fd94[m updated article 503
+[33mfd3533f[m added conclusion section in custom apache 503 article
+[33mfb321e9[m 503-image uploaded
+[33m31acbd2[m disabled articles 05
+[33m590ff80[m disabled articles 04
+[33m66ed3e5[m disabled articles 03
+[33m68f3aaf[m disabled articles
+[33mc8caf14[m python-ec2-article-v1
+[33m65d1455[m unwanted post deleted
+[33m8c8bd64[m python-ec2-article-v0
+[33m2edc9f9[m aws-ec2-scripts-v1
+[33m33253d8[m article text updated
+[33m437bf20[m pic added
+[33m48e6493[m new articles added
+[33m2211777[m logo updated
+[33m613c17a[m Profile Picture Updated
+[33m7173721[m Update baseURL to systemsgo.live
+[33m8987775[m Update Netlify configuration for submodules
+[33m9e3b6cd[m Reinitialize hugo-clarity theme as submodule
+[33m31acdaf[m Remove theme for reinstallation
+[33m603c446[m Update hugo.toml configuration
+[33m88756de[m Update build command to initialize git submodules
+[33mb58d3fd[m Update build command with debug flag
+[33m2e12eb8[m Add verbose output to build command
+[33ma418488[m Update Netlify config to use Hugo extended version and minify
+[33m375f707[m Update netlify.toml with correct Go version
+[33me5de5e0[m Fix Netlify configuration
+[33m5b499fa[m Add Netlify configuration
+[33m6a972c6[m Initial commit
