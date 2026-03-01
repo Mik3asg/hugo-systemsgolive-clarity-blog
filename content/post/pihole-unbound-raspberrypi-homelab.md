@@ -58,9 +58,9 @@ Two services running on a Raspberry Pi 4 address the problem:
 
 # Architecture
 
-The diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
+The flow diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
 
-![DNS Architecture Diagram](/diagrams/pihole-unbound-dns-architecture.svg)
+![Pi-hole and Unbound Flow Diagram](/diagrams/pihole-unbound-dns-architecture.svg)
 
 **With Pi-hole + Unbound**
 
@@ -455,8 +455,6 @@ The trade-off is centralisation. DoH and DoT hide the content of DNS queries fro
 
 This setup takes a different position: DNS queries are not encrypted in transit, but no single external resolver ever sees the full query history. Queries are distributed across the global DNS hierarchy rather than aggregated by one provider.
 
-For this home network, eliminating centralised DNS logging was the primary concern. DoH or DoT could be layered on top in future if in-transit encryption also becomes a requirement.
-
 ---
 
 # Conclusion
@@ -487,4 +485,4 @@ Result:
 - No third-party recursive DNS provider receives query history
 - DNS responses are validated and cached locally
 
-No centralised resolver. No browsing history logged by a third party. No ads reaching the network. A Raspberry Pi 4 running two services handles it all, quietly, for every device on the network.
+Running Pi-hole and Unbound on a Raspberry Pi 4 was a deliberate homelab choice — privacy over encryption, with DNS resolution kept entirely in-house and no third-party provider involved at any step. No centralised resolver. No browsing history logged externally. No ads reaching any device on the network.
