@@ -1,11 +1,11 @@
 ---
-title: "Pi-hole and Unbound on Raspberry Pi 4 – Homelab Setup: Network-wide Ad-blocking and Private DNS Recursive Resolver"
+title: "Pi-hole and Unbound on Raspberry Pi 4 – Ad-blocking and Private DNS Resolver"
 date: 2026-03-01T12:19:06Z
 draft: false
-tags: []
-categories: []
+tags: ["Pi-hole", "Unbound", "DNS", "Raspberry Pi", "Homelab", "Ad Blocking", "Privacy", "DNSSEC", "Recursive DNS", "Self-hosted"]
+categories: ["Homelab", "Networking", "Infrastructure"]
 thumbnail: "images/pihole-unbound-raspberrypi-homelab.png"
-summary: ""
+summary: "Run Pi-hole and Unbound on a Raspberry Pi 4 to block ads and tracking domains across every device on your home network, while resolving DNS privately using a local recursive resolver — no third-party DNS provider required."
 ---
 
 # Problem Statement
@@ -60,7 +60,7 @@ Two services running on a Raspberry Pi 4 address the problem:
 
 The diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
 
-[View Architecture Diagram](https://viewer.diagrams.net/?url=https://systemsgo.live/diagrams/pihole-unbound-dns-architecture-new.drawio)
+![DNS Architecture Diagram](/diagrams/pihole-unbound-dns-architecture.svg)
 
 **With Pi-hole + Unbound**
 
@@ -199,7 +199,7 @@ The dashboard provides:
 - Blocking statistics
 - Device activity overview
 
-> [ Insert Pi-hole dashboard screenshot here ]
+![Pi-hole Dashboard](/images/pihole-dashboard.png)
 
 ---
 
@@ -332,8 +332,6 @@ Summary:
 - `fail01.dnssec.works` → rejected invalid DNSSEC data
 - `dnssec.works` → validated and authenticated successfully
 
-> [ Insert DNSSEC verification screenshot here ]
-
 ---
 
 ## Privacy vs Encryption
@@ -412,7 +410,7 @@ Explanation:
 
 > If you see queries forwarded to `127.0.0.1#5335`, Pi-hole is correctly using Unbound as its upstream resolver.
 
-> [ Insert first verification screenshot here ]
+![Pi-hole first query – recursive resolution](/images/phole-unbound-first-query-recursive-resolution.png)
 
 #### Second Query – Cached Lookup
 
@@ -439,7 +437,7 @@ Explanation:
 - No external DNS queries are required.
 - Subsequent lookups are significantly faster.
 
-> [ Insert cached query screenshot here ]
+![Pi-hole second query – cached lookup](/images/phole-unbound-second-query-cached-lookup.png)
 
 ---
 
