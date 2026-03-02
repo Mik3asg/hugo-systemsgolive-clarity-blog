@@ -476,13 +476,15 @@ The DNS stack operates entirely within the home network:
 
 - Performs recursive DNS resolution locally
 - Removes reliance on public DNS providers
+- DNS requests walk the tree directly from `127.0.0.1#5335` – starting at the root servers, then TLD, then authoritative servers
 - Distributes DNS queries across the global DNS system
 
 Result:
 
 - All devices use Pi-hole automatically
 - Ads and trackers are blocked at the DNS level
-- No third-party recursive DNS provider receives query history
-- DNS responses are validated and cached locally
+- Zero dependency on public DNS providers
+- DNS responses are validated and cached locally in RasperryPi for faster lookups
+- DNSSEC validation
 
 Running Pi-hole and Unbound on a Raspberry Pi 4 was a deliberate homelab choice — privacy over encryption, with DNS resolution kept entirely in-house and no third-party provider involved at any step. No centralised resolver. No browsing history logged externally. No ads reaching any device on the network.
