@@ -58,9 +58,9 @@ Two services running on a Raspberry Pi 4 address the problem:
 
 # Architecture
 
-The flow diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
+The diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
 
-![Pi-hole and Unbound Flow Diagram](/diagrams/pihole-unbound-dns-architecture.svg)
+![pihole-unbound-dns-flow-comparison](/diagrams/pihole-unbound-dns-flow-comparison.drawio.svg)
 
 **With Pi-hole + Unbound**
 
