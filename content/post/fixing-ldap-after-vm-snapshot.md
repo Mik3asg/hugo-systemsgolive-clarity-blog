@@ -4,7 +4,7 @@ date: 2026-03-03T14:30:34Z
 draft: false
 tags: ["LDAP", "OpenLDAP", "Linux", "AlmaLinux", "Troubleshooting", "SLAPD", "CRC32", "VM Snapshot"]
 categories: ["System Administration", "Troubleshooting", "Infrastructure"]
-thumbnail: "images/ldap-failure-after-vm-snapshot"
+thumbnail: "images/ldap-failure-after-vm-snapshot.png"
 summary: "Resolving an OpenLDAP service failure on a VM snapshot — fixing hostname identity mismatches, loopback address issues, olcServerID with CRC32 recalculation, and removing leftover replication config from the source server."
 ---
 
