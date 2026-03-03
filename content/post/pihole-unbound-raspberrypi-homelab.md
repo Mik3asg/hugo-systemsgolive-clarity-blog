@@ -73,7 +73,7 @@ Device → Public DNS → Ad domain → Content loads
 With Pi-hole:
 
 ```
-Device → Pi-hole → Domain blocked locally
+Device → Pi-hole → Blocklist match → 0.0.0.0 / NXDOMAIN returned → Connection fails
 ```
 
 ---
@@ -112,7 +112,8 @@ The DNS system is organised as a hierarchy. Every domain name maps to a position
        │
  en.wikipedia.org                         ← subdomain
 ```
-When a device requests en.wikipedia.org, Unbound performs recursive resolution, locating the answer step by step:
+
+When a device requests `en.wikipedia.org`, Unbound performs recursive resolution, locating the answer step by step:
 
 1. Queries the `root servers` to learn which servers manage `.org`
 2. Queries the `.org TLD servers` to find the `authoritative servers` for `wikipedia.org`
@@ -134,7 +135,7 @@ The diagram below compares DNS query flows side by side – with Pi-hole and Unb
 **With Pi-hole + Unbound**
 
 ```
-Devices → Pi-hole (DNS filter) → Unbound (recursive resolver) → Internet DNS hierarchy
+Devices → Pi-hole (filter + cache) → Unbound (recursive resolver) → Root → TLD → Authoritative servers
 ```
 
 **Without Pi-hole + Unbound**
@@ -267,7 +268,7 @@ Advertising domains may be blocked, but DNS queries remain externally visible.
 With Unbound:
 
 ```
-Device → Pi-hole → Unbound → DNS hierarchy
+Device → Pi-hole → Unbound → Root → TLD → Authoritative → Response
 ```
 
 DNS resolution occurs locally without reliance on public resolvers.
@@ -369,6 +370,8 @@ dig fifa.com @127.0.0.1
 sudo tail /var/log/pihole/pihole.log | grep "fifa"
 ```
 
+`127.0.0.1` is the loopback address (localhost) — the Raspberry Pi itself. The `@127.0.0.1` flag tells `dig` to send the query to Pi-hole running locally on the device. Pi-hole listens on the standard DNS port `53`. It then forwards the query to Unbound, which listens on port `5335`.
+
 What I observed:
 
 - Query time ≈ 135 ms
@@ -382,8 +385,7 @@ reply fifa.com is 2.19.248.224
 
 Explanation:
 
-- `127.0.0.1#5335` is Unbound
-- Pi-hole forwarded the request internally
+- Pi-hole forwarded the query to Unbound at `127.0.0.1#5335`
 - Unbound performed recursive resolution by querying root, TLD, and authoritative DNS servers
 - The higher query time occurs because the result was not yet cached
 
