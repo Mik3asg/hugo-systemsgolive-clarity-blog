@@ -14,7 +14,7 @@ Every device on a home network performs DNS lookups before connecting to a websi
 
 In a typical home network, those queries are handled by an ISP or a public DNS provider such as Google or Cloudflare:
 
-```
+```text
 Device → ISP DNS / Public DNS → Internet
 ```
 
@@ -66,13 +66,13 @@ It works at the DNS level, before any content is loaded. No browser extension. N
 
 Without Pi-hole:
 
-```
+```text
 Device → Public DNS → Ad domain → Content loads
 ```
 
 With Pi-hole:
 
-```
+```text
 Device → Pi-hole → Blocklist match → 0.0.0.0 / NXDOMAIN returned → Connection fails
 ```
 
@@ -102,7 +102,7 @@ The difference is who operates the resolver.
 
 The DNS system is organised as a hierarchy. Every domain name maps to a position within this tree:
 
-```
+```text
                     . (root)
                     │
        ┌────────────┼────────────┐
@@ -134,13 +134,13 @@ The diagram below compares DNS query flows side by side – with Pi-hole and Unb
 
 **With Pi-hole + Unbound**
 
-```
+```text
 Devices → Pi-hole (filter + cache) → Unbound (recursive resolver) → Root → TLD → Authoritative servers
 ```
 
 **Without Pi-hole + Unbound**
 
-```
+```text
 Devices → ISP DNS / Public DNS → Internet
 ```
 
@@ -182,7 +182,7 @@ I also pointed the router's own DNS to Pi-hole, so router-originated queries are
 
 Unbound listens only on localhost:
 
-```
+```text
 127.0.0.1:5335
 ```
 
@@ -198,7 +198,7 @@ All third-party upstream DNS providers are disabled in Pi-hole.
 
 Only Unbound is configured:
 
-```
+```text
 127.0.0.1#5335
 ```
 
@@ -212,7 +212,7 @@ This ensures DNS queries are resolved locally.
 
 Pi-hole includes a default blocklist on installation:
 
-```
+```text
 https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 ```
 
@@ -220,7 +220,7 @@ This list provides a baseline set of advertising and tracking domains.
 
 I added additional lists from:
 
-```
+```text
 https://firebog.net
 ```
 
@@ -238,7 +238,7 @@ This command downloads updated blocklists and rebuilds Pi-hole's filtering datab
 
 I access the dashboard at:
 
-```
+```text
 http://192.168.1.143/admin
 ```
 
@@ -259,7 +259,7 @@ Pi-hole blocks unwanted domains but does not resolve allowed domains itself.
 
 Pi-hole only:
 
-```
+```text
 Device → Pi-hole → Public DNS → Internet
 ```
 
@@ -267,7 +267,7 @@ Advertising domains may be blocked, but DNS queries remain externally visible.
 
 With Unbound:
 
-```
+```text
 Device → Pi-hole → Unbound → Root → TLD → Authoritative → Response
 ```
 
@@ -341,7 +341,7 @@ nslookup en.wikipedia.org
 
 This is what I got:
 
-```
+```text
 Server:  pi.hole
 Address:  192.168.1.143
 
@@ -377,7 +377,7 @@ What I observed:
 - Query time ≈ 135 ms
 - Pi-hole log showed:
 
-```
+```text
 forwarded fifa.com to 127.0.0.1#5335
 reply fifa.com is 2.19.248.207
 reply fifa.com is 2.19.248.224
@@ -407,7 +407,7 @@ This time:
 - Query time ≈ 0 ms
 - The log showed cached responses:
 
-```
+```text
 cached fifa.com is 2.19.248.207
 cached fifa.com is 2.19.248.224
 ```
