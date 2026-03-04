@@ -218,14 +218,14 @@ https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 
 This provides a baseline set of advertising and tracking domains.
 
-I added two additional lists under Pi-hole → Group Management → Lists. HaGeZi's DNS blocklists are modern, consolidated lists designed to replace multiple smaller ones — covering ads, trackers, telemetry, malware, scam domains, and threat intelligence feeds in a single maintained source.
+I added two additional lists under __Pi-hole → Group Management → Lists__. HaGeZi's DNS blocklists are modern, consolidated lists designed to replace multiple smaller ones — covering ads, trackers, telemetry, malware, scam domains, and threat intelligence feeds in a single maintained source.
 
 | List | URL |
 |---|---|
 | HaGeZi Pro | `https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt` |
 | HaGeZi Threat Intelligence Feeds (medium) | `https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/tif.medium.txt` |
 
-![Pi-hole Adlists](/images/pihole-dns-blocklists.png)
+![Pi-hole DNS Blocklists](/images/pihole-dns-blocklists.png)
 
 After adding, rebuild the gravity database:
 
