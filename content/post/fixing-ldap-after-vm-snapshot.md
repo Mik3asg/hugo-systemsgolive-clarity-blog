@@ -87,7 +87,20 @@ sudo vim /etc/hosts
 
 ### 3. Fix `olcServerID`
 
-This is where it got interesting. The right way to modify LDAP config is through `ldapmodify` — the config files explicitly say do not edit directly. So I prepared the ldif file and tried to apply it:
+This is where it got interesting. The right way to modify LDAP config is through `ldapmodify` — the config files explicitly say do not edit directly. So I prepared the ldif file:
+
+```bash
+sudo vim /tmp/fix_serverid.ldif
+```
+
+```text
+dn: cn=config
+changetype: modify
+replace: olcServerID
+olcServerID: 0 ldap://SNAP-198
+```
+
+And tried to apply it:
 
 ```bash
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/fix_serverid.ldif
