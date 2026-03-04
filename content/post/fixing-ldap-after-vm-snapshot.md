@@ -61,6 +61,18 @@ sudo vim /etc/sysconfig/slapd
 SLAPD_URLS="ldapi:/// ldap://SNAP-198 ldap://localhost"
 ```
 
+Verify the change:
+
+```bash
+sudo cat /etc/sysconfig/slapd
+```
+
+```text
+## Reason: Give access to file to specific group. This can now be edited as required ##
+#SLAPD_URLS="ldapi:/// ldap://Pre-Prod ldap://localhost"
+SLAPD_URLS="ldapi:/// ldap://SNAP-198 ldap://localhost"
+```
+
 ### 2. Fix `/etc/hosts`
 
 Remove the loopback entry for the hostname and map it to the actual public IP:
@@ -101,6 +113,14 @@ To:
 ```text
 olcServerID: 0 ldap://SNAP-198
 ```
+
+OpenLDAP stores a CRC32 checksum at the top of `cn=config.ldif`. When `slapd` starts, it recalculates the checksum from the file content and compares it against the stored value. If they don't match, `slapd` rejects the file:
+
+```text
+ldif_read_file: checksum error on "/etc/openldap/slapd.d/cn=config.ldif"
+```
+
+Editing the file directly changes the content but leaves the stored checksum pointing to the old version. Recalculating it and updating the value at the top of the file tells `slapd` the content is valid.
 
 Then recalculate the CRC32:
 
