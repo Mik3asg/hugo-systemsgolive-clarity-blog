@@ -216,23 +216,22 @@ Pi-hole includes a default blocklist on installation:
 https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
 ```
 
-This list provides a baseline set of advertising and tracking domains.
+This provides a baseline set of advertising and tracking domains.
 
-I added additional lists from:
+I added two additional lists under Pi-hole → Group Management → Lists. HaGeZi's DNS blocklists are modern, consolidated lists designed to replace multiple smaller ones — covering ads, trackers, telemetry, malware, scam domains, and threat intelligence feeds in a single maintained source.
 
-```text
-https://firebog.net
-```
+| List | URL |
+|---|---|
+| HaGeZi Pro | `https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt` |
+| HaGeZi Threat Intelligence Feeds (medium) | `https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/tif.medium.txt` |
 
-I selected only the recommended (green) lists to balance effective blocking with minimal false positives.
+![Pi-hole Adlists](/images/pihole-dns-blocklists.png)
 
-Update or rebuild the gravity database using:
+After adding, rebuild the gravity database:
 
 ```bash
 pihole -g
 ```
-
-This command downloads updated blocklists and rebuilds Pi-hole's filtering database.
 
 ### Pi-hole Dashboard
 
