@@ -8,3 +8,10 @@
   margin: 10px auto !important;  // Centers the image
   display: block !important;
 }
+
+// Sticky sidebar - follows user as they scroll down the page
+aside.sidebar {
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+}
