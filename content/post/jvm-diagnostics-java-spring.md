@@ -161,5 +161,3 @@ My role as a DevOps Engineer stops here - getting the captures clean, complete, 
 When the spike hits, the last thing you want is to be figuring out tooling under pressure. That groundwork is done.
 
 ---
-
-*If you found this article useful, consider following this blog to stay informed on new posts — it's free. If you have questions or would like to discuss further, feel free to leave a comment below.*
