@@ -9,6 +9,11 @@
   display: block !important;
 }
 
+// Prevent orphaned words at end of lines in post body
+.post_body p, .post_body li {
+  text-wrap: pretty;
+}
+
 // Sticky sidebar - follows user as they scroll down the page
 aside.sidebar {
   position: sticky;
