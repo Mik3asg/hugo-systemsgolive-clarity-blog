@@ -99,7 +99,7 @@ One thing worth knowing: the JRE (Java Runtime Environment) is enough to *run* a
 
 ## The Diagnostic Script
 
-Rather than running commands manually under pressure during a live incident, I built a shell script to handle the full capture process safely and consistently. The script is available on my GitHub - [link to be added].
+Rather than running commands manually under pressure during a live incident, I built a shell script to handle the full capture process safely and consistently. The script is available on my GitHub - [jvm_diagnostics.sh](https://github.com/Mik3asg/devops-sre-scripts/blob/98ed63846a47739242a2eb1a0a6ed6febcaeec27/jvm_diagnostics.sh).
 
 At a high level it does the following:
 
