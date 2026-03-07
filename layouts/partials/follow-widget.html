@@ -1,103 +1,40 @@
 <style>
-    .followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-  margin-top: 1.5rem !important;
-  padding: 0.5rem 0 0.5rem 0.75rem !important;
-  max-width: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  background-color: transparent !important;
-  border-left: 3px solid var(--theme) !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview,
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview *{
-  box-sizing: border-box !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading {
-  width: 100% !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading h5{
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  font-family: Metropolis, sans-serif !important;
-  font-weight: 300 !important;
-  font-size: 125% !important;
-  color: var(--header-text) !important;
-  text-align: left !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field {
-  margin-top: 20px !important;
-  width: 100% !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input {
-  width: 100% !important;
-  height: 40px !important;
-  border-radius: 1.5rem !important;
-  border: 2px solid #e9e8e8 !important;
-  background-color: #fff;
-  outline: none !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input {
-  color: #ffffff !important;
-  font-family: Metropolis, sans-serif !important;
-  font-size: 0.9rem !important;
-  font-weight: 400 !important;
-  line-height: 20px !important;
-  text-align: center !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input::placeholder {
-  color: #ffffff !important;
-  opacity: 1 !important;
-}
+  .followit-email-input {
+    width: 100%;
+    height: 40px;
+    border-radius: 1.5rem;
+    border: 2px solid #e9e8e8;
+    background-color: #0077b8;
+    color: #fff;
+    font-family: Metropolis, sans-serif;
+    font-size: 0.9rem;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    display: block;
+  }
+  .followit-email-input::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .followit-subscribe h2 {
+    font-size: 125%;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .followit-subscribe .button {
+    width: 100%;
+    justify-content: center;
+  }
 
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input:-ms-input-placeholder {
-  color: #ffffff !important;
-}
+</style>
 
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input::-ms-input-placeholder {
-  color: #ffffff !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button {
-  margin-top: 10px !important;
-  width: 100% !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button {
-  width: 100% !important;
-  height: 40px !important;
-  border: 0 !important;
-  border-radius: 1.5rem !important;
-  line-height: 0px !important;
-  font-family: Metropolis, sans-serif !important;
-  font-size: 0.9rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button:hover {
-  cursor: pointer !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line {
-  color: #231f20 !important;
-  font-family: "Montserrat" !important;
-  font-size: 13px !important;
-  font-weight: 400 !important;
-  line-height: 25px !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  display: flex !important;
-  width: 100% !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin-top: 10px !important;
-}
-.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line img {
-  margin-left: 10px !important;
-  height: 1.13em !important;
-  max-height: 1.13em !important;
-}
+<div class="followit-subscribe" style="border-left: 3px solid var(--theme); padding: 0 0 0.5rem 0.75rem; margin-top: 2.5rem; margin-bottom: 1.5rem;">
+  <h2>Get new posts by email</h2>
+  <!-- Action URL from follow.it website — do not change unless you regenerate it from your follow.it dashboard -->
+  <form action="https://api.follow.it/subscription-form/MFNlUVpLbC8rbmc2dTJ0MGJxQTQ3WnhWT1J1TXUzeGJReXpDNFlWUko1TjhzUmdaSiszWmljOEpkWi9sRTdLR2h3TFI3V1dXSmxhT0NjdHZVUFpzUGtrUDU3Wi9kMldJZmovR2RzK2ZNbytRcUFnNHN4Si93RG1PVmh4Sy9CakR8L1BtUDBiYm5aR3BkZ2V0T3FDUXB1U1dqMXhqSWtmekVBTlplbnZhOHJNVT0=/8" method="post">
+    <input type="email" name="email" required placeholder="Enter your email" class="followit-email-input">
+    <button type="submit" class="button mt-1">Subscribe</button>
+  </form>
 
-  </style>
-  <div class="followit--follow-form-container" attr-a attr-b attr-c attr-d attr-e attr-f>
-    <form data-v-8a8a107f="" action="https://api.follow.it/subscription-form/MFNlUVpLbC8rbmc2dTJ0MGJxQTQ3WnhWT1J1TXUzeGJReXpDNFlWUko1TjhzUmdaSiszWmljOEpkWi9sRTdLR2h3TFI3V1dXSmxhT0NjdHZVUFpzUGtrUDU3Wi9kMldJZmovR2RzK2ZNbytRcUFnNHN4Si93RG1PVmh4Sy9CakR8L1BtUDBiYm5aR3BkZ2V0T3FDUXB1U1dqMXhqSWtmekVBTlplbnZhOHJNVT0=/8" method="post"><div data-v-8a8a107f="" class="form-preview" style="background-color: transparent; position: relative;"><div data-v-8a8a107f="" class="preview-heading"><h5 data-v-8a8a107f="" style="font-family: Metropolis, sans-serif; font-weight: 300; color: var(--header-text); font-size: 125%; text-align: left; text-transform: none;">Get new posts by email:</h5></div><div data-v-8a8a107f="" class="preview-input-field"><input data-v-8a8a107f="" type="email" name="email" required="" placeholder="Enter your email" spellcheck="false" style="font-family: Metropolis, sans-serif; font-weight: 400; color: rgb(255, 255, 255); font-size: 0.9rem; text-align: center; background-color: rgb(0, 119, 184);"></div><div data-v-8a8a107f="" class="preview-submit-button"><button data-v-8a8a107f="" type="submit" style="font-family: Metropolis, sans-serif; font-weight: 700; color: rgb(255, 255, 255); font-size: 0.9rem; text-align: center; background-color: rgb(0, 119, 184); text-transform: uppercase;">Subscribe</button></div></div></form><a href="https://follow.it" class="powered-by-line">Powered by <img src="https://follow.it/images/colored-logo.svg" alt="follow.it" height="17px"/></a>
-  </div>
+</div>
