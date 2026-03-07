@@ -7,9 +7,6 @@ categories: [DevOps, Java, Performance]
 thumbnail: "images/jvm-diagnostics.png"
 summary: "A practical DevOps walkthrough on how to safely capture JVM heap dumps and thread dumps during a CPU spike on a Java Spring/Tomcat production server — using a shell script built around jmap, jstack, and jcmd."
 ---
-# How I Prepared Our Java Spring App Servers to Capture JVM Diagnostics During a CPU Spike
-
----
 
 ## The Problem
 
