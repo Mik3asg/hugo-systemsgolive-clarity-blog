@@ -32,8 +32,6 @@ Google's SRE team literally wrote the book on this. A blameless postmortem cultu
 > *"A truly blameless postmortem culture results in more reliable systems."*
 > — Google SRE Workbook, Chapter 10
 
----
-
 ## It's a Mindset, Not Just Documentation
 
 Anyone can follow a runbook and fix an SSL cert at 2am. What not everyone does is sit down the next morning and ask: why did this happen? Could I have seen it coming? What does this tell me about my system?
@@ -47,8 +45,6 @@ That's the postmortem mindset. Here's why it sets you apart:
 
 I've worked in infrastructure long enough to know — the engineers who write these things, and write them well, are the ones who get trusted with the bigger problems.
 
----
-
 ## Blameless. Always.
 
 This is the bit most people get wrong. Postmortems are not about naming who broke prod.
@@ -56,8 +52,6 @@ This is the bit most people get wrong. Postmortems are not about naming who brok
 Even if a human made a mistake, the real question is: why was it *possible* for that mistake to cause this much damage? Could a better alert have caught it earlier? Could a rate limit have slowed the blast radius? Was the documentation actually clear?
 
 Blame kills learning. Blamelessness creates safety. And safety is what makes people flag near-misses before they become outages.
-
----
 
 ## A Real-World Example
 
@@ -70,8 +64,6 @@ Now — did you just close the ticket and move on?
 A good engineer writes the postmortem. They capture how it was detected (the alert), how it was resolved (manual renewal), and what actually caused it (SELinux context change silently broke the automation). Then — the part that really matters — they add action items: a Prometheus alert for certs expiring within 14 days, a CI test to dry-run renewal on every deploy, and an audit of other cron jobs that might have the same SELinux problem.
 
 That 45-minute fix just became a permanent improvement. And the engineer who documented it? They've shown they understand the system at a level most people never bother with. Notice what's missing from that write-up: names. No one got blamed. The system got fixed.
-
----
 
 ## The Template
 
@@ -145,8 +137,6 @@ The most important section. Vague action items are useless. Each one needs an ow
 
 ### 10. Lessons Learned
 What did this incident reveal about your system? What assumptions were wrong? What change would prevent a whole *class* of similar issues — not just this one?
-
----
 
 ## Final Thoughts
 
