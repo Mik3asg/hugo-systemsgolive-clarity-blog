@@ -8,11 +8,15 @@ thumbnail: "images/selinux-ldap-issue.png"
 summary: "An internal LDAP certificate renewal failed due to incorrect SELinux contexts on transferred certificate files. Despite correct permissions and ownership, OpenLDAP couldn't initialise TLS. Using `restorecon` to fix the security context resolved the issue immediately, highlighting the importance of SELinux context verification in certificate deployments."
 ---
 
+## The Problem
+
 We recently had to renew a private SSL certificate used for internal LDAP access on one of our production web servers (e.g., `prod-web-01`). This certificate is not public-facing and is used only by the Support and DevOps teams internally, when connecting to the LDAP directory via Apache Directory Studio (i.e. LDAP client).
 
 The certificate secures the LDAPS connection (port 636) between the LDAP client (GUI) and the LDAP service running on `prod-web-01`. This host provides internal LDAP services only, and the certificate is not shared with any external systems or applications. The certificate was issued by our private Root CA, hosted on a separate virtual machine and used solely for internal infrastructure.
 
 On paper, this should have been a routine renewal.
+
+---
 
 ## The Plan (What Should Have Worked)
 
@@ -31,6 +35,8 @@ Our OpenLDAP TLS configuration already referenced fixed paths and filenames:
 
 Since none of these changed, no configuration updates were required. A service restart should have been enough.
 
+---
+
 ## The Failure
 
 After copying the new certificates into place and restarting `slapd`, the service failed immediately with:
@@ -39,6 +45,8 @@ TLS init def ctx failed: -1
 ```
 
 Not the result we were expecting.
+
+---
 
 ## The Investigation
 
@@ -56,6 +64,8 @@ ls -alZ
 ```
 
 That's when the problem became clear.
+
+---
 
 ## The Culprit: SELinux Contexts
 
@@ -77,6 +87,8 @@ Because the certificates were generated and transferred from a different system,
 
 SELinux enforces access based on security contexts, not just permissions. OpenLDAP requires certificate files to be labeled correctly; without the proper context, access is denied and TLS initialisation fails — even though everything else appears correct.
 
+---
+
 ## The Fix
 
 Restoring the correct SELinux contexts resolved the issue immediately:
@@ -86,6 +98,8 @@ restorecon -v /etc/openldap/certs/private-rootca-ldap.cert.pem
 ```
 
 Once the contexts were corrected, the LDAP service started successfully and LDAPS on port 636 was available again.
+
+---
 
 ## Lesson Learned
 
