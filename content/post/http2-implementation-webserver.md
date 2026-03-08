@@ -14,6 +14,8 @@ This case study demonstrates how we implemented HTTP/2 on production Apache serv
 
 > **Note:** Domain names have been anonymised for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
 
+---
+
 ## The Problem
 
 We enabled HTTP/2 on our Apache web servers for `login.companyabc.com` to improve performance. When we configured Apache with `Protocols h2 http/1.1` on port 443, our load balancer's health checks immediately failed. All servers were marked as DOWN, causing a complete service outage.
@@ -21,8 +23,6 @@ We enabled HTTP/2 on our Apache web servers for `login.companyabc.com` to improv
 **Root Cause:** HAProxy (our vendor-hosted application load balancer) health check process only supports HTTP/1.1. When it tried to communicate with HTTP/2-enabled ports, the protocol mismatch caused all health checks to fail with "invalid response" errors.
 
 Our pre-production environment (hosted on Vultr without a load balancer) worked perfectly with the same Apache HTTP/2 configuration. This confirmed the issue was specific to the load balancer health check mechanism.
-
----
 
 ## Deployment Journey Overview
 
@@ -34,8 +34,6 @@ The following diagram illustrates our complete deployment journey from the initi
 ![HTTP/2 deployment - phase 06](images/http2-04.png)
 
 *Figure 1: Complete HTTP/2 deployment progression showing seven phases: The Problem (protocol mismatch causing outage), Phase 1 (initial HTTP/1.1 state), Phase 2 (Tomcat-01 isolated in DRAIN mode), Phase 3 (dual-port configuration tested), Phase 4 (parallel infrastructure rolled out), Phase 5 (seamless listener cutover), and Phase 6 (HTTP/2 enabled with dedicated health check port). The diagram clearly distinguishes between customer traffic (port 443) and health check traffic (port 8443), showing how the solution separates these concerns to prevent protocol mismatch.*
-
----
 
 ## The Solution: Dual-Port Architecture
 
@@ -290,8 +288,6 @@ We enabled HTTP/2 on port 443 one server at a time using graceful Apache reloads
 # Health checks still using HTTP/1.1 on dedicated port:
 10.0.0.7 - - [29/Sep/2025:11:33:42 +0100] "GET /healthcheck/ HTTP/1.1" 200 88
 ```
-
----
 
 ## Results and Key Takeaways
 

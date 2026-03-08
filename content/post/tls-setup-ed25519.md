@@ -11,6 +11,8 @@ summary: "This guide demonstrates how to set up secure TLS 1.3 communication usi
 
 This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve certificates and a private Certificate Authority (CA). It covers encrypted client-server communication with modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network architectures.
 
+---
+
 ### What Is Ed25519 and How Does It Compare to RSA?
 
 Ed25519 is a modern elliptic-curve signature algorithm that offers fast operations, smaller keys, and strong security while reducing operational overhead in your infrastructure.
@@ -522,6 +524,8 @@ SECRET DATA: password123 - credit card: 1234-5678-9012-3456
 |----------------------------|-----------------------|------------------------|-----------------------------|
 | HTTPS (TLS 1.3 + Ed25519) | Normal data access | Fully encrypted     | Encrypted gibberish only |
 | HTTP (Unencrypted)        | Normal data access | No protection       | All secrets visible      |
+
+---
 
 ## Conclusion
 

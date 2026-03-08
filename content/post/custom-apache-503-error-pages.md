@@ -12,6 +12,8 @@ This article outlines the implementation and usage of custom Apache 503 error pa
 - Unexpected Outage (default)
 - Planned Maintenance
 
+---
+
 ## 1 – Implementation
 These actions were performed only once during the initial implementation and are **not required for routine operations**.
 
@@ -179,6 +181,8 @@ sudo systemctl start tomcat
 
 #### Step 7 – Repeat:
 Repeat the above steps on the required Tomcat web app instances.
+
+---
 
 ## Conclusion
 Custom Apache 503 error pages provide a clear and controlled way to communicate service interruptions. With proper setup, teams can switch between planned and unexpected outage messages based on operational needs.

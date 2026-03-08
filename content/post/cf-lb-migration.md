@@ -12,6 +12,8 @@ summary: "Our journey migrating our production care management platform from ANS
 
 This article documents our seamless production migration from ANS Load Balancer to Cloudflare Load Balancer for our production care management web application.
 
+---
+
 ### Current Setup
 
 Our domain `eplancare.com` is hosted on Cloudflare as our DNS provider. The production application is accessible at `login.eplancare.com`, which is our main customer-facing application serving healthcare providers and care managers who access our platform daily.
@@ -21,8 +23,6 @@ Currently, `login.eplancare.com` points to a Virtual IP (VIP) address managed by
 ### Migration Goal
 
 We needed to migrate from the ANS Load Balancer to Cloudflare Load Balancer while maintaining the same application endpoint (`login.eplancare.com`). This migration was driven by operational overhead, security concerns, and the need for automated certificate management. The cutover was executed successfully with zero downtime during a planned maintenance window (10th November 2024, 04:30-05:15 UK Time).
-
----
 
 ## Why We Migrated
 
@@ -54,16 +54,12 @@ We needed to migrate from the ANS Load Balancer to Cloudflare Load Balancer whil
 ⚠️ **Potential Cloudflare Outage** - If Cloudflare experiences issues, we could face downtime
 - **Mitigation**: We kept ANS LB as a backup solution (requires manual switchover, though).
 
----
-
 ## Architecture Overview
 
 The following diagram illustrates the final Cloudflare Load Balancer architecture after migration:
 
 ![Cloudflare Load Balancer Architecture](images/cf-lb-architecture.png)
 *Traffic flow from visitors through Cloudflare Load Balancer to backend Tomcat servers with configured weights*
-
----
 
 ## Migration Approach
 
@@ -78,8 +74,6 @@ The following diagram illustrates the final Cloudflare Load Balancer architectur
 
 **Result:** Successfully validated.
 
----
-
 ### Phase 2: Planning and Preparation
 
 **Implementation Planning**
@@ -93,8 +87,6 @@ The following diagram illustrates the final Cloudflare Load Balancer architectur
 2. Coordinated migration date/time with development and operations teams.
 3. Scheduled during maintenance hours (outside business hours).
 4. Communicated plans to wider stakeholder audience.
-
----
 
 ### Phase 3: Pre-Configuration
 
@@ -132,8 +124,6 @@ We used a dummy hostname (`test.eplancare.com`) to set up the entire configurati
 
 > **Note**: Health check and monitor configurations were applied to all 4 Tomcat instances (tomcat-01, tomcat-02, tomcat-03, tomcat-04).
 
----
-
 ## Migration Execution
 
 ### Go-Live: Mon 10th Nov 2025, 04:30 UK Time
@@ -151,8 +141,6 @@ Before draining traffic, I configured custom 503 error pages on all Tomcat web s
 | 05:05 | **Sanity Check** | Verification checkpoint |
 | 05:15 | **Extended Monitoring** | Monitored traffic distribution through peak time (09:00) and throughout the day |
 
----
-
 ## Rollback Plan
 
 In the event of critical issues, I had a documented rollback procedure:
@@ -165,8 +153,6 @@ In the event of critical issues, I had a documented rollback procedure:
 6. **Monitor and verify** - Check traffic and review logs.
 
 > **Note**: Rollback was not required - included here for documentation completeness.
-
----
 
 ## Results and Monitoring
 
@@ -215,8 +201,6 @@ Traffic was monitored continuously through peak hours on migration day and for t
 - No customer complaints.
 - No application errors.
 - No performance degradation.
-
----
 
 ## Key Success Factors
 

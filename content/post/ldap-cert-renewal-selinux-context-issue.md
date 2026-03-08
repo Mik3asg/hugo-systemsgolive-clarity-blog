@@ -35,8 +35,6 @@ Our OpenLDAP TLS configuration already referenced fixed paths and filenames:
 
 Since none of these changed, no configuration updates were required. A service restart should have been enough.
 
----
-
 ## The Failure
 
 After copying the new certificates into place and restarting `slapd`, the service failed immediately with:
@@ -45,8 +43,6 @@ TLS init def ctx failed: -1
 ```
 
 Not the result we were expecting.
-
----
 
 ## The Investigation
 
@@ -64,8 +60,6 @@ ls -alZ
 ```
 
 That's when the problem became clear.
-
----
 
 ## The Culprit: SELinux Contexts
 
@@ -86,8 +80,6 @@ cert_t
 Because the certificates were generated and transferred from a different system, they retained a home directory–style security label when placed on the LDAP server.
 
 SELinux enforces access based on security contexts, not just permissions. OpenLDAP requires certificate files to be labeled correctly; without the proper context, access is denied and TLS initialisation fails — even though everything else appears correct.
-
----
 
 ## The Fix
 

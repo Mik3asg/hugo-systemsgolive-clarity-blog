@@ -10,6 +10,8 @@ summary: 'On Friday 6th September 2024 at 21:31, we received an alert from Logic
 # Problem Statement 
 On Friday 6th September 2024 at 21:31, we received an alert from LogicMonitor indicating one of our production web app servers (Tomcat#3) was down, with the message: `"The host Tomcat#3 (i-xxxxxxx) is down"`. However, shortly after receiving the alert, we attempted to SSH into the VM and confirmed that the server was fully operational. But what did it go wrong?
 
+---
+
 # Root Cause Investigation and Resolution 
 A ticket was promptly raised with our IT service provider, responsible for managing our Cloud Production workloads, immediately following the alert. Their investigation provided the following findings:
 
@@ -159,6 +161,8 @@ To automate the script, run it as a cron job every 5 minutes:
 
 ### Avoiding Unnecessary Alerts
 With 3 retry attempts and a 30-second interval, the script waits ~90 seconds before declaring a server unreachable. This reduces unnecessary alerts for brief downtimes, like reboots.
+
+---
 
 ## Conclusion
 The false alert caused by the monitoring collector led us to realize that the server was never down, despite the loss of ping data. Having a fallback ping monitoring script offers a reliable alternative for connectivity checks, ensuring you’re not misled by false positives from external services. This backup system is lightweight, customisable, and independent of the main monitoring service.

@@ -16,6 +16,8 @@ On 15th August 2024, an incident occurred where the `CPUBusyPercent` alert did n
 
 *Figure 1: CPU usage plateau at 100% for 6 minutes without triggering an alert.*
 
+---
+
 ## Analysis:
 The initial investigation revealed that the `CPUBusyPercent` alert settings were configured to trigger an alert after five consecutive polls (which equates to 6 minutes of sustained high CPU usage). In this case, the CPU usage plateaued at 100% for exactly 6 minutes (from 9:02 to 9:08 AM), barely meeting the alert trigger criteria. However, the alert was not active long enough to be sent out due to the immediate clear interval once the CPU usage dipped below the threshold.
 
@@ -32,6 +34,8 @@ To prevent this issue from recurring, the following adjustments were made to the
 2. **Alert Clear Interval:** Changed from "Immediate" to 2 consecutive polls (2 minutes). This adjustment prevents alerts from being cleared too rapidly, allowing more time for notifications to be sent.
 
 These changes are designed to ensure that any similar CPU usage spikes in the future will trigger a timely alert, providing better monitoring and response capabilities.
+
+---
 
 ## Conclusion:
 This incident highlighted the importance of fine-tuning monitoring thresholds to balance between avoiding false positives and ensuring critical alerts are not missed. By adjusting the alert trigger and clear intervals, the monitoring system can now better capture and alert on CPU usage spikes, helping prevent similar issues in the future.

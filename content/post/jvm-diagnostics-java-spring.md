@@ -18,8 +18,6 @@ When our care web app started experiencing CPU spikes on the production Tomcat s
 
 Our care web app is a Java Spring application running on Apache Tomcat. When Tomcat starts, it runs inside the **JVM - the Java Virtual Machine**. Think of the JVM as the engine keeping the application alive. It manages memory, runs threads to handle incoming requests, and periodically cleans up unused objects through **Garbage Collection (GC)**.
 
----
-
 ## The Heap - Where Memory Lives
 
 Inside the JVM, all Java objects are stored in a region of memory called the **heap**. Two numbers define it:
@@ -35,8 +33,6 @@ Usage:          68%
 
 When heap in use climbs too close to the capacity ceiling, the Garbage Collector works harder and harder to free space. That GC pressure is one of the most common causes of CPU spikes in Java applications.
 
----
-
 ## Threads - the Workers Inside the JVM
 
 The JVM also manages **threads** - Tomcat spins up one per incoming HTTP request. Under pressure, threads can end up stuck:
@@ -47,8 +43,6 @@ The JVM also manages **threads** - Tomcat spins up one per incoming HTTP request
 
 A CPU spike often means a large number of threads in RUNNABLE or BLOCKED state - the JVM thrashing rather than making progress.
 
----
-
 ## The Two Diagnostic Captures
 
 To understand what the JVM is doing during a spike, there are two standard captures:
@@ -58,8 +52,6 @@ To understand what the JVM is doing during a spike, there are two standard captu
 **Thread dump** - a snapshot of every thread and what it is doing at that exact moment.
 
 Together they give the engineering team the full picture of JVM state during an incident.
-
----
 
 ## Estimating the Heap Dump File Size
 
@@ -81,8 +73,6 @@ garbage-first heap   total 23068672K, used 15966281K
 
 That is 22 GB total, 15.2 GB in use - so the dump file would be approximately 15 GB. Knowing this upfront meant I could confirm there was enough disk space before proceeding.
 
----
-
 ## Where These Tools Come From
 
 The tools used to capture dumps - `jmap`, `jstack`, and `jcmd` - are not third-party software. They are bundled inside the **JDK (Java Development Kit)** installed on the server:
@@ -94,8 +84,6 @@ The tools used to capture dumps - `jmap`, `jstack`, and `jcmd` - are not third-p
 ```
 
 One thing worth knowing: the JRE (Java Runtime Environment) is enough to *run* a Java app, but it does not include these diagnostic tools. Only the full JDK does. Confirming the JDK is present is the first check before any diagnostic work.
-
----
 
 ## The Diagnostic Script
 
@@ -119,13 +107,9 @@ At a high level it does the following:
 
 **Step 8 - Summary.** Prints file locations, sizes, and the exact `scp` command to copy files off the server.
 
----
-
 ## Testing on Non-Production First
 
 Before touching production, I ran the script on our dev server to validate the full flow - tool detection, dump output, safety checks, and file sizes. It also gave me a feel for the brief JVM pause that occurs during a heap dump, which is important to be aware of on a live server.
-
----
 
 ## Deploying to Production
 
@@ -138,8 +122,6 @@ Once validated, I deployed the script to all four production Tomcat servers. For
 This can be moved to a more permanent location such as `/opt/tomcat/bin/` once the team agrees on a standard. Before deploying I checked each server individually - disk space, current heap usage, and JDK tool availability - to confirm everything was ready.
 
 The servers were now prepared. The next time a CPU spike occurred, the team had a single script to run to safely capture the full JVM state without guesswork.
-
----
 
 ## Getting the Files Off the Server
 
@@ -159,5 +141,3 @@ scp user@tomcat-01:/tmp/threaddump-tomcat-01-20260306.txt .
 My role as a DevOps Engineer stops here - getting the captures clean, complete, and safely off the servers. The deeper analysis belongs to the software engineering team, who need to look into the dumps from an application level perspective to understand what the code was doing and where the root cause lives.
 
 When the spike hits, the last thing you want is to be figuring out tooling under pressure. That groundwork is done.
-
----

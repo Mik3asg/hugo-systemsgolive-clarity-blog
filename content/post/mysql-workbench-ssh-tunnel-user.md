@@ -22,6 +22,8 @@ This effectively grants full root-level access to the system.
 
 Extending this model to external users (e.g., third-party vendors) introduces a serious security risk. Even if access is intended only for MySQL tunneling, using `vmadmin` would allow full VM login and administrative privileges — violating the principle of least privilege (POLP) and increasing the risk of accidental or malicious misuse.
 
+---
+
 ## Secure Approach & Standardisation
 
 To mitigate this, a dedicated, non-interactive SSH user (`workbench-user`) has been introduced, designed specifically for MySQL access via SSH tunneling. This user:

@@ -19,6 +19,8 @@ tags:
 ## Overview
 This guide explains how to securely create and manage MySQL user accounts using standard access profiles. It covers required configuration, user setup, privilege assignment, and best practices to ensure consistent and controlled access across environments.
 
+---
+
 ## Prerequisites
 
 ### System Requirements
@@ -227,6 +229,8 @@ SELECT VERSION();-- Should be 8.0.16+
 - Document user purpose
 - Time-limited access for temporary users
 - Limit admin profile creation
+
+---
 
 ## Environment Consistency
 

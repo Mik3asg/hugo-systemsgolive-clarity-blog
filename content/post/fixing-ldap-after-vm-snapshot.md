@@ -8,20 +8,19 @@ thumbnail: "images/ldap-failure-after-vm-snapshot.png"
 summary: "Resolving an OpenLDAP service failure on a VM snapshot — fixing hostname identity mismatches, loopback address issues, olcServerID with CRC32 recalculation, and removing leftover replication config from the source server."
 ---
 
-## Environment
-
-| Component | Version |
-|---|---|
-| OS | AlmaLinux 8.10 (Cerulean Leopard) |
-| LDAP | OpenLDAP 2.5.18 |
-
----
 
 ## Background
 
 Recently I was asked to help troubleshoot an LDAP service that wasn't starting on a newly created VM. The VM in question, `SNAP-198`, was a snapshot of our Pre-Release server, spun up to test something in isolation — hence the name. Sounds straightforward — but as soon as the snapshot was booted, LDAP was in a failed state.
 
 ---
+
+## Environment
+
+| Component | Version |
+|---|---|
+| OS | AlmaLinux 8.10 (Cerulean Leopard) |
+| LDAP | OpenLDAP 2.5.18 |
 
 ## The Problem
 
@@ -36,8 +35,6 @@ read_config: no serverID / URL match found
 
 LDAP was trying to bind to an address that didn't exist on this new server, and couldn't match its own identity in the config.
 
----
-
 ## Root Causes
 
 After digging in, there were four things that needed fixing:
@@ -46,8 +43,6 @@ After digging in, there were four things that needed fixing:
 - `olcServerID` in the LDAP config still pointing to the Pre-Release server
 - `SNAP-198`'s hostname resolving to `127.0.0.1` (loopback) instead of its actual public IP
 - Replication config still pointing back to Pre-Release — not needed since `SNAP-198` is a standalone server
-
----
 
 ## The Fix
 
@@ -182,8 +177,6 @@ Apply both:
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/fix_config_syncrepl.ldif
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/fix_mdb_syncrepl.ldif
 ```
-
----
 
 ## Verification
 

@@ -43,8 +43,6 @@ Installation is not covered. Refer to the official documentation:
 - [Pi-hole Basic Install](https://docs.pi-hole.net/main/basic-install/)
 - [Unbound Setup for Pi-hole](https://docs.pi-hole.net/guides/dns/unbound/)
 
----
-
 # Solution
 
 Two services running on a Raspberry Pi 4 address the problem:
@@ -53,8 +51,6 @@ Two services running on a Raspberry Pi 4 address the problem:
 |---|---|
 | Pi-hole | Blocks ads and trackers across all devices at the DNS level |
 | Unbound | Locally resolves allowed domains using a recursive DNS resolver, eliminating reliance on external DNS resolvers |
-
----
 
 # What Is Pi-hole?
 
@@ -75,8 +71,6 @@ With Pi-hole:
 ```text
 Device → Pi-hole → Blocklist match → 0.0.0.0 / NXDOMAIN returned → Connection fails
 ```
-
----
 
 # What Is Unbound?
 
@@ -124,8 +118,6 @@ Public DNS providers such as Google or Cloudflare perform the same recursive pro
 
 When Unbound runs locally, it performs this resolution itself by querying the DNS hierarchy directly instead of forwarding requests to a public resolver. As a result, no single third-party provider receives a complete history of DNS activity. Unbound also caches responses locally, allowing repeated queries to be answered faster and improving overall lookup performance.
 
----
-
 # Architecture
 
 The diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
@@ -143,8 +135,6 @@ Devices → Pi-hole (filter + cache) → Unbound (recursive resolver) → Root �
 ```text
 Devices → ISP DNS / Public DNS → Internet
 ```
-
----
 
 # How It Works
 
@@ -204,8 +194,6 @@ Only Unbound is configured:
 
 This ensures DNS queries are resolved locally.
 
----
-
 ## Pi-hole Configuration
 
 ### Blocklist Management
@@ -250,8 +238,6 @@ The dashboard provides:
 
 ![Pi-hole Dashboard](/images/pihole-dashboard.png)
 
----
-
 ## Pi-hole + Unbound: Why Together?
 
 Pi-hole blocks unwanted domains but does not resolve allowed domains itself.
@@ -271,8 +257,6 @@ Device → Pi-hole → Unbound → Root → TLD → Authoritative → Response
 ```
 
 DNS resolution occurs locally without reliance on public resolvers.
-
----
 
 ## DNSSEC – Validation
 
@@ -311,8 +295,6 @@ Summary:
 - `fail01.dnssec.works` → rejected invalid DNSSEC data
 - `dnssec.works` → validated and authenticated successfully
 
----
-
 ## Privacy vs Encryption
 
 These concepts address different concerns.
@@ -327,8 +309,6 @@ Unbound improves privacy by removing centralised DNS providers.
 DNS queries themselves remain standard DNS traffic.
 
 Even though Unbound does not rely on the ISP's DNS resolver, DNS queries still traverse the ISP's network connection. This means the ISP may observe outbound DNS traffic at the network level (in-transit), even though no single external resolver receives a complete history of DNS queries.
-
----
 
 ## Confirming the Setup
 
@@ -419,8 +399,6 @@ Explanation:
 
 ![Pi-hole second query – cached lookup](/images/phole-unbound-second-query-cached-lookup.png)
 
----
-
 # Alternative Approaches
 
 DNS over HTTPS (DoH) and DNS over TLS (DoT) are encryption-focused alternatives. Both encrypt DNS queries in transit, preventing ISP-level interception.
@@ -434,8 +412,6 @@ DNS over HTTPS (DoH) and DNS over TLS (DoT) are encryption-focused alternatives.
 The trade-off is centralisation. DoH and DoT hide the content of DNS queries from the network path, but they route all traffic through a single provider, which then receives a complete picture of every domain queried across the network.
 
 This setup takes a different position: DNS queries are not encrypted in transit, but no single external resolver ever sees the full query history. Queries are distributed across the global DNS hierarchy rather than aggregated by one provider.
-
----
 
 # Conclusion
 
@@ -466,6 +442,8 @@ The DNS stack is managed locally within the home network:
 - No dependency on public DNS resolvers
 - DNS responses are validated and cached locally on the Raspberry Pi for faster lookups
 - DNS responses are DNSSEC-validated, ensuring records are authentic and have not been tampered with in transit
+
+---
 
 Running Pi-hole and Unbound on a Raspberry Pi 4 was a deliberate homelab choice — prioritising privacy by keeping DNS resolution local rather than relying on external providers. DNS resolution remains under local control, with no centralised resolver maintaining a complete history of DNS activity and no ads reaching devices on the network.
 

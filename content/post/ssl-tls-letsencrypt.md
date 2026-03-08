@@ -18,14 +18,14 @@ This case study demonstrates how to implement **Full (Strict) SSL/TLS encryption
 - **Free SSL certificates** with industry-standard security
 - **Cloudflare proxy protection** (orange cloud) maintained
 
+---
+
 ### Why This Approach?
 
 - **Enhanced Security**: Full (strict) mode ensures encrypted connections throughout the entire path
 - **Cost-Effective**: Let's Encrypt certificates are free and auto-renew
 - **Scalability**: One wildcard certificate covers all current and future subdomains
 - **Reliability**: Cloudflare manages frontend certs while you control backend security
-
----
 
 ## Architecture Overview
 
@@ -54,8 +54,6 @@ or your domain
 - Backend: Let's Encrypt ECDSA wildcard certificate (90-day validity, auto-renewal after 60 days)
 - DNS Validation: Uses Cloudflare API for DNS-01 challenge (allows keeping orange cloud enabled)
 
----
-
 ## Prerequisites
 
 Before starting, ensure you have:
@@ -76,8 +74,6 @@ Before starting, ensure you have:
 # Source: Server IP → Destination: ANY → Port: TCP 443 → Action: Allow
 ```
 
----
-
 ## Step 1: Install EPEL Repository
 
 EPEL (Extra Packages for Enterprise Linux) provides Certbot packages.
@@ -89,8 +85,6 @@ sudo dnf repolist | grep epel
 # If no output, install EPEL
 sudo dnf install epel-release -y
 ```
-
----
 
 ## Step 2: Install Certbot and Cloudflare DNS Plugin
 
@@ -139,8 +133,6 @@ sudo dnf install -y mod_ssl
 
 > **Note:** Apache's default `ssl.conf` can conflict with custom vhost configurations. Review and adjust as needed.
 
----
-
 ## Step 3: Create Cloudflare API Token
 
 The API token allows Certbot to create DNS records for domain validation.
@@ -170,8 +162,6 @@ curl "https://api.cloudflare.com/client/v4/user/tokens/verify" \
 
 Expected output should show `"status": "active"`
 
----
-
 ## Step 4: Store Cloudflare Credentials Securely
 
 **Security Best Practice:** Generate one API token per webserver for better access control.
@@ -200,8 +190,6 @@ sudo chmod 600 /root/.secrets/cloudflare.ini
 # Verify permissions (should show -rw-------)
 sudo ls -l /root/.secrets/cloudflare.ini
 ```
-
----
 
 ## Step 5: Obtain Wildcard TLS Certificate
 
@@ -312,8 +300,6 @@ openssl s_client -connect localhost:443 2>/dev/null | \
 - **Algorithm**: ECDSA with SHA-384
 - **Key Size**: 256-bit (P-256 curve)
 - **Coverage**: `*.virtualscale.dev` and `virtualscale.dev`
-
----
 
 ## Step 6: Install and Configure Nginx
 
@@ -426,8 +412,6 @@ sudo systemctl status nginx
 sudo ss -tlnp | grep -E ':(80|443)'
 ```
 
----
-
 ## Step 7: Set Up Automatic Certificate Renewal
 
 ### How Auto-Renewal Works
@@ -527,8 +511,6 @@ sudo certbot renew --dry-run
 
 If successful, you should see: `Congratulations, all simulated renewals succeeded`
 
----
-
 ## Step 8: Increase DNS Propagation Timeout (Optional but Recommended)
 
 Prevents timeout failures during renewal by allowing more time for DNS changes to propagate.
@@ -551,8 +533,6 @@ Expected output:
 ```
 dns_cloudflare_propagation_seconds = 60
 ```
-
----
 
 ## Troubleshooting
 
@@ -582,8 +562,6 @@ sudo tail -n 50 /var/log/nginx/error.log
 
 **Issue**: Certificate not covering subdomain  
 **Solution**: Verify both `*.domain.com` and `domain.com` are in certificate
-
----
 
 ## Verification and Testing
 
@@ -634,8 +612,6 @@ sudo certbot renew --force-renewal
 sudo certbot renew --dry-run
 ```
 
----
-
 ## Security Benefits Summary
 
 **End-to-End Encryption**: Full (strict) mode ensures TLS encryption from browser to origin  
@@ -645,8 +621,6 @@ sudo certbot renew --dry-run
 **Zero Downtime**: Renewal happens in background without service interruption  
 **Cloudflare Protection**: Maintains DDoS protection and CDN benefits  
 **Free Solution**: No certificate costs while maintaining enterprise-grade security
-
----
 
 ## Key Takeaways
 
@@ -664,8 +638,3 @@ sudo certbot renew --dry-run
 - [Cloudflare TLS Full Strict Mode Documentation](https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes/full-strict/)
 - [Certbot Documentation](https://eff-certbot.readthedocs.io/)
 - [Nginx SSL Configuration Generator](https://ssl-config.mozilla.org/)
-
----
-
-**If this helped you**, follow me on [LinkedIn](https://www.linkedin.com/in/m-asghar/) for more DevOps & cloud articles.  
-If you’re implementing something similar and want to discuss real-world tradeoffs, **feel free to DM me on LinkedIn**.
