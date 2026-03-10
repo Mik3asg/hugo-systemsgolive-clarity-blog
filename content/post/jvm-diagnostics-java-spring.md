@@ -73,6 +73,118 @@ garbage-first heap   total 23068672K, used 15966281K
 
 That is 22 GB total, 15.2 GB in use - so the dump file would be approximately 15 GB. Knowing this upfront meant I could confirm there was enough disk space before proceeding.
 
+## Validating the JVM Before Capturing
+
+Before running the script, I ran these commands manually on each server to confirm everything was in order.
+
+**Step 1 - Confirm Tomcat is running and identify the PID and JVM path**
+
+```bash
+ps -ef | grep tomcat
+```
+
+Look for the line with `org.apache.catalina.startup.Bootstrap` - the PID is the second column and the Java binary path is at the start of the command.
+
+**Step 2 - Find the correct JDK tools to use**
+
+```bash
+sudo find / -name "jcmd" 2>/dev/null
+```
+
+This finds all JDK installations on the server. Cross-reference the path with what you saw in Step 1 - you want the `jcmd` that matches the Java binary Tomcat is actually using.
+
+**Step 3 - Set the PID**
+
+```bash
+PID=<number from Step 1>
+```
+
+Explicitly set this so all subsequent commands target the correct Tomcat process.
+
+**Step 4 - Check disk space**
+
+```bash
+df -h
+```
+
+Get the full picture across all partitions - not just `/tmp`.
+
+**Step 5 - Check actual heap in use**
+
+```bash
+sudo /usr/lib/jvm/jdk-19.0.1/bin/jcmd $PID GC.heap_info
+```
+
+Example output:
+
+```
+garbage-first heap   total 23068672K, used 15966281K
+  region size 16384K, 686 young (11239424K), 5 survivors (81920K)
+Metaspace       used 720390K, committed 744512K, reserved 1769472K
+  class space    used 68642K, committed 81408K, reserved 1048576K
+```
+
+The `used` value is what matters - that is your estimated heap dump file size. Once all five checks pass, the server is ready for the script.
+
+## Manual Capture Steps
+
+These are the individual commands the script automates. Useful to know if you ever need to run them manually or want to understand exactly what the script is doing under the hood.
+
+**Step 6 - Take the heap dump**
+
+```bash
+sudo /usr/lib/jvm/jdk-19.0.1/bin/jmap -dump:format=b,file=/tmp/heapdump-$(hostname)-$(date +%Y%m%d%H%M%S).hprof $PID
+```
+
+This connects to the live JVM and writes a full memory snapshot to disk. The JVM will pause briefly during capture - this is normal. The output file is a `.hprof` binary file sized roughly equal to the heap in use.
+
+**Step 7 - Take the thread dump (3 snapshots, 30 seconds apart)**
+
+```bash
+for i in {1..3}; do
+  echo "--- Dump $i at $(date) ---" >> /tmp/threaddump-$(date +%Y%m%d).txt
+  sudo /usr/lib/jvm/jdk-19.0.1/bin/jstack -l $PID >> /tmp/threaddump-$(date +%Y%m%d).txt
+  sleep 30
+done
+```
+
+Three snapshots thirty seconds apart gives a view of thread behaviour over time rather than a single moment. This runs for approximately 90 seconds total.
+
+**Step 8 - Verify both files were created**
+
+```bash
+ls -lh /tmp/heapdump-*.hprof
+ls -lh /tmp/threaddump-*.txt
+```
+
+Confirm both files exist and the sizes look as expected before doing anything else.
+
+**Step 9 - Quick scan for BLOCKED threads**
+
+```bash
+grep -A 5 "BLOCKED" /tmp/threaddump-$(date +%Y%m%d).txt
+```
+
+Any threads in `BLOCKED` state are waiting for a lock held by another thread - a signal of potential deadlock or contention worth flagging to the engineering team immediately.
+
+**Step 10 - Copy files to your local machine**
+
+```bash
+scp user@tomcat-01:/tmp/heapdump-*.hprof .
+scp user@tomcat-01:/tmp/threaddump-*.txt .
+```
+
+Downloads both dump files for analysis. The `.hprof` heap dump requires Eclipse MAT to open - it is a binary file and cannot be read in a text editor.
+
+**Step 11 - Clean up the server**
+
+```bash
+sudo rm /tmp/heapdump-*.hprof
+rm /tmp/threaddump-*.txt
+```
+
+Heap dump files are large - remove them once safely transferred to free up disk space.
+
 ## Where These Tools Come From
 
 The tools used to capture dumps - `jmap`, `jstack`, and `jcmd` - are not third-party software. They are bundled inside the **JDK (Java Development Kit)** installed on the server:
@@ -133,8 +245,6 @@ The script outputs the exact `scp` command to copy files to a local machine:
 scp user@tomcat-01:/tmp/heapdump-tomcat-01-20260306.hprof .
 scp user@tomcat-01:/tmp/threaddump-tomcat-01-20260306.txt .
 ```
-
----
 
 ## What Comes Next
 
