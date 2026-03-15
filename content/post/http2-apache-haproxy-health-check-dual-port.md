@@ -18,9 +18,9 @@ aliases: ["/post/http2-implementation-webserver/"]
 
 ---
 
-## Summary
+## Overview
 
-This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. When we discovered that our vendor-hosted HAProxy application load balancer's health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment.
+Our production care management web application runs on four servers, each with Apache HTTPD acting as a reverse proxy in front of a Tomcat application server running Java Spring — all sitting behind a vendor-hosted HAProxy application load balancer. As part of a performance improvement initiative, we set out to enable HTTP/2 on the Apache HTTPD layer — a straightforward protocol upgrade in isolation, but one that immediately exposed a compatibility constraint with the load balancer's health check mechanism. This article documents how we navigated that constraint without touching production traffic.
 
 > **Note:** Domain names have been anonymised for this article. All references to `login.companyabc.com` are used as examples and do not reflect actual production domain names.
 
