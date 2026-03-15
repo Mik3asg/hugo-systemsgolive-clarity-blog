@@ -1,12 +1,22 @@
 ---
-title: "A Guide to Generating TLS Ed25519 (Elliptic Curve Cryptography) Certificates Using Private CA"
+title: "TLS 1.3 with Ed25519 and a Private CA: End-to-End Encrypted Client-Server Communication"
 date: 2025-07-10T11:37:03+01:00
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Ed25519']
 categories: ['Security']
 thumbnail: "images/tls-ed25519.png"
 summary: "This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve certificates and a private Certificate Authority (CA). It covers encrypted client-server communication with modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network architectures."
+aliases: ["/post/tls-setup-ed25519/"]
 ---
+## TL;DR
+
+- **Goal:** Set up verified TLS 1.3 communication between a client and an Nginx server using Ed25519 certificates signed by a self-hosted private CA.
+- **Why Ed25519:** Faster than RSA, smaller keys and signatures, stronger security (RSA-3072 equivalent), and resistant to side-channel attacks.
+- **Method:** Three-node setup — CA node generates the root certificate and signs CSRs, server node hosts Nginx with TLS 1.3, client node trusts the CA and validates the connection.
+- **Result:** Fully encrypted traffic confirmed via tcpdump — sensitive data unreadable over HTTPS, fully exposed over plain HTTP.
+
+---
+
 ## Overview
 
 This guide demonstrates how to set up secure TLS 1.3 communication using Ed25519 elliptic curve certificates and a private Certificate Authority (CA). It covers encrypted client-server communication with modern, efficient cryptographic standards — ideal for internal systems, microservices, and zero-trust network architectures.
