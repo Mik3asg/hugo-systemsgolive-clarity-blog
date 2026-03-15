@@ -6,6 +6,7 @@ tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Automation', 'Cloudflare']
 categories: ['Security']
 thumbnail: "images/letsencrypt-thumbnail.png"
 summary: "This article demonstrates how to implement Full (Strict) SSL/TLS encryption by combining Cloudflare's managed frontend certificates with Let's Encrypt wildcard certificates on your origin server."
+aliases: ["/post/ssl-tls-letsencrypt/"]
 ---
 
 ## Overview
