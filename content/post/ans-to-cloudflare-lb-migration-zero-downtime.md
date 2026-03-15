@@ -1,16 +1,19 @@
 ---
-title: "Seamless Production Migration: Moving to Cloudflare Load Balancer"
+title: "Migrating from ANS to Cloudflare Load Balancer: Zero-Downtime DNS Cutover with Pre-Configuration Strategy"
 date: 2025-11-23T11:44:31+01:00
 draft: false
-tags: ['Cloudflare', Load Balancer', 'Migration', 'SSL', 'TLS', 'Certificate Management', 'Zero Downtime']
+tags: ['Cloudflare', 'Load Balancer', 'Migration', 'SSL', 'TLS', 'Certificate Management', 'Zero Downtime']
 categories: ['Infrastructure Migration', 'DevOps', 'Operations', 'Site Reliability Engineering']
 thumbnail: "images/cf-lb-picture.png"
-summary: "Our journey migrating our production care management platform from ANS to Cloudflare Load Balancer—eliminating manual certificate management, resolving security concerns, and achieving a seamless cutover."
+summary: "How we migrated our production care management platform from ANS to Cloudflare Load Balancer — eliminating manual SSL certificate management that had caused a past outage, replacing an EOL HAProxy instance, and achieving zero downtime through a dummy hostname pre-configuration strategy and a planned 45-minute DNS cutover window."
+aliases: ["/post/cf-lb-migration/"]
 ---
 
 ## Overview
 
 This article documents our seamless production migration from ANS Load Balancer to Cloudflare Load Balancer for our production care management web application.
+
+> **Note on ANS:** ANS (not to be confused with AWS) is a UK-based cloud and managed services provider headquartered in Manchester, England. They offer cloud infrastructure, managed services, and data centre solutions primarily to UK organisations. More info at [ans.co.uk](https://www.ans.co.uk/our-company/).
 
 ---
 
