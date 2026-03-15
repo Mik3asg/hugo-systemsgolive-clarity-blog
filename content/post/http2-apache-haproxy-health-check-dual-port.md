@@ -1,11 +1,12 @@
 ---
-title: "Implementing HTTP/2 with Zero Downtime: A Blue-Green Deployment Case Study"
+title: "HTTP/2 on Apache Behind HAProxy: Solving Health Check Failures with Dual-Port Architecture"
 date: 2025-10-04T15:37:02+01:00
 draft: false
 tags: ['Infrastructure','HTTP/2', 'Apache']
 categories: ['Linux']
 thumbnail: "images/http2-logo.png"
 summary: "This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy."
+aliases: ["/post/http2-implementation-webserver/"]
 ---
 
 ## Summary
