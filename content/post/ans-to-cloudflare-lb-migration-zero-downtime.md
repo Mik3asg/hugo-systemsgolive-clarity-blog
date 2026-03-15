@@ -9,6 +9,15 @@ summary: "How we migrated our production care management platform from ANS to Cl
 aliases: ["/post/cf-lb-migration/"]
 ---
 
+## TL;DR
+
+- **Problem:** ANS Load Balancer required manual SSL certificate uploads — a past missed renewal caused a production outage. HAProxy v2.0.31 was also EOL.
+- **Solution:** Migrated to Cloudflare Load Balancer for automated certificate management and modern infrastructure.
+- **Method:** Pre-configured everything using a dummy hostname, then executed a DNS switchover in a 45-minute maintenance window.
+- **Result:** Zero downtime, stable traffic across four Tomcat instances, confirmed over 72 hours post-migration.
+
+---
+
 ## Overview
 
 This article documents our seamless production migration from ANS Load Balancer to Cloudflare Load Balancer for our production care management web application.

@@ -9,6 +9,15 @@ summary: "This article demonstrates how to implement Full (Strict) SSL/TLS encry
 aliases: ["/post/ssl-tls-letsencrypt/"]
 ---
 
+## TL;DR
+
+- **Problem:** Standard HTTP-01 validation doesn't support wildcard certificates and breaks with Cloudflare's proxy (orange cloud) enabled.
+- **Solution:** Use Certbot with the Cloudflare DNS plugin to perform DNS-01 validation — issues a wildcard cert covering all subdomains without disabling the Cloudflare proxy.
+- **Method:** Install Certbot + Cloudflare DNS plugin, create a scoped API token, request the wildcard cert, configure Nginx, then automate renewal via a systemd timer and deploy hook.
+- **Result:** Free, auto-renewing wildcard certificate on the origin server with Full (Strict) TLS end-to-end encryption via Cloudflare.
+
+---
+
 ## Overview
 
 This case study demonstrates how to implement **Full (Strict) SSL/TLS encryption** by combining Cloudflare's managed frontend certificates with Let's Encrypt wildcard certificates on your origin server. This architecture provides:

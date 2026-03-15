@@ -9,6 +9,15 @@ summary: "This case study demonstrates how we implemented HTTP/2 on production A
 aliases: ["/post/http2-implementation-webserver/"]
 ---
 
+## TL;DR
+
+- **Problem:** Enabling HTTP/2 on Apache caused HAProxy health checks to fail immediately — the load balancer only speaks HTTP/1.1, marking all servers as DOWN and triggering a full outage.
+- **Solution:** Dual-port VirtualHost architecture — port 443 for HTTP/2 customer traffic, port 8443 dedicated to HTTP/1.1-only health checks.
+- **Method:** Staged blue-green deployment — pilot on a drained server, parallel infrastructure rollout to all four Tomcat instances, seamless listener cutover, then HTTP/2 enablement as a final separate step.
+- **Result:** HTTP/2 successfully enabled across all four production servers with zero downtime.
+
+---
+
 ## Summary
 
 This case study demonstrates how we implemented HTTP/2 on production Apache servers with zero downtime using a blue-green deployment strategy. When we discovered that our vendor-hosted HAProxy application load balancer's health checks only support HTTP/1.1, we designed a dual-port architecture separating customer traffic (port 443, HTTP/2) from health checks (port 8443, HTTP/1.1), then deployed it through staged phases including pilot testing, parallel infrastructure rollout, and seamless cutover across our four-server environment.
