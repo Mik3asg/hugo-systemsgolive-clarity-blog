@@ -31,6 +31,14 @@ Individual AWS services have their own snapshot mechanisms  -  EBS snapshots, RD
 
 AWS Backup solves this by acting as an orchestration layer across services. One vault, one plan, one place to look.
 
+### Setup at a Glance
+
+1. **KMS key** - AWS KMS > Customer-managed keys > Create key. Symmetric key, Encrypt and Decrypt. Key policy scoped to the AWS Backup service principal and the admin IAM user.
+2. **Backup vault** - AWS Backup > Backup vaults > Create backup vault. Named `backup-vault-dev`, assigned the customer-managed KMS key above.
+3. **Backup plan** - AWS Backup > Backup plans > Create plan > Build a new plan. Two rules added: daily with 7-day retention, weekly with 30-day retention, both targeting `backup-vault-dev`.
+4. **Resource assignment** - Tag-based selection: key `Backup`, value `true`. Applied that tag to both the EC2 instance (`webapp-01`) and the S3 bucket.
+5. **IAM** - AWS Backup uses `AWSBackupDefaultServiceRole`. Two managed policies are attached by default: `AWSBackupServiceRolePolicyForBackup` (creating recovery points) and `AWSBackupServiceRolePolicyForRestores` (restoring them). For S3, `AWSBackupServiceRolePolicyForS3Backup` and `AWSBackupServiceRolePolicyForS3Restore` also need to be attached to the role - this is a common oversight covered in the S3 section below.
+
 ### Vault Design
 
 The first decision was the encryption key. AWS Backup defaults to an AWS-managed key, which is fine for many use cases. For this setup, I chose a customer-managed KMS key instead.
@@ -76,7 +84,7 @@ That distinction matters in an interview. Quoting a raw restore time without con
 
 ### A Note on S3 Restore
 
-S3 restore via AWS Backup works differently from EC2. It restores to a new bucket rather than back into the existing one, which means you need the restore role to have the right permissions to create a bucket in the target account  -  a common gotcha on first setup.
+S3 restore via AWS Backup works differently from EC2. It restores to a new bucket rather than back into the existing one, which means you need the restore role to have the right permissions to create a bucket in the target account  -  a common oversight on first setup.
 
 For object-level recovery, S3 versioning handles it more cleanly: delete the object, remove the delete marker, file is back. For full bucket recovery AWS Backup is the right tool, but the IAM permissions need to be right upfront.
 
@@ -89,6 +97,15 @@ For object-level recovery, S3 versioning handles it more cleanly: delete the obj
 Having backups in place answers one question: can we recover data? Resilience Hub answers a different question: does this workload actually meet its defined RTO and RPO targets, and what's missing?
 
 The distinction is important. A workload can have backups and still fail a resilience assessment  -  because it has no alerting, no runbooks, no tested failure scenarios. Resilience Hub surfaces those gaps systematically.
+
+### Setup at a Glance
+
+1. **Create application** - AWS Resilience Hub > Applications > Add application. Named `backup-lab-app`. Resources imported using the same `Backup: true` tag from Project 1, which pulled in the EC2 instance and S3 bucket automatically.
+2. **Resiliency policy** - Created a new policy with RTO 1 hour / RPO 24 hours, tier set to Non-critical. Attached to the application before publishing.
+3. **IAM** - Resilience Hub requires a service role with `AWSResilienceHubAsssessmentExecutionPolicy` attached. This is created automatically on first use if you allow it, or you can pre-create it manually and pass the role ARN when setting up the application.
+4. **Initial assessment** - Published the application, then ran the assessment from the application dashboard. Score: 40/100.
+5. **Implement recommendation** - CloudWatch > Alarms > Create alarm. Used the exact name from the Resilience Hub recommendation: `AWSResilienceHub-Ec2CpuUtilizationAlarm_2020-07-13`. Threshold set to 90% CPU utilisation over a 5-minute period.
+6. **Reassessment** - Re-ran the assessment from the Resilience Hub application dashboard. Score updated to 41/100.
 
 ### Defining the Policy
 
