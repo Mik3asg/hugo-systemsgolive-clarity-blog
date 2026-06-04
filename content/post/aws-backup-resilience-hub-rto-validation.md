@@ -33,11 +33,18 @@ AWS Backup solves this by acting as an orchestration layer across services. One 
 
 ### Setup at a Glance
 
-1. **KMS key** - AWS KMS > Customer-managed keys > Create key. Symmetric key, Encrypt and Decrypt. Key policy scoped to the AWS Backup service principal and the admin IAM user.
+1. **KMS key** - AWS KMS > Customer-managed keys > Create key. Named `backup-dev-key`. Symmetric key, Encrypt and Decrypt. Key policy scoped to the AWS Backup service principal and the admin IAM user.
 2. **Backup vault** - AWS Backup > Backup vaults > Create backup vault. Named `backup-vault-dev`, assigned the customer-managed KMS key above.
-3. **Backup plan** - AWS Backup > Backup plans > Create plan > Build a new plan. Two rules added: daily with 7-day retention, weekly with 30-day retention, both targeting `backup-vault-dev`.
-4. **Resource assignment** - Tag-based selection: key `Backup`, value `true`. Applied that tag to both the EC2 instance (`webapp-01`) and the S3 bucket.
-5. **IAM** - AWS Backup uses `AWSBackupDefaultServiceRole`. Two managed policies are attached by default: `AWSBackupServiceRolePolicyForBackup` (creating recovery points) and `AWSBackupServiceRolePolicyForRestores` (restoring them). For S3, `AWSBackupServiceRolePolicyForS3Backup` and `AWSBackupServiceRolePolicyForS3Restore` also need to be attached to the role - this is a common oversight covered in the S3 section below.
+3. **Backup plan** - AWS Backup > Backup plans > Create plan > Build a new plan. Named `backup-dev-plan`. Two rules added, both targeting `backup-vault-dev`:
+
+   | Field | `daily-7-day-retention` | `weekly-30-day-retention` |
+   |---|---|---|
+   | Backup frequency | Daily | Weekly |
+   | Start within | 8 hours | 8 hours |
+   | Complete within | 7 days | 7 days |
+   | Total retention | 7 days | 30 days |
+4. **Resource assignment** - Named `backup-lab-selection`. IAM role: Default role (selected by default). Resource selection: Include all resource types. Under tags, add key `Backup` / value `true`, then click Assign resources.
+5. **IAM** - Under the resource assignment, select **Default role**. If `AWSBackupDefaultServiceRole` does not yet exist in the account, AWS will create it automatically with the correct permissions. Two managed policies are attached by default: `AWSBackupServiceRolePolicyForBackup` (creating recovery points) and `AWSBackupServiceRolePolicyForRestores` (restoring them). For S3, `AWSBackupServiceRolePolicyForS3Backup` and `AWSBackupServiceRolePolicyForS3Restore` also need to be attached - this is a common oversight covered in the S3 section below.
 
 ### Vault Design
 
@@ -60,7 +67,7 @@ Rather than hardcoding resource ARNs into the backup plan, I used tag-based sele
 
 This matters at scale. If you're managing dozens of resources across multiple services, ARN-based selection becomes a maintenance burden  -  every new resource requires a plan update. Tag-based selection is self-service: the resource is created with the right tag and it's automatically protected. It also makes the backup policy auditable  -  you can query which resources carry the tag and verify coverage in one pass.
 
-![AWS Backup plan showing daily-7day-retention and weekly-30day-retention rules against backup-vault-dev](/images/aws-backup-rules.png)
+![AWS Backup plan showing daily-7-day-retention and weekly-30-day-retention rules against backup-vault-dev](/images/aws-backup-rules.png)
 
 ### Testing the Restore
 
@@ -68,19 +75,25 @@ The backup jobs for both EC2 (`webapp-01`) and S3 completed successfully.
 
 ![AWS Backup jobs showing webapp-01 EC2 and S3 bucket both Completed](/images/aws-backup-jobs.png)
 
-Completing a backup is the easy part. The only thing that matters is whether you can restore from it under pressure. So I terminated the EC2 instance to simulate a failure and initiated a restore from the recovery point.
+Completing a backup is the easy part. The only thing that matters is whether you can restore from it under pressure. Before running the test, confirm there is a completed recovery point in `backup-vault-dev` – if the scheduled job shows as aborted, trigger an on-demand backup from the vault first. Here is how the test was run:
+
+1. **Simulate failure** - EC2 > select `web-dev-01` > Instance state > Terminate. Note the exact time – this is T0.
+2. **Restore** - AWS Backup > Backup vaults > `backup-vault-dev` > find the EC2 recovery point > Restore. Instance type: `t2.micro`. IAM role: Default role. Note the exact time you click Restore – this is T1.
+3. **Confirm recovery** - Go to EC2 and wait for the new instance to reach running state. Note that time – this is T2.
+
+RTO = T2 - T0.
 
 | Event | Time |
 |---|---|
 | T0  -  instance terminated | 22:36 |
-| T1  -  restore initiated | 22:37 |
-| T2  -  instance running | 22:37 |
+| T1  -  restore initiated | 22:38 |
+| T2  -  instance running | 22:39 |
 
-**EC2 RTO: 1 minute.**
+**EC2 RTO: 3 minutes.**
 
-That number is specific to this instance size and snapshot state. In a production context, you'd add application startup time, health check validation, and any DNS or load balancer propagation on top. The infrastructure recovery itself was 1 minute  -  what that means for service RTO depends on the application layer above it.
+The restored instance came up with all data intact – confirming the recovery point was consistent and the restore procedure worked as expected.
 
-That distinction matters in an interview. Quoting a raw restore time without contextualising it is a junior answer. The meaningful question is: what does this number mean for your SLA, and what else contributes to the real recovery time?
+That number is specific to this instance size and snapshot state. In a production context, you'd add application startup time, health check validation, and any DNS or load balancer propagation on top. The infrastructure recovery itself was 3 minutes  -  what that means for service RTO depends on the application layer above it.
 
 ### A Note on S3 Restore
 
