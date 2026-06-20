@@ -6,7 +6,7 @@ slug: "multi-stage-docker-builds-smaller-safer-faster"
 tags: ["dockerfile", "multi-stage", "build", "runtime", "compiler", "typescript", "nodejs", "buildkit"]
 categories: ["DevOps", "Docker", "Optimisation", "Security"]
 thumbnail: "images/multi-stage-docker-build-logo.png"
-draft: true
+draft: false
 ---
 
 ## The problem
