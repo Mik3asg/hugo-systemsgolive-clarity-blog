@@ -5,6 +5,7 @@ date: 2026-06-20T09:15:36+01:00
 slug: "multi-stage-docker-builds-smaller-safer-faster"
 tags: ["dockerfile", "multi-stage", "build", "runtime", "compiler", "typescript", "nodejs", "buildkit"]
 categories: ["DevOps", "Docker", "Optimisation", "Security"]
+summary: "Multi-stage Docker builds separate the build environment from the runtime in a single Dockerfile. This post covers the four concrete benefits – smaller images, fewer CVEs, more readable Dockerfiles, and faster builds – using a TypeScript app that dropped from 289MB to 167MB."
 thumbnail: "images/multi-stage-docker-build-logo.png"
 draft: false
 ---
