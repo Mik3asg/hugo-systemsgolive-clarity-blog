@@ -1,0 +1,68 @@
+{{- define "main" }}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = $pages.ByDate.Reverse }}
+{{- $groups := $pages.GroupByDate "2006" "desc" }}
+<div class="wrap content">
+  <article class="post_content">
+    <h1 class="post_title">{{ .Title | markdownify }}</h1>
+    <div class="timeline">
+      {{- range $groups }}
+      <section class="timeline_year">
+        <h2 class="timeline_year_label">{{ .Key }}</h2>
+        <ul class="timeline_list">
+          {{- range .Pages }}
+          <li class="timeline_item">
+            <span class="timeline_date">{{ .Date.Format "Jan 2" }}</span>
+            <a href="{{ .RelPermalink }}" class="timeline_link">{{ .Title }}</a>
+          </li>
+          {{- end }}
+        </ul>
+      </section>
+      {{- end }}
+    </div>
+  </article>
+</div>
+
+<style>
+.timeline {
+  margin-top: 2rem;
+}
+.timeline_year {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--table-border);
+}
+.timeline_year:first-child {
+  border-top: none;
+}
+.timeline_year_label {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--theme);
+}
+.timeline_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.timeline_item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  align-items: baseline;
+}
+.timeline_date {
+  flex: 0 0 3.5rem;
+  color: var(--text);
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+.timeline_link {
+  color: var(--header-text);
+  text-decoration: none;
+}
+.timeline_link:hover {
+  color: var(--theme);
+  text-decoration: underline;
+}
+</style>
+{{- end }}
