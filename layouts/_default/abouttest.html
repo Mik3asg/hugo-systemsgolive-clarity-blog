@@ -1,0 +1,234 @@
+{{- define "main" }}
+<div class="wrap content">
+  <article class="post_content abouttest">
+
+    <header class="abouttest-hero">
+      <h1 class="abouttest-hero-name">{{ .Params.heroName | default "Mickael Asghar" }}</h1>
+      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "DevOps Engineer building reliable, automated infrastructure" }}</p>
+    </header>
+
+    <div class="abouttest-intro">
+      <div>
+        <h2 class="abouttest-section-title">About</h2>
+        <p class="abouttest-about-text">I'm a DevOps Engineer with 14+ years of experience spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. Born in France to Pakistani parents, I now call Bristol, UK home, where I live with my Spanish wife and three kids.</p>
+
+        <h2 class="abouttest-section-title abouttest-section-title-spaced">Work History</h2>
+        <div class="abouttest-timeline">
+
+          <div class="abouttest-timeline-entry">
+            <div class="abouttest-timeline-role">DevOps Engineer</div>
+            <div class="abouttest-timeline-date">2024 – Present</div>
+            <div class="abouttest-timeline-company">Carebeans (part of QCS / RLDatix)</div>
+            <p class="abouttest-timeline-desc">Bridging development and operations for a digital care planning platform used by social care providers across the UK. Automating deployment processes and managing cloud infrastructure to keep care management solutions running reliably. Carebeans joined Quality Compliance Systems (QCS), a subsidiary of RLDatix, in Summer 2024.</p>
+          </div>
+
+          <div class="abouttest-timeline-entry abouttest-placeholder">
+            <div class="abouttest-timeline-role">[Placeholder role]</div>
+            <div class="abouttest-timeline-date">[Placeholder dates]</div>
+            <div class="abouttest-timeline-company">[Placeholder company]</div>
+            <p class="abouttest-timeline-desc">[Add a real 1–2 sentence summary of scope and impact for this role.]</p>
+          </div>
+
+          <div class="abouttest-timeline-entry abouttest-placeholder">
+            <div class="abouttest-timeline-role">[Placeholder role]</div>
+            <div class="abouttest-timeline-date">[Placeholder dates]</div>
+            <div class="abouttest-timeline-company">[Placeholder company]</div>
+            <p class="abouttest-timeline-desc">[Add a real 1–2 sentence summary of scope and impact for this role.]</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="abouttest-photo-wrap">
+        <img src="/images/mickael-pic-45.png" alt="Mickael Asghar" class="abouttest-photo">
+      </div>
+    </div>
+
+    <section class="abouttest-background">
+      <div class="abouttest-section-header">
+        <h2 class="abouttest-section-title">Background</h2>
+      </div>
+      <div class="abouttest-grid">
+
+        <article class="abouttest-card">
+          <h3 class="abouttest-card-title">Education &amp; Certifications</h3>
+          <ul class="abouttest-checklist">
+            <li>Master's in Network Architecture and Security — ESIGELEC, France (2010)</li>
+            <li>Certified Kubernetes Application Developer — The Linux Foundation (2023)</li>
+            <li>HashiCorp Certified Terraform Associate (003) — HashiCorp (2023)</li>
+            <li>AWS Certified Cloud Practitioner — AWS (2023)</li>
+            <li>AWS Certified Solutions Architect – Associate — AWS (2021)</li>
+            <li>ITIL Foundation — BCS, The Chartered Institute for IT (2017)</li>
+            <li>PRINCE2 Foundation — APMG International (2016)</li>
+          </ul>
+        </article>
+
+        <article class="abouttest-card">
+          <h3 class="abouttest-card-title">Technical Expertise</h3>
+          <ul class="abouttest-checklist">
+            <li>Cloud &amp; Infrastructure: AWS, Azure, GCP</li>
+            <li>IaC &amp; Config Management: Terraform, Azure Bicep, Ansible</li>
+            <li>Containers &amp; Orchestration: Docker, Kubernetes, EKS</li>
+            <li>CI/CD: GitHub Actions, Jenkins</li>
+            <li>Networking &amp; Security: TCP/IP, DNS, SSL/TLS</li>
+            <li>Monitoring &amp; Observability: CloudWatch, Grafana</li>
+            <li>Identity &amp; Access: IAM, SSO</li>
+            <li>FinOps &amp; Cost Governance: Cost optimisation, reserved instances</li>
+            <li>Databases: MySQL</li>
+            <li>Caching: Redis</li>
+          </ul>
+        </article>
+
+        <article class="abouttest-card">
+          <h3 class="abouttest-card-title">Languages</h3>
+          <ul class="abouttest-checklist">
+            <li>French (Native)</li>
+            <li>English (Fluent)</li>
+            <li>Urdu (Fluent)</li>
+            <li>Spanish (Fluent)</li>
+          </ul>
+        </article>
+
+        <article class="abouttest-card">
+          <h3 class="abouttest-card-title">Sector Experience</h3>
+          <ul class="abouttest-checklist">
+            <li>Automotive</li>
+            <li>Energy</li>
+            <li>Telecom</li>
+            <li>Aerospace</li>
+            <li>Social Care</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<style>
+.abouttest-hero-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  color: var(--header-text);
+}
+.abouttest-hero-tagline {
+  font-size: 1.15rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0;
+}
+.abouttest-intro {
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 2.5rem;
+}
+.abouttest-photo-wrap {
+  position: sticky;
+  top: 2rem;
+}
+.abouttest-photo {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.abouttest-section-title {
+  font-size: 1.3rem;
+  margin: 0 0 1rem;
+  color: var(--theme);
+}
+.abouttest-section-title-spaced {
+  margin-top: 2.5rem;
+}
+.abouttest-about-text {
+  line-height: 1.7;
+  color: var(--text);
+}
+.abouttest-timeline-entry {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--table-border);
+}
+.abouttest-timeline-entry:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+.abouttest-timeline-role {
+  font-weight: 600;
+  color: var(--header-text);
+}
+.abouttest-timeline-date {
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.7;
+  margin: 0.15rem 0 0.35rem;
+}
+.abouttest-timeline-company {
+  font-size: 0.95rem;
+  color: var(--theme);
+  margin-bottom: 0.5rem;
+}
+.abouttest-timeline-desc {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+.abouttest-placeholder {
+  opacity: 0.55;
+  font-style: italic;
+}
+.abouttest-background {
+  margin-top: 3.5rem;
+}
+.abouttest-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.abouttest-card {
+  padding: 1.5rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+}
+.abouttest-card-title {
+  margin: 0 0 1rem;
+  color: var(--theme);
+  font-size: 1.05rem;
+}
+.post_content ul.abouttest-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.abouttest-checklist li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.abouttest-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+}
+@media (max-width: 42rem) {
+  .abouttest-intro {
+    grid-template-columns: 1fr;
+  }
+  .abouttest-photo-wrap {
+    position: static;
+  }
+  .abouttest-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{{- end }}
