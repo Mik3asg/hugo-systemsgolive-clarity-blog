@@ -27,6 +27,11 @@
   url = "about/"
   weight = -107
 
+[[main]]
+  name = "Consulting"
+  url = "consulting/"
+  weight = -106
+
 # social menu links
 
 [[social]]

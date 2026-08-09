@@ -29,6 +29,7 @@
       {{- .Content }}
     </div>
 
+    {{- if ne $p.hideSupport true }}
     <!-- Divider between article content and support section -->
     <div style="margin-top: 2rem; border-top: 2px solid #e8e8e8;"></div>
 
@@ -47,6 +48,7 @@
         <img src="/images/14.png" alt="" style="height: 30px;">
       </a>
     </div>
+    {{- end }}
 
     {{- $showRelatedInArticle := true }}
     {{- if eq $s.showRelatedInArticle false }}
