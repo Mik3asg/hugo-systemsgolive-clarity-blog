@@ -23,14 +23,14 @@
 #  url = "https://twitter.com/"
 
 [[main]]
-  name = "About"
-  url = "about/"
-  weight = -107
-
-[[main]]
   name = "Consulting"
   url = "consulting/"
   weight = -106
+
+[[main]]
+  name = "About"
+  url = "about/"
+  weight = -105
 
 # social menu links
 

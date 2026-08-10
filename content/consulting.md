@@ -10,9 +10,9 @@ hideSupport = true
 comments = false
 +++
 
-I help startups and SaaS teams build reliable, scalable, secure and cost-efficient cloud infrastructure through pragmatic architecture, automation and DevOps practices.
+I help startups and SaaS teams build reliable, scalable, secure and cost-efficient production infrastructure through cloud architecture, automation and DevOps practices.
 
-I remove complexity by delivering simple and effective solutions.
+I remove business complexity by delivering simple and effective technical solutions, with clear communication and strong collaboration.
 
 ## Services
 
