@@ -1,0 +1,300 @@
+{{- define "main" }}
+<div class="wrap content">
+  <article class="post_content consulting">
+
+    <header class="consulting-hero">
+      <p class="consulting-eyebrow">Independent Cloud &amp; DevOps Consultant</p>
+      <h1 class="consulting-hero-title">Cloud infrastructure shouldn&rsquo;t become a bottleneck as your SaaS grows.</h1>
+      <p class="consulting-hero-sub">I help growing SaaS engineering teams fix cloud cost, deployment and reliability problems as their infrastructure gets harder to run.</p>
+      <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Book an intro call</a>
+    </header>
+
+    <section class="consulting-when">
+      <h2 class="consulting-section-title">When I can help</h2>
+      <div class="consulting-when-list">
+        <article class="consulting-when-item">
+          <h3>Cloud costs</h3>
+          <p>Spend is growing faster than expected, or it&rsquo;s become hard to understand what&rsquo;s driving the bill.</p>
+        </article>
+        <article class="consulting-when-item">
+          <h3>Slow or fragile deployments</h3>
+          <p>Releases take too long, need manual steps, or feel risky every time.</p>
+        </article>
+        <article class="consulting-when-item">
+          <h3>Reliability &amp; infrastructure complexity</h3>
+          <p>What worked at an earlier stage is harder to operate, change or scale, putting production reliability at risk as the platform and customer base grow.</p>
+        </article>
+        <article class="consulting-when-item">
+          <h3>Engineering overhead</h3>
+          <p>Engineers spend more time on infrastructure and deployment problems than on product.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="consulting-help">
+      <h2 class="consulting-section-title">How I help</h2>
+      <div class="consulting-help-grid">
+        <article class="consulting-help-card">
+          <h3>Cloud Architecture &amp; Infrastructure</h3>
+          <p>Designing, modernising and improving production cloud environments, with day-to-day operation in mind, not just the initial build.</p>
+        </article>
+        <article class="consulting-help-card">
+          <h3>Infrastructure as Code &amp; Automation</h3>
+          <p>Making infrastructure repeatable and version-controlled, so environments can be provisioned and changed with confidence.</p>
+        </article>
+        <article class="consulting-help-card">
+          <h3>CI/CD &amp; Software Delivery</h3>
+          <p>Finding what&rsquo;s slowing deployments down and rebuilding the pipeline so releases become faster, safer and more predictable.</p>
+        </article>
+        <article class="consulting-help-card">
+          <h3>Platform Reliability, Security &amp; Cost Optimisation</h3>
+          <p>Improving how production is operated, protected and observed, and bringing cloud spend back under control.</p>
+        </article>
+      </div>
+      <p class="consulting-help-tools">Works primarily with Azure, AWS, Terraform, Ansible, GitHub Actions, Kubernetes and Docker.</p>
+    </section>
+
+    <section class="consulting-proof">
+      <h2 class="consulting-section-title">HealthTech SaaS: Scaling infrastructure and improving software delivery</h2>
+      <div class="consulting-proof-grid">
+        <div class="consulting-proof-text">
+          <p>A HealthTech SaaS platform needed to move to Azure and reduce the operational overhead of getting software into production. I designed and migrated the infrastructure towards a more scalable, highly available setup, and reworked the CI/CD pipeline to remove manual steps from deployment.</p>
+        </div>
+        <div class="consulting-proof-metrics">
+          <div class="consulting-metric">
+            <div class="consulting-metric-value">30 &rarr; 5 min</div>
+            <div class="consulting-metric-label">Deployment time per environment</div>
+          </div>
+          <div class="consulting-metric">
+            <div class="consulting-metric-value">~23%</div>
+            <div class="consulting-metric-label">Cloud cost reduction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="consulting-process">
+      <h2 class="consulting-section-title">How I work</h2>
+      <p class="consulting-process-intro">I work on defined, outcome-focused Cloud and DevOps projects, not as staff augmentation or a permanent hire. Every engagement moves through the same four stages, from understanding the problem through to handover.</p>
+      <div class="consulting-process-steps">
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">01</span>
+            <h3>Understand</h3>
+          </div>
+          <p>Clarify the problem, constraints and the outcome you need.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">02</span>
+            <h3>Diagnose</h3>
+          </div>
+          <p>Identify root causes, risks and priorities.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">03</span>
+            <h3>Implement</h3>
+          </div>
+          <p>Deliver the agreed technical improvements.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">04</span>
+            <h3>Handover</h3>
+          </div>
+          <p>Document the solution so your team can operate it confidently.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="consulting-final-cta">
+      <h2 class="consulting-section-title">Dealing with an infrastructure bottleneck?</h2>
+      <p>If cloud costs, deployments, reliability or infrastructure complexity are becoming harder to manage as your team grows, let&rsquo;s have a conversation.</p>
+      <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Book a 15-minute intro call</a>
+    </section>
+
+  </article>
+</div>
+
+<style>
+.consulting-hero {
+  max-width: 42rem;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+.consulting-eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--theme);
+}
+.consulting-hero-title {
+  margin: 0 0 1rem;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  color: var(--header-text);
+}
+.consulting-hero-sub {
+  margin: 0 auto 1.75rem;
+  max-width: 34rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.consulting-cta {
+  text-transform: none;
+}
+.consulting-section-title {
+  margin: 0 0 1.75rem;
+  font-size: 1.5rem;
+  color: var(--header-text);
+}
+.consulting-when,
+.consulting-help,
+.consulting-proof,
+.consulting-process {
+  margin-top: 4rem;
+}
+.consulting-when-list,
+.consulting-help-grid,
+.consulting-process-steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.consulting-when-item,
+.consulting-help-card,
+.consulting-process-step {
+  padding: 1.5rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+}
+.consulting-when-item h3,
+.consulting-help-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--theme);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.consulting-when-item p,
+.consulting-help-card p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+.consulting-help-tools {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.75;
+}
+.consulting-proof {
+  padding: 2rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+}
+.consulting-proof-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.consulting-proof-text p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+}
+.consulting-proof-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.consulting-metric-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--theme);
+  line-height: 1.1;
+}
+.consulting-metric-label {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.consulting-process-intro {
+  margin: -1rem 0 2rem;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 42rem;
+}
+.consulting-process-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+.consulting-process-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--post-bg);
+  border: 1px solid var(--table-border);
+  color: var(--theme);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.consulting-process-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--theme);
+}
+.consulting-process-step p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+.consulting-final-cta {
+  margin-top: 4.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--table-border);
+  text-align: center;
+}
+.consulting-final-cta .consulting-section-title {
+  margin-bottom: 0.75rem;
+}
+.consulting-final-cta p {
+  margin: 0 auto 1.75rem;
+  max-width: 34rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+@media (max-width: 64rem) {
+  .consulting-proof-grid {
+    grid-template-columns: 1fr;
+  }
+  .consulting-proof-metrics {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 42rem) {
+  .consulting-hero-title {
+    font-size: 1.75rem;
+  }
+  .consulting-when-list,
+  .consulting-help-grid,
+  .consulting-process-steps {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{{- end }}
