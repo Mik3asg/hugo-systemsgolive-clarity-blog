@@ -4,14 +4,15 @@
 
     <header class="abouttest-hero">
       <h1 class="abouttest-hero-name">{{ .Params.heroName | default "Mickael Asghar" }}</h1>
-      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "DevOps Engineer helping startups and SaaS teams build and scale reliable production infrastructure" }}</p>
+      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "Independent Cloud & DevOps Consultant helping growing SaaS engineering teams fix cloud cost,<br>deployment and reliability problems as their infrastructure gets harder to run." | safeHTML }}</p>
     </header>
 
     <div class="abouttest-intro">
       <div>
         <h2 class="abouttest-section-title">About</h2>
-        <p class="abouttest-about-text">I'm a DevOps Engineer with 14+ years of experience spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. Born and raised in France to Pakistani parents, I graduated with a Master's Degree in Network Architecture and Security from <a href="https://en.esigelec.fr" target="_blank" rel="noopener">ESIGELEC</a>, a French School of Engineering based in Rouen, and hold dual British and French citizenship. I live in Bristol, UK, with my Spanish wife and three kids — this multicultural, multilingual upbringing helps me pick up on subtle nuances and connect with people beyond just the technical and business requirements, wherever they're from.</p>
-        <p class="abouttest-about-text">When I'm not designing infrastructure or firefighting an issue (or glued to my laptop), you'll usually find me exploring new places, spending quality time with my family without staring at my phone, learning about languages and linguistics, or listening to a good podcast.</p>
+        <p class="abouttest-about-text">I'm an independent Cloud & DevOps Consultant with 14+ years of experience in the tech space, spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. I diagnose infrastructure problems and deliver practical, production-ready improvements across cloud architecture, infrastructure automation and software delivery.</p>
+        <p class="abouttest-about-text">My focus is on measurable outcomes: lower cloud costs, faster and safer deployments, more reliable infrastructure and less operational overhead for engineering teams. I work primarily on defined, outcome-focused consulting projects rather than permanent placements.</p>
+        <p class="abouttest-about-text">Born and raised in France to Pakistani parents, I hold dual British and French citizenship, and live with my Spanish wife and three children. That multicultural, multilingual upbringing helps me connect with people beyond just the technical requirements. Outside of work, you'll usually find me exploring new places, spending time with family, or learning about languages.</p>
 
         <h2 class="abouttest-section-title abouttest-section-title-spaced">Work History</h2>
         <div class="abouttest-timeline">
@@ -101,6 +102,12 @@
         </article>
 
       </div>
+    </section>
+
+    <section class="abouttest-consulting-cta">
+      <h2 class="abouttest-section-title">Need help with your cloud infrastructure?</h2>
+      <p class="abouttest-about-text">Book a free 15-minute intro call to see if I can help with your cloud cost, deployment or reliability challenges.</p>
+      <a href="/consulting" class="button abouttest-cta-button">Book an intro call</a>
     </section>
 
   </article>
@@ -206,6 +213,19 @@
 }
 .abouttest-background {
   margin-top: 3.5rem;
+}
+.abouttest-consulting-cta {
+  margin-top: 3.5rem;
+  padding: 1.75rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+}
+.abouttest-consulting-cta .abouttest-about-text {
+  margin-bottom: 1.25rem;
+}
+.abouttest-cta-button {
+  text-transform: none;
 }
 .abouttest-grid {
   display: grid;
