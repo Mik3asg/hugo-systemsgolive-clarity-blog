@@ -1,6 +1,6 @@
 +++
 title = "Cloud & DevOps Consulting"
-description = "Independent Cloud & DevOps Consultant helping growing SaaS engineering teams fix cloud cost, deployment and reliability problems."
+description = "Independent Cloud & DevOps consulting for growing SaaS teams. Improve cloud cost, software delivery, reliability and scalability through focused, fixed-outcome projects."
 date = "2026-08-09"
 author = "Mickael Asghar"
 layout = "consulting"
