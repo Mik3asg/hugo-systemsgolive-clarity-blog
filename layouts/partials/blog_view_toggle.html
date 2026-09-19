@@ -1,0 +1,34 @@
+{{- $active := .active }}
+<div class="blog_view_toggle" role="group" aria-label="Blog view">
+  <a href="{{ absLangURL "" }}" class="blog_view_btn{{ if eq $active "blog" }} is-active{{ end }}" aria-current="{{ if eq $active "blog" }}page{{ else }}false{{ end }}">Blog</a>
+  <a href="{{ absLangURL "timeline/" }}" class="blog_view_btn{{ if eq $active "timeline" }} is-active{{ end }}" aria-current="{{ if eq $active "timeline" }}page{{ else }}false{{ end }}">Timeline</a>
+</div>
+
+<style>
+.blog_view_toggle {
+  display: inline-flex;
+  padding: 0.2rem;
+  background: var(--choice-bg);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.blog_view_btn {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.15s var(--ease, ease), color 0.15s var(--ease, ease);
+}
+.blog_view_btn:hover {
+  color: var(--header-text);
+  text-decoration: none;
+}
+.blog_view_btn.is-active {
+  background: var(--theme);
+  color: #fff;
+}
+</style>

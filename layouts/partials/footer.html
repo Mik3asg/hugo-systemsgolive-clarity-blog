@@ -19,7 +19,7 @@ END ORIGINAL FOOTER -->
 <!-- NEW CUSTOM FOOTER -->
 <footer class="footer">
   <div class="footer_inner wrap pale footer_inner_custom">
-    <p style="white-space: nowrap; margin: 0;">{{ $c }} · <a href="{{ absLangURL "timeline/" }}" class="footer_archive_link">Full Archive</a></p>
+    <p style="white-space: nowrap; margin: 0;">{{ $c }}</p>
     {{- partialCached "top" .}}
   </div>
 </footer>
@@ -30,13 +30,5 @@ END ORIGINAL FOOTER -->
   justify-content: flex-start;
   gap: 1rem;
   flex-wrap: wrap;
-}
-.footer_archive_link {
-  color: var(--text);
-  font-size: 0.9rem;
-  text-decoration: underline;
-}
-.footer_archive_link:hover {
-  color: var(--theme);
 }
 </style>

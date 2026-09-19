@@ -1,5 +1,5 @@
 +++
-title = "Blog Articles - Timeline"
+title = "Blog Articles — Timeline"
 description = "All posts, grouped by year"
 layout = "timeline"
 showdate = false

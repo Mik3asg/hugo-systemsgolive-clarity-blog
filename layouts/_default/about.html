@@ -12,7 +12,7 @@
         <h2 class="abouttest-section-title">About</h2>
         <p class="abouttest-about-text">I'm an independent Cloud & DevOps Consultant with 14+ years of experience in the tech space, spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. I diagnose infrastructure problems and deliver practical, production-ready improvements across cloud architecture, infrastructure automation and software delivery.</p>
         <p class="abouttest-about-text">My focus is on measurable outcomes: lower cloud costs, faster and safer deployments, more reliable infrastructure and less operational overhead for engineering teams. I work primarily on defined, fixed-outcome consulting projects rather than permanent placements.</p>
-        <p class="abouttest-about-text">Born and raised in France to Pakistani parents, I hold dual British and French citizenship, and live with my Spanish wife and three children. That multicultural, multilingual upbringing helps me connect with people beyond just the technical requirements. Outside of work, you'll usually find me exploring new places, spending time with family, or learning about languages.</p>
+        <p class="abouttest-about-text">Born and raised in France to Pakistani parents, I hold dual British and French citizenship, and live with my Spanish wife and three children. That multicultural, multilingual upbringing helps me connect with people beyond just the technical requirements. Outside of work, you'll usually find me exploring new places and the outdoors, spending time with family, or listening to podcasts.</p>
 
         <h2 class="abouttest-section-title abouttest-section-title-spaced">Work History</h2>
         <div class="abouttest-timeline">
@@ -188,7 +188,12 @@
   border-radius: 50%;
   background: var(--post-bg);
   border: 2px solid var(--theme);
+  box-shadow: 0 0 0 4px rgba(0, 119, 184, 0.12), 0 0 12px rgba(0, 119, 184, 0.5);
   z-index: 1;
+  transition: box-shadow 0.25s ease;
+}
+.abouttest-timeline-entry:hover::before {
+  box-shadow: 0 0 0 6px rgba(0, 119, 184, 0.18), 0 0 18px rgba(0, 119, 184, 0.75);
 }
 .abouttest-timeline-role {
   font-weight: 600;
@@ -220,6 +225,12 @@
   border: 1px solid var(--table-border);
   border-radius: 8px;
   background: var(--choice-bg);
+  box-shadow: 0 0 0 1px rgba(0, 119, 184, 0.08), 0 10px 30px rgba(0, 119, 184, 0.1);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.abouttest-consulting-cta:hover {
+  box-shadow: 0 0 0 1px rgba(0, 119, 184, 0.18), 0 12px 36px rgba(0, 119, 184, 0.2);
+  transform: translateY(-2px);
 }
 .abouttest-consulting-cta .abouttest-about-text {
   margin-bottom: 1.25rem;
@@ -237,11 +248,17 @@
   border: 1px solid var(--table-border);
   border-radius: 8px;
   background: var(--choice-bg);
+  box-shadow: 0 0 0 1px rgba(0, 119, 184, 0.06), 0 8px 24px rgba(0, 119, 184, 0.08), 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.abouttest-card:hover {
+  box-shadow: 0 0 0 1px rgba(0, 119, 184, 0.16), 0 10px 32px rgba(0, 119, 184, 0.18), 0 4px 12px rgba(0, 0, 0, 0.16);
+  transform: translateY(-3px);
 }
 .abouttest-card-title {
   margin: 0 0 1rem;
   color: var(--theme);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 .post_content ul.abouttest-checklist {
   list-style: none;
@@ -253,8 +270,8 @@
   padding-left: 1.5rem;
   margin-bottom: 0.6rem;
   color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 1.02rem;
+  line-height: 1.55;
 }
 .abouttest-checklist li strong {
   color: var(--header-text);
