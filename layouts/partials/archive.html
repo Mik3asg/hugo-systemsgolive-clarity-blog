@@ -1,5 +1,6 @@
+{{ $isBlogIndex := eq .Section "blog" }}
 {{ $pages := .Pages }}
-{{ if .IsHome }}
+{{ if $isBlogIndex }}
   {{ $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{ end }}
 
@@ -12,7 +13,7 @@
 
 <div class="grid-inverse wrap content">
   <div>
-    {{ if .IsHome }}
+    {{ if $isBlogIndex }}
     <div class="archive_toolbar">
       {{ partial "blog_view_toggle.html" (dict "active" "blog") }}
     </div>
@@ -29,7 +30,7 @@
   {{- partial "sidebar" . }}
 </div>
 
-{{ if .IsHome }}
+{{ if $isBlogIndex }}
 <style>
 .archive_toolbar {
   display: flex;

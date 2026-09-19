@@ -1,6 +1,6 @@
 {{- $active := .active }}
 <div class="blog_view_toggle" role="group" aria-label="Blog view">
-  <a href="{{ absLangURL "" }}" class="blog_view_btn{{ if eq $active "blog" }} is-active{{ end }}" aria-current="{{ if eq $active "blog" }}page{{ else }}false{{ end }}">Blog</a>
+  <a href="{{ absLangURL "blog/" }}" class="blog_view_btn{{ if eq $active "blog" }} is-active{{ end }}" aria-current="{{ if eq $active "blog" }}page{{ else }}false{{ end }}">Blog</a>
   <a href="{{ absLangURL "timeline/" }}" class="blog_view_btn{{ if eq $active "timeline" }} is-active{{ end }}" aria-current="{{ if eq $active "timeline" }}page{{ else }}false{{ end }}">Timeline</a>
 </div>
 

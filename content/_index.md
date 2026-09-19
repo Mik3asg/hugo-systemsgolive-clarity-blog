@@ -1,5 +1,11 @@
 +++
-author = "Hugo Authors"
-description = "A theme based on VMware's Clarity Design System for publishing technical blogs with Hugo." # Set your site's meta tag (SEO) description here. This overrides any description set in your site configuration.
-keywords = ["design", "clarity", "hugo theme"] # Set your site's meta tag (SEO) keywords here. These override any keywords set in your site configuration.
+title = "About"
+description = "DevOps Engineer with 14+ years of experience — background, work history, and what I'm about"
+aliases = ["/about/", "/about-us/", "/about-hugo/", "/contact/", "/abouttest/"]
+showdate = false
+showreadtime = false
+showshare = false
+hideSupport = true
+comments = false
+sidebar = false
 +++
