@@ -1,7 +1,7 @@
 [[main]]
   name = "Blog"
   url = "blog/"
-  weight = -110
+  weight = -105
 
 #[[main]]
 #  name = "Archives"
@@ -30,7 +30,7 @@
 [[main]]
   name = "About"
   url = ""
-  weight = -105
+  weight = -110
 
 # social menu links
 
