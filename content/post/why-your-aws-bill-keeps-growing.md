@@ -1,11 +1,12 @@
 ---
-title: "Why Your SaaS Cloud Bill Keeps Growing (and Where to Look First)"
+title: "Why Your SaaS Cloud Bill Keeps Growing"
 date: 2026-09-26
 draft: false
 description: "A quick diagnosis for early-stage SaaS companies whose AWS bill is growing faster than the business: where to look, what to spot, and what fixing it involves."
 summary: "Most cloud waste in early-stage SaaS sits in the same few places. Here's where to look, what to spot, and why fixing it takes more care than it seems."
 tags: ["aws", "cost-optimisation", "finops", "saas", "startups", "consulting"]
 categories: ["Consulting"]
+thumbnail: "images/cloud-cost-increasing-logo.png"
 ---
 
 A lot of early-stage SaaS companies end up in the same spot. Customers are growing, the product is moving, and the AWS bill is growing even faster. When someone finally asks why, nobody has a clear answer.
