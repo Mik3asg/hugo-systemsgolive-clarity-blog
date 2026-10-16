@@ -1,12 +1,13 @@
 ---
-title: "Migrating a Regulated Healthcare Platform to Azure: A Cutover Retrospective"
+title: "Migrating a Regulated UK Care Management SaaS Platform to Azure: A Cutover Retrospective"
 date: 2026-10-16T09:00:00+01:00
 draft: false
 description: "How we moved a UK care management platform from private hosting to Azure: the prep work, the problems, and what I'd do differently."
 summary: "A retrospective on moving a regulated UK care management platform to Azure: weeks of parallel running, online database sync with Azure DMS, a two-database surprise on cutover night, and the lessons I'd apply next time."
 tags: ["azure", "azure-dms", "cloudflare", "mysql", "openldap", "almalinux", "ansible", "bicep", "devops"]
 categories: ["Cloud Migration"]
-thumbnail: "images/infra-automation-azure-migration.png"
+thumbnail: "images/legacy-to-cloud-migration.png"
+aliases: ["/post/migrating-regulated-healthcare-platform-to-azure/"]
 ---
 
 ## TL;DR
