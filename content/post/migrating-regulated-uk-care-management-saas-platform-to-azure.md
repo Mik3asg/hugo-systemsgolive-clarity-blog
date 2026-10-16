@@ -19,7 +19,7 @@ aliases: ["/post/migrating-regulated-healthcare-platform-to-azure/"]
 
 ## Context
 
-The platform is a SaaS product used by care providers across the UK. It operates in a regulated healthcare environment, and the hosting contract was ending. Hard deadline.
+The platform is a Java-based SaaS product used by care providers across the UK. It operates in a regulated healthcare environment, and the hosting contract was ending. Hard deadline.
 
 **Scale:** roughly 60k unique visitors and 50M+ requests a week, around 1 TB of traffic.
 
@@ -32,8 +32,8 @@ The platform is a SaaS product used by care providers across the UK. It operates
 - **Edge:** Cloudflare for DNS, WAF, load balancing and health checks (already in place from an [earlier load balancer migration](/post/ans-to-cloudflare-lb-migration-zero-downtime/)). There's no Azure Load Balancer; Cloudflare sends traffic straight to the Tomcat VMs.
 - **TLS end to end:** Cloudflare's edge certificate for users, then a Let's Encrypt wildcard certificate on Apache at the origin. SSL mode is Full (strict), so Cloudflare only accepts a valid, unexpired origin certificate that matches the hostname.
 - **App tier:** AlmaLinux 9 VMs throughout. Four Tomcat VMs across availability zones, each running Apache, Tomcat and a replicated OpenLDAP node, plus a shared services VM and a jump VM.
-- **Data tier:** twelve self-managed MySQL servers consolidated into five Azure Database for MySQL Flexible Server instances, all HA.
-- **Cache:** Azure Managed Redis, HA, behind a private endpoint. Only resources inside the VNet can reach it.
+- **Data tier:** twelve self-managed MySQL servers consolidated into five Azure Database for MySQL Flexible Server instances, all HA. Nine of those servers held over 600 customer tenant schemas, now grouped by customer category on three Memory Optimized servers. The other three (archive, demo and a common database) moved to the remaining two.
+- **Cache and sessions:** Azure Managed Redis, HA, behind a private endpoint. It stores the Java app's user sessions, so if a Tomcat VM goes offline, users carry on from another VM without being logged out. Only resources inside the VNet can reach it.
 - **Backups:** geo-redundant backups for MySQL. VMs are backed up to a Recovery Services vault.
 - **Deployments:** Bitbucket Pipelines builds the WAR and deploys it to the Tomcat VMs over SSH.
 - **Ops access:** DevOps and support connect over the Cisco VPN, using SSH for the Tomcat VMs and the jump VM for MySQL Workbench and Redis clients.
@@ -62,21 +62,41 @@ All settings and application configuration files were staged on the Azure VMs ah
 
 By go/no-go, we already knew the app worked on Azure. The only open question was whether the data would be fully up to date on the night.
 
-### Database migration with Azure DMS
+### Database consolidation and migration
 
-**Problem:** the source databases used MySQL's native encryption at rest (keyring plugin). Flexible Server doesn't support it, so encrypted schemas failed to import.
+**Before:** the customer data lived on nine self-hosted MySQL VMs. Over 600 tenant schemas were spread across them, mixing care home, domiciliary care and group customers on the same servers.
 
-**Approach:**
+**Consolidation:** rather than lift and shift nine servers, we grouped the tenant schemas by customer category and consolidated them into three Azure Database for MySQL Flexible Server instances:
 
-1. Strip `ENCRYPTION='Y'` from the schema dump with `sed`.
-2. Pre-create the schemas only on Azure, with no data.
-3. Run Azure DMS as an online migration: full copy, then continuous sync, all over the site-to-site VPN.
+| Customer category | Target server |
+|---|---|
+| Care home | `prod-carehome-db-01` |
+| Domiciliary care | `prod-dom-db-02` |
+| Group | `prod-group-db-03` |
+
+Each server runs on the Memory Optimized tier, with the SKU and capacity sized for the combined load of its category. Fewer, clearly labelled servers are easier to run, monitor and audit.
+
+The other three source servers held the archive, demo and common databases. They moved to the remaining two Flexible Server instances, for five in total.
+
+**Migration, in short:**
+
+- **Prep work:** dump the schema definitions from each source server.
+- **Challenge:** the source databases used MySQL's native encryption at rest (keyring plugin). Flexible Server doesn't support it, so encrypted schemas failed to import.
+- **Steps:**
+  1. Remove the encryption clause (`ENCRYPTION='Y'`) from the schema dump with `sed`.
+  2. Create the schemas only on the target, with no data.
+  3. Copy the data with Azure DMS as an online migration: full copy, then continuous replication, all over the site-to-site VPN.
 
 Data synced for days before cutover. On the night, ten of the twelve databases only needed a final sync check before we stopped DMS. The other two are covered under Challenges. Flexible Server encrypts storage by default, so encryption at rest wasn't lost; it moved to the platform.
 
 ### Directory service
 
-OpenLDAP runs as a multi-node replicated cluster across the Tomcat VMs. The move was scripted and rehearsed: `slapcat` backup on the old platform, copy to Azure, restore on each node in turn, then replication keeps them in step. Entry counts were checked against the source every time.
+OpenLDAP runs as a multi-node replicated cluster across the Tomcat VMs. The data can't go anywhere until the server config exists, so the move came in two parts:
+
+1. **Build the config first.** Ansible set up OpenLDAP on each Azure VM ahead of time: the server configuration, schemas and replication between the nodes. The directory was ready, just empty.
+2. **Move the data with `slapcat` and `slapadd`.** On the night, `slapcat` exported the directory from the old platform. We copied the export to Azure and loaded it with `slapadd` on each node in turn, with `slapd` stopped. Then replication kept the nodes in step.
+
+The whole sequence was scripted and rehearsed, and entry counts were checked against the source every time.
 
 ## Testing
 
@@ -138,7 +158,11 @@ During the window, with the VPN-only rule already in place:
 
 The production hostname never stopped resolving. It just pointed at a different pool, and the WAF rule kept customers on the maintenance page while we tested. Rolling back meant reversing the two renames.
 
-Going live was one small change. Rolling back would have been just as quick.
+Going live was one small change.
+
+**The rollback window closed at go-live.** Reversing the renames was quick, but rollback was only realistic before customers came back. Up to that point, the old databases and the Azure databases were still consistent, because no customer had written anything to Azure yet. Once customers were on Azure, they'd start writing new data there. The old databases would go stale straight away, and moving that new data back would be slow and risky.
+
+So the rule was clear: roll back only before go-live, and only if testing during the maintenance window found a critical issue. After go-live, we were committed to Azure and would fix forward.
 
 ### Performance under real customer traffic
 
@@ -154,7 +178,7 @@ Before go/no-go, I ran a walkthrough of the cutover execution plan with the CTO,
 
 - **Readiness:** our point of view on whether we were ready, and the evidence behind it.
 - **Execution plan:** every step, owner and timing for the night.
-- **Rollback plan:** what would trigger a rollback, and how we'd do it.
+- **Rollback plan:** what would trigger a rollback, how we'd do it, and the point after which rollback was no longer an option.
 
 Go/no-go was two days before. The cutover itself ran on Wednesday 14 October. Every step had an owner, a start time and a duration.
 
