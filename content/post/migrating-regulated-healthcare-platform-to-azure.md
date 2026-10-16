@@ -4,7 +4,7 @@ date: 2026-10-16T09:00:00+01:00
 draft: false
 description: "How we moved a UK care management platform from private hosting to Azure: the prep work, the problems, and what I'd do differently."
 summary: "A retrospective on moving a regulated UK care management platform to Azure: weeks of parallel running, online database sync with Azure DMS, a two-database surprise on cutover night, and the lessons I'd apply next time."
-tags: ["azure", "azure-dms", "cloudflare", "mysql", "openldap", "ansible", "bicep", "devops"]
+tags: ["azure", "azure-dms", "cloudflare", "mysql", "openldap", "almalinux", "ansible", "bicep", "devops"]
 categories: ["Cloud Migration"]
 thumbnail: "images/infra-automation-azure-migration.png"
 ---
@@ -30,7 +30,7 @@ The platform is a SaaS product used by care providers across the UK. It operates
 
 - **Edge:** Cloudflare for DNS, WAF, load balancing and health checks (already in place from an [earlier load balancer migration](/post/ans-to-cloudflare-lb-migration-zero-downtime/)). There's no Azure Load Balancer; Cloudflare sends traffic straight to the Tomcat VMs.
 - **TLS end to end:** Cloudflare's edge certificate for users, then a Let's Encrypt wildcard certificate on Apache at the origin. SSL mode is Full (strict), so Cloudflare only accepts a valid, unexpired origin certificate that matches the hostname.
-- **App tier:** four Tomcat VMs across availability zones, each running Apache, Tomcat and a replicated OpenLDAP node, plus a shared services VM and a jump VM.
+- **App tier:** AlmaLinux 9 VMs throughout. Four Tomcat VMs across availability zones, each running Apache, Tomcat and a replicated OpenLDAP node, plus a shared services VM and a jump VM.
 - **Data tier:** twelve self-managed MySQL servers consolidated into five Azure Database for MySQL Flexible Server instances, all HA.
 - **Cache:** Azure Managed Redis, HA, behind a private endpoint. Only resources inside the VNet can reach it.
 - **Backups:** geo-redundant backups for MySQL. VMs are backed up to a Recovery Services vault.
@@ -51,7 +51,7 @@ The goal: by cutover night, Azure is already a working copy of production. The n
 
 ### Build and parallel run
 
-Ansible built everything on top of the VMs: OpenJDK, Tomcat, Apache, TLS, OpenLDAP, file sync across the fleet, and OS hardening.
+All VMs were built on AlmaLinux 9. Ansible built everything on top: OpenJDK, Tomcat, Apache, TLS, OpenLDAP, file sync across the fleet, and OS hardening.
 
 The full stack then ran alongside the old platform for a few weeks, on a test subdomain behind Cloudflare. CI/CD deployed the same code to both.
 
