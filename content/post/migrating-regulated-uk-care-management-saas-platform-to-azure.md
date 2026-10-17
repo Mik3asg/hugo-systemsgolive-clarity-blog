@@ -32,7 +32,7 @@ The platform is a Java-based SaaS product used by care providers across the UK. 
 - **Edge:** Cloudflare for DNS, WAF, load balancing and health checks (already in place from an [earlier load balancer migration](/post/ans-to-cloudflare-lb-migration-zero-downtime/)). There's no Azure Load Balancer; Cloudflare sends traffic straight to the Tomcat VMs.
 - **TLS end to end:** Cloudflare's edge certificate for users, then a Let's Encrypt wildcard certificate on Apache at the origin. SSL mode is Full (strict), so Cloudflare only accepts a valid, unexpired origin certificate that matches the hostname.
 - **App tier:** AlmaLinux 9 VMs throughout. Four Tomcat VMs across availability zones, each running Apache, Tomcat and a replicated OpenLDAP node, plus a shared services VM and a jump VM.
-- **Data tier:** twelve self-managed MySQL servers consolidated into five Azure Database for MySQL Flexible Server instances, all HA. Nine of those servers held over 600 customer tenant schemas, now grouped by customer category on three Memory Optimized servers. The other three (archive, demo and a common database) moved to the remaining two.
+- **Data tier:** eleven self-managed MySQL servers consolidated into five Azure Database for MySQL Flexible Server instances, all HA. Nine customer servers holding over 850 tenant schemas are now grouped by customer category on three Memory Optimized servers. The demo and archive servers each have their own instance.
 - **Cache and sessions:** Azure Managed Redis, HA, behind a private endpoint. It stores the Java app's user sessions, so if a Tomcat VM goes offline, users carry on from another VM without being logged out. Only resources inside the VNet can reach it.
 - **Backups:** geo-redundant backups for MySQL. VMs are backed up to a Recovery Services vault.
 - **Deployments:** Bitbucket Pipelines builds the WAR and deploys it to the Tomcat VMs over SSH.
@@ -64,19 +64,19 @@ By go/no-go, we already knew the app worked on Azure. The only open question was
 
 ### Database consolidation and migration
 
-**Before:** the customer data lived on nine self-hosted MySQL VMs. Over 600 tenant schemas were spread across them, mixing care home, domiciliary care and group customers on the same servers.
+**Before:** the customer data lived on nine self-hosted MySQL VMs. Over 850 tenant schemas were spread across them, mixing care home, domiciliary care and group customers on the same servers.
 
-**Consolidation:** rather than lift and shift nine servers, we grouped the tenant schemas by customer category and consolidated them into three Azure Database for MySQL Flexible Server instances:
+**Consolidation:** rather than lift and shift nine servers, we grouped the tenant schemas by customer category and consolidated them into three Azure Database for MySQL Flexible Server instances. The demo and archive servers moved across as they were, one instance each:
 
-| Customer category | Target server |
+| Source | Target server |
 |---|---|
-| Care home | `prod-carehome-db-01` |
-| Domiciliary care | `prod-dom-db-02` |
-| Group | `prod-group-db-03` |
+| Care home customers | `prod-carehome-db-01` |
+| Domiciliary care customers | `prod-dom-db-02` |
+| Group customers | `prod-group-db-03` |
+| Demo | `prod-demo-db-04` |
+| Archive | `prod-archive-db-05` |
 
-Each server runs on the Memory Optimized tier, with the SKU and capacity sized for the combined load of its category. Fewer, clearly labelled servers are easier to run, monitor and audit.
-
-The other three source servers held the archive, demo and common databases. They moved to the remaining two Flexible Server instances, for five in total.
+The three customer servers run on the Memory Optimized tier, with the SKU and capacity sized for the combined load of each category. Fewer, clearly labelled servers are easier to run, monitor and audit.
 
 **Migration, in short:**
 
@@ -87,7 +87,7 @@ The other three source servers held the archive, demo and common databases. They
   2. Create the schemas only on the target, with no data.
   3. Copy the data with Azure DMS as an online migration: full copy, then continuous replication, all over the site-to-site VPN.
 
-Data synced for days before cutover. On the night, ten of the twelve databases only needed a final sync check before we stopped DMS. The other two are covered under Challenges. Flexible Server encrypts storage by default, so encryption at rest wasn't lost; it moved to the platform.
+Data synced for days before cutover. On the night, nine of the eleven source databases only needed a final sync check before we stopped DMS. The other two are covered under Challenges. Flexible Server encrypts storage by default, so encryption at rest wasn't lost; it moved to the platform.
 
 ### Directory service
 
@@ -120,13 +120,13 @@ Some fixes went in through the Portal to unblock testing: a Redis SKU change and
 
 ### Two databases out of sync on the night
 
-When we checked the final sync, ten databases were fully caught up. Two were not:
+When we checked the final sync, nine databases were fully caught up. Two were not:
 
-| Source DB | Seconds behind |
+| Source DB (old host) | Seconds behind |
 |---|---|
-| DB 04 | 6,587 (~1.8 hours) |
-| DB 05 | 28,550 (~8 hours) |
-| All other 10 | 0 |
+| Customer DB 04 | 6,587 (~1.8 hours) |
+| Customer DB 05 | 28,550 (~8 hours) |
+| All other 9 | 0 |
 
 Waiting for them to catch up wasn't an option inside the window. So for those two, we stopped relying on the online sync and ran an offline copy on the night.
 
