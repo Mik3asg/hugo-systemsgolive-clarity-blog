@@ -4,8 +4,8 @@ date: 2026-09-26
 draft: false
 description: "A quick diagnosis for early-stage SaaS companies whose AWS bill is growing faster than the business: where to look, what to spot, and what fixing it involves."
 summary: "Most cloud waste in early-stage SaaS sits in the same few places. Here's where to look, what to spot, and why fixing it takes more care than it seems."
-tags: ["aws", "cost-optimisation", "finops", "saas", "startups", "consulting"]
-categories: ["Consulting"]
+tags: ["aws", "cost-optimisation", "finops", "saas", "startups"]
+categories: ["AWS", "Cloud Cost"]
 thumbnail: "images/cloud-cost-increasing-logo.png"
 ---
 
@@ -62,32 +62,16 @@ Spotting the problem is easy. Fixing it without breaking something is harder.
 
 **Tagging.** Without it, every cost conversation is guesswork.
 
-## How I work
+## A sensible order to tackle it
 
-I'm an independent DevOps and cloud engineer. A cost review with me typically runs over two to three weeks:
+Cost work goes wrong when it's rushed. This is the order I'd follow:
 
-1. Read-only access to your AWS account and a short call with whoever knows the setup best.
-2. A full review of your spend and infrastructure, based on real usage data.
-3. A short report listing each finding with its estimated saving, effort and risk, in priority order.
-4. Implementation, either by your team with my support or by me working alongside them. All changes go through code and review.
-5. Guardrails before I step away: tagging, budgets, alerts and a simple monthly routine, so the bill stays under control.
+1. **Get the data first.** Read-only access to Cost Explorer and the main consoles, and 30 minutes with whoever knows the setup best. Most surprises come from things nobody remembers creating.
+2. **Review against real usage.** Size from peak load, not averages, and check what each resource is actually for before touching it.
+3. **List findings by saving, effort and risk.** Quick, safe wins first: log retention, unattached volumes, idle IPs. Leave rightsizing and network changes until they've been tested.
+4. **Change everything through code and review.** A console change that saves money today is drift tomorrow, and it's the one nobody can explain in six months.
+5. **Put guardrails in place.** Tagging, budgets, cost alerts and a short monthly review, so the bill doesn't creep back up.
 
-## What to expect
+## Final thoughts
 
-For an account that has never been properly reviewed, a 30 to 50% reduction is a realistic range. If your setup is already in good shape, I'll tell you, and the review stays short.
-
-You also come out of it knowing where your money goes. That matters when you're managing runway or preparing for a fundraise.
-
-## Is this for you?
-
-It's probably worth a conversation if:
-
-- your cloud bill is somewhere between £2k and £20k a month and rising
-- you don't have a dedicated DevOps or platform engineer
-- nobody can explain last month's bill with confidence
-
-## Get in touch
-
-I've spent over 14 years in infrastructure, including regulated environments where cost, security and reliability all need to hold up together. I offer a fixed-price cloud cost review for early-stage and growing SaaS companies. No long contracts, no lock-in.
-
-If your cloud bill is growing faster than your business, get in touch via [systemsgolive.com](https://systemsgolive.com).
+A growing cloud bill is rarely one big mistake. It's a dozen small ones that nobody owns. The diagnosis is the easy part and takes an afternoon. The fixes need the same care as any other production change, because that's what they are.
