@@ -64,11 +64,12 @@
 
     <section class="consulting-section consulting-proof" id="recent-work">
       <h2 class="consulting-section-title">Recent work</h2>
-      <h3 class="services-work-title">Azure migration and platform improvements (current employed role, HealthTech SaaS)</h3>
-      <p class="consulting-proof-intro">In my current role as Cloud DevOps Engineer at a UK HealthTech SaaS company, I:</p>
       <ul class="services-work-list">
-        <li>Migrated the platform from private hosting to Microsoft Azure, consolidating 12 self-managed MySQL servers into 5 HA Azure Database for MySQL instances (850+ tenant schemas), with no data loss</li>
-        <li>Built a CI/CD pipeline (Bitbucket Pipelines) that cut deployment time from ~30 to ~5 minutes per environment</li>
+        <li>Migrated a regulated UK care management SaaS platform (50M+ requests/week) to Azure, running the cutover with no data loss.</li>
+        <li>Built the Azure platform as Infrastructure as Code with Bicep and Ansible, run in parallel with production before cutover.</li>
+        <li>Cut deployment time from ~30 to ~5 minutes with an end-to-end CI/CD pipeline (Bitbucket Pipelines).</li>
+        <li>Consolidated 12 self-managed MySQL servers (850+ tenant schemas) into 5 HA Azure managed databases using Azure DMS.</li>
+        <li>Previously built a highly available AWS platform with Terraform and GitHub Actions CI/CD, cutting spend by ~15%.</li>
       </ul>
       <p class="services-work-link">Full write-up: <a href="/post/migrating-regulated-uk-care-management-saas-platform-to-azure/">Migrating a Regulated UK Care Management SaaS Platform to Azure: A Cutover Retrospective</a></p>
     </section>
@@ -87,15 +88,6 @@
 .services .consulting-problem-list,
 .services .consulting-process-steps {
   grid-template-columns: repeat(2, 1fr);
-}
-.services-work-title {
-  margin: 0 0 0.75rem;
-  font-size: 1.15rem;
-  color: var(--header-text);
-}
-.post_content.services .consulting-proof-intro {
-  margin-bottom: 0.25rem;
-  padding-bottom: 0;
 }
 .post_content.services .services-work-list {
   margin: 0 0 0.25rem;
