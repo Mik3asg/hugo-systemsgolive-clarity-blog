@@ -1,6 +1,6 @@
 +++
 title = "About"
-description = "DevOps Engineer with 14+ years of experience — background, work history, and what I'm about"
+description = "DevOps Engineer with 15+ years of experience — background, work history, and what I'm about"
 aliases = ["/about/", "/about-us/", "/about-hugo/", "/contact/", "/abouttest/"]
 showdate = false
 showreadtime = false

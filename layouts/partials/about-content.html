@@ -3,14 +3,15 @@
 
     <header class="abouttest-hero">
       <h1 class="abouttest-hero-name">{{ .Params.heroName | default "Mickael Asghar" }}</h1>
-      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "Independent Cloud & DevOps Consultant helping growing SaaS engineering teams fix cloud cost,<br>deployment and reliability problems as their infrastructure gets harder to run." | safeHTML }}</p>
+      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "Senior Cloud & DevOps Engineer helping growing SaaS engineering teams fix cloud cost,<br>deployment and reliability problems as their infrastructure gets harder to run." | safeHTML }}</p>
     </header>
 
     <div class="abouttest-intro">
       <div>
         <h2 class="abouttest-section-title">About</h2>
-        <p class="abouttest-about-text">I'm an independent Cloud & DevOps Consultant with 14+ years of experience in the tech space, spanning Automotive, Energy, Telecom, Aerospace, and Social Care sectors. I diagnose infrastructure problems and deliver practical, production-ready improvements across cloud architecture, infrastructure automation and software delivery — I also write about this work on the <a href="/blog/">blog</a>.</p>
-        <p class="abouttest-about-text">My focus is on measurable outcomes: lower cloud costs, faster and safer deployments, more reliable infrastructure and less operational overhead for engineering teams. I work primarily on defined, fixed-outcome consulting projects rather than permanent placements. Currently taking on new consulting engagements — <a href="/consulting">see how I can help</a>.</p>
+        <p class="abouttest-about-text">I've spent 15+ years in infrastructure: first in enterprise consulting across the Automotive, Energy, Telecom and Aerospace sectors, and more recently in SaaS, including regulated Social Care.</p>
+        <p class="abouttest-about-text">Most recently, I ran the cloud migration and cutover of a regulated UK healthcare SaaS platform from private hosting to Microsoft Azure: 12 self-managed MySQL servers consolidated into 5 Azure managed MySQL databases, 850+ tenant schemas, no data loss.</p>
+        <p class="abouttest-about-text">I write here about real infrastructure work: what was done, what broke and what I'd do differently.</p>
         <p class="abouttest-about-text">Born and raised in France to Pakistani parents, I hold dual British and French citizenship, and live with my Spanish wife and three children. That multicultural, multilingual upbringing helps me connect with people beyond just the technical requirements. Outside of work, you'll usually find me exploring new places and the outdoors, spending time with family, or listening to podcasts.</p>
 
         <h2 class="abouttest-section-title abouttest-section-title-spaced">Work History</h2>
@@ -20,14 +21,14 @@
             <div class="abouttest-timeline-role">Cloud DevOps Engineer</div>
             <div class="abouttest-timeline-date">03/2024 – Present</div>
             <div class="abouttest-timeline-company">Quality Compliance Systems · Hybrid/London, UK</div>
-            <p class="abouttest-timeline-desc">Own cloud infrastructure, CI/CD, and platform reliability for a Java Spring SaaS platform — hybrid Azure HA architecture, self-managed Redis Sentinel failover, automated TLS renewal, and incident response.</p>
+            <p class="abouttest-timeline-desc">Migrated a regulated UK care management SaaS platform (~60k weekly users, 50M+ requests/week) from private hosting to Azure UK South, consolidating 12 self-managed MySQL servers (850+ tenant schemas) into 5 HA Azure Database for MySQL instances with no data loss. Built the platform with Bicep and Ansible, cut deployments from ~30 to ~5 minutes with CI/CD, and own Cloudflare, monitoring, certificate automation and incident response.</p>
           </div>
 
           <div class="abouttest-timeline-entry">
             <div class="abouttest-timeline-role">Cloud DevOps Engineer</div>
             <div class="abouttest-timeline-date">04/2023 – 02/2024</div>
             <div class="abouttest-timeline-company">Experis · Remote</div>
-            <p class="abouttest-timeline-desc">Architected a highly available 3-tier AWS platform with Terraform, GitHub Actions CI/CD, and a centralised AWS Backup strategy, applying FinOps practices that cut infrastructure spend by ~15%.</p>
+            <p class="abouttest-timeline-desc">Architected a highly available 3-tier AWS platform (Auto Scaling, ELB, Route 53, multi-AZ RDS), provisioned with Terraform and secured with IAM roles, security groups and VPC segmentation. Built GitHub Actions CI/CD pipelines and a centralised AWS Backup strategy, and cut infrastructure spend by ~15% through rightsizing, removing idle resources and CloudWatch cost alerting.</p>
           </div>
 
           <div class="abouttest-timeline-entry">
@@ -105,8 +106,10 @@
 
     <section class="abouttest-consulting-cta">
       <h2 class="abouttest-section-title">Need help with your cloud infrastructure?</h2>
-      <p class="abouttest-about-text">Book a free 15-minute intro call to see if I can help with your cloud cost, deployment or reliability challenges.</p>
-      <a href="/consulting" class="button abouttest-cta-button">Book an intro call</a>
+      <div class="abouttest-cta-actions">
+        <a href="/blog/" class="button abouttest-cta-button">Read the blog</a>
+        <a href="/services/" class="button abouttest-cta-button">Services</a>
+      </div>
     </section>
 
   </article>
@@ -236,6 +239,11 @@
 }
 .abouttest-cta-button {
   text-transform: none;
+}
+.abouttest-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 .abouttest-grid {
   display: grid;

@@ -11,4 +11,11 @@ hideSupport = true
 comments = false
 sidebar = false
 singleColumn = true
+draft = true
+
+# Archived consultant-positioning page. Never built or listed.
+# The page body lives in layouts/_default/consulting.html (kept for restore).
+[build]
+  list = "never"
+  render = "never"
 +++

@@ -1,0 +1,122 @@
+{{- define "main" }}
+<div class="wrap content">
+  <article class="post_content consulting services">
+
+    <header class="consulting-hero">
+      <p class="consulting-eyebrow">Senior Cloud &amp; DevOps Engineer</p>
+      <h1 class="consulting-hero-title">Services</h1>
+      <p class="consulting-hero-sub">Hands-on cloud and DevOps engineering for growing SaaS teams: embedded in your team on a contract, or delivering a scoped piece of work with a defined outcome.</p>
+    </header>
+
+    <section class="consulting-section consulting-problems" id="focus">
+      <h2 class="consulting-section-title">What I work on</h2>
+      <div class="consulting-problem-list">
+        <article class="consulting-problem-card">
+          <span class="consulting-problem-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4-8 4-8-4 8-4z" stroke-linejoin="round"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Cloud Architecture &amp; Migration</h3>
+          <p>Designing cloud platforms that scale with growth, and moving production workloads onto them safely, with planned cutovers and clear rollback points.</p>
+        </article>
+        <article class="consulting-problem-card">
+          <span class="consulting-problem-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.5-5.5L20 9"/><path d="M20 5v4h-4"/><path d="M20 12a8 8 0 0 1-13.5 5.5L4 15"/><path d="M4 19v-4h4"/></svg>
+          </span>
+          <h3>Software Delivery &amp; Automation</h3>
+          <p>Turning slow, fragile deployments and manual provisioning into fast, reliable releases and auditable infrastructure through CI/CD, Infrastructure as Code and automation.</p>
+        </article>
+        <article class="consulting-problem-card">
+          <span class="consulting-problem-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5L16 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>Reliable &amp; Scalable Cloud Infrastructure</h3>
+          <p>Improving reliability, observability, security and recovery, and tracking recurring incidents down to a clear root cause and fix.</p>
+        </article>
+        <article class="consulting-problem-card">
+          <span class="consulting-problem-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.3c0 3 6 1.3 6 4.2 0 1.4-1.3 2.5-3 2.5s-3-1.1-3-2.5" stroke-linecap="round"/></svg>
+          </span>
+          <h3>Cloud Cost Optimisation</h3>
+          <p>Bringing cloud spend under control and improving cost visibility without cutting capacity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="consulting-section consulting-process" id="how-i-work">
+      <h2 class="consulting-section-title">How I work</h2>
+      <div class="consulting-process-steps">
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">01</span>
+            <h3>Contract</h3>
+          </div>
+          <p>Working inside your team on a defined engagement, remote or hybrid from Bristol, UK.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">02</span>
+            <h3>Scoped project</h3>
+          </div>
+          <p>A specific problem with the scope, outcome and timeline agreed up front, then a documented handover.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="consulting-section consulting-proof" id="recent-work">
+      <h2 class="consulting-section-title">Recent work</h2>
+      <h3 class="services-work-title">Azure migration and platform improvements (current employed role, HealthTech SaaS)</h3>
+      <p class="consulting-proof-intro">In my current role as Cloud DevOps Engineer at a UK HealthTech SaaS company, I:</p>
+      <ul class="services-work-list">
+        <li>Migrated the platform from private hosting to Microsoft Azure, consolidating 12 self-managed MySQL servers into 5 HA Azure Database for MySQL instances (850+ tenant schemas), with no data loss</li>
+        <li>Built a CI/CD pipeline (Bitbucket Pipelines) that cut deployment time from ~30 to ~5 minutes per environment</li>
+      </ul>
+      <p class="services-work-link">Full write-up: <a href="/post/migrating-regulated-uk-care-management-saas-platform-to-azure/">Migrating a Regulated UK Care Management SaaS Platform to Azure: A Cutover Retrospective</a></p>
+    </section>
+
+    <section class="consulting-section consulting-final-cta" id="contact">
+      <h2 class="consulting-section-title">Contact</h2>
+      <p>Book a 15-minute intro call, or get in touch at <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a> or on <a href="https://www.linkedin.com/in/m-asghar/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Book a 15-minute intro call</a>
+    </section>
+
+  </article>
+</div>
+
+{{ partial "consulting-styles.html" . }}
+<style>
+.services .consulting-problem-list,
+.services .consulting-process-steps {
+  grid-template-columns: repeat(2, 1fr);
+}
+.services-work-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+  color: var(--header-text);
+}
+.post_content.services .consulting-proof-intro {
+  margin-bottom: 0.25rem;
+  padding-bottom: 0;
+}
+.post_content.services .services-work-list {
+  margin: 0 0 0.25rem;
+  padding: 0 0 0 1.25rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.post_content.services .services-work-list li {
+  margin: 0;
+  padding: 0.15rem 0;
+}
+.post_content.services .consulting-final-cta p a {
+  color: var(--light);
+  font-weight: 600;
+  text-decoration: underline;
+}
+@media (max-width: 42rem) {
+  .services .consulting-problem-list,
+  .services .consulting-process-steps {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{{- end }}
