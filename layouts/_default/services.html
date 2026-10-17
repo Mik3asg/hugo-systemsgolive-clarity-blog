@@ -66,9 +66,10 @@
       <h2 class="consulting-section-title">Recent work</h2>
       <ul class="services-work-list">
         <li>Migrated a regulated UK care management SaaS platform (50M+ requests/week) to Azure, running the cutover with no data loss.</li>
-        <li>Built the Azure platform as Infrastructure as Code with Bicep and Ansible, run in parallel with production before cutover.</li>
-        <li>Cut deployment time from ~30 to ~5 minutes with an end-to-end CI/CD pipeline (Bitbucket Pipelines).</li>
-        <li>Consolidated 12 self-managed MySQL servers (850+ tenant schemas) into 5 HA Azure managed databases using Azure DMS.</li>
+        <li>Designed a highly available Azure architecture: stateless zone-redundant app tier, Redis-backed sessions and zone-redundant managed MySQL.</li>
+        <li>Delivered the platform as code with Bicep and Ansible, automating the full server build and running it in parallel with production.</li>
+        <li>Consolidated 12 self-managed MySQL servers (850+ tenant schemas) into 5 Azure managed MySQL databases using Azure DMS.</li>
+        <li>Cut deployment time from ~30 to ~5 minutes per environment with an end-to-end CI/CD pipeline.</li>
         <li>Previously built a highly available AWS platform with Terraform and GitHub Actions CI/CD, cutting spend by ~15%.</li>
       </ul>
       <p class="services-work-link">Full write-up: <a href="/post/migrating-regulated-uk-care-management-saas-platform-to-azure/">Migrating a Regulated UK Care Management SaaS Platform to Azure: A Cutover Retrospective</a></p>
