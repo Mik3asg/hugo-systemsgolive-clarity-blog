@@ -4,7 +4,11 @@
     <header class="abouttest-hero">
       <h1 class="abouttest-hero-name">{{ .Params.heroName | default "Mickael Asghar" }}</h1>
       <p class="abouttest-hero-role">Cloud &amp; DevOps Consulting</p>
-      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "I help SaaS companies and software development agencies build reliable cloud infrastructure,<br>automate deployments and solve operational challenges through hands-on engineering." | safeHTML }}</p>
+      <p class="abouttest-hero-tagline">I help SaaS companies and software development agencies overcome cloud infrastructure and DevOps challenges, from improving existing systems to delivering new solutions.</p>
+      <p class="abouttest-hero-tagline">I bring independent expertise and hands-on delivery, giving you access to experienced engineering support without the need for a permanent hire.</p>
+      <div class="abouttest-cta-actions abouttest-hero-actions">
+        <a href="/services/" class="button abouttest-cta-button">Explore my services</a>
+      </div>
     </header>
 
     <div class="abouttest-intro">
@@ -132,10 +136,17 @@
   color: var(--theme);
 }
 .abouttest-hero-tagline {
+  max-width: 50rem;
   font-size: 1.15rem;
   color: var(--text);
   line-height: 1.5;
   margin: 0;
+}
+.abouttest-hero-tagline + .abouttest-hero-tagline {
+  margin-top: 0.75rem;
+}
+.abouttest-hero-actions {
+  margin-top: 1.25rem;
 }
 .abouttest-intro {
   display: grid;

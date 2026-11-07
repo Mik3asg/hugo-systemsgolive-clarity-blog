@@ -4,7 +4,8 @@
 
     <header class="consulting-hero">
       <h1 class="consulting-hero-title">Cloud &amp; DevOps Consulting</h1>
-      <p class="consulting-hero-sub">Hands-on cloud and DevOps engineering for SaaS companies and software development agencies.</p>
+      <p class="consulting-hero-sub">Independent, hands-on cloud and DevOps expertise for SaaS companies and software development agencies.</p>
+      <p class="consulting-hero-sub">Get the expertise you need for specific technical challenges, without a permanent hiring commitment.</p>
       <div class="consulting-hero-actions">
         <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Discuss a project</a>
       </div>
@@ -46,12 +47,28 @@
 
     <section class="consulting-section consulting-process" id="how-i-work">
       <h2 class="consulting-section-title">How I work</h2>
+      <p class="consulting-process-intro"><strong>Project-based consulting.</strong> I work on clearly defined cloud and DevOps projects, with agreed scope, deliverables, timelines and costs. From initial assessment through to implementation and handover, I take ownership of the work.</p>
       <div class="consulting-process-steps">
         <article class="consulting-process-step">
           <div class="consulting-process-header">
-            <h3>Project-based consulting</h3>
+            <span class="consulting-process-number">01</span>
+            <h3>Assess &amp; Scope</h3>
           </div>
-          <p>I take on specific cloud and DevOps projects, with the scope, deliverables and timeline agreed up front, followed by a documented handover.</p>
+          <p>Understand the challenge, review the existing environment and define the proposed solution.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">02</span>
+            <h3>Implement &amp; Validate</h3>
+          </div>
+          <p>Deliver the agreed work, test the solution and validate the results.</p>
+        </article>
+        <article class="consulting-process-step">
+          <div class="consulting-process-header">
+            <span class="consulting-process-number">03</span>
+            <h3>Document &amp; Handover</h3>
+          </div>
+          <p>Provide documentation, explain what's been delivered and hand everything over to your team.</p>
         </article>
       </div>
     </section>
@@ -60,7 +77,7 @@
       <h2 class="consulting-section-title">Selected work</h2>
       <ul class="services-work-list">
         <li>Migrated a regulated UK care management SaaS platform (50M+ requests/week) to Azure, running the cutover with no data loss.</li>
-        <li>Designed a highly available Azure architecture: stateless zone-redundant app tier, Redis-backed sessions and zone-redundant managed MySQL.</li>
+        <li>Designed a highly available Azure architecture: stateless zone-redundant app tier, Redis-backed sessions and zone-redundant managed MySQL databases.</li>
         <li>Delivered the platform as code with Bicep and Ansible, automating the full server build and running it in parallel with production.</li>
         <li>Consolidated 12 self-managed MySQL servers (850+ tenant schemas) into 5 Azure managed MySQL databases using Azure DMS.</li>
         <li>Cut deployment time from ~30 to ~5 minutes per environment with an end-to-end CI/CD pipeline.</li>
@@ -83,8 +100,19 @@
 .services .consulting-problem-list {
   grid-template-columns: repeat(2, 1fr);
 }
-.services .consulting-process-steps {
-  grid-template-columns: 1fr;
+.services .consulting-problem-card h3,
+.services .consulting-process-header h3 {
+  font-size: 1.25rem;
+}
+.services .consulting-problem-card p {
+  font-size: inherit;
+  line-height: 1.6;
+}
+.services .consulting-hero-sub {
+  margin-bottom: 0.75rem;
+}
+.services .consulting-hero-sub:last-of-type {
+  margin-bottom: 1.75rem;
 }
 .post_content.services .services-work-list {
   margin: 0 0 0.25rem;
