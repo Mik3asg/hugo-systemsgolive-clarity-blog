@@ -1,0 +1,375 @@
+{{- define "main" }}
+<div class="wrap content">
+  <article class="post_content consulting contact">
+
+    <header class="consulting-hero">
+      <h1 class="consulting-hero-title">Tell me about your project</h1>
+      <p class="consulting-hero-sub">Have a cloud or DevOps challenge, or looking for a technology partner? Share a few details to get the conversation started.</p>
+    </header>
+
+    {{/* Submitted via Netlify Forms (detected at deploy time from data-netlify). */}}
+    <form class="contact-form" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate{{ if hugo.IsServer }} data-local-preview{{ end }}>
+      <input type="hidden" name="form-name" value="enquiry">
+      <p class="contact-honeypot" aria-hidden="true">
+        <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <fieldset class="contact-field" id="field-enquiry-type">
+        <legend class="contact-label">What are you getting in touch about?</legend>
+        <p class="contact-error" id="error-enquiry-type" hidden>Please choose an enquiry type.</p>
+        <label class="contact-radio"><input type="radio" name="enquiry-type" value="Cloud & DevOps project" required> Cloud &amp; DevOps project</label>
+        <label class="contact-radio"><input type="radio" name="enquiry-type" value="Technology partnership"> Technology partnership</label>
+        <label class="contact-radio"><input type="radio" name="enquiry-type" value="Other enquiry"> Other enquiry</label>
+      </fieldset>
+
+      <div class="contact-field">
+        <label class="contact-label" for="contact-name">Your name</label>
+        <input class="contact-input" id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
+        <p class="contact-error" id="error-name" hidden>Please enter your name.</p>
+      </div>
+
+      <div class="contact-field">
+        <label class="contact-label" for="contact-email">Email address</label>
+        <input class="contact-input" id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <p class="contact-error" id="error-email" hidden>Please enter a valid email address.</p>
+      </div>
+
+      <div class="contact-field">
+        <label class="contact-label" for="contact-company">Company name <span class="contact-optional">(optional)</span></label>
+        <input class="contact-input" id="contact-company" name="company" type="text" autocomplete="organization" placeholder="Your company (optional)">
+      </div>
+
+      <div class="contact-field">
+        <label class="contact-label" for="contact-details">Project or enquiry details</label>
+        <textarea class="contact-input" id="contact-details" name="details" rows="4" placeholder="Briefly describe what you're looking to achieve and where you need support..." aria-describedby="hint-details" data-hint="hint-details" required></textarea>
+        <p class="contact-hint" id="hint-details">A few sentences is enough: your current setup, what you'd like to achieve, and any timing constraints.</p>
+        <p class="contact-error" id="error-details" hidden>Please add a few details about your enquiry.</p>
+      </div>
+
+      <p class="contact-submit-error" id="contact-submit-error" role="alert" hidden>Sorry, your enquiry couldn't be sent. Please try again, or email <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a>.</p>
+
+      <p class="contact-preview-note" id="contact-preview-note" role="status" hidden>Local preview: validation passed, but nothing was sent. Submissions only work on the deployed Netlify site.</p>
+
+      <button type="submit" class="button contact-submit">Send Enquiry</button>
+
+      <p class="contact-reply-time">I usually reply within 1 working day.</p>
+      <p class="contact-privacy">Your details will only be used to respond to your enquiry.</p>
+    </form>
+
+    <p class="contact-alternatives">Prefer a call? <a href="https://cal.com/mickael-asghar/15min" target="_blank" rel="noopener">Book a 15-minute intro call</a> or email <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a></p>
+
+    <div class="contact-success" id="contact-success" role="status" tabindex="-1" hidden>
+      <h2 class="consulting-section-title">Thanks, your enquiry has been sent</h2>
+      <p>I'll get back to you by email, usually within 1 working day.</p>
+      <p>In the meantime, you can read more about <a href="/services/#how-i-work">how I work</a>.</p>
+    </div>
+
+  </article>
+</div>
+
+{{ partial "consulting-styles.html" . }}
+<style>
+.contact {
+  --contact-error: #b3261e;
+}
+html[data-mode="dim"] .contact {
+  --contact-error: #ff8a80;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode="lit"]) .contact {
+    --contact-error: #ff8a80;
+  }
+}
+.contact .consulting-hero {
+  margin-bottom: 2.5rem;
+}
+.contact-form,
+.contact-success {
+  max-width: 37.5rem;
+  margin: 0 auto;
+  padding: 2.25rem 2rem;
+  border-radius: 20px;
+  background: var(--post-bg);
+}
+.contact-field {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: none;
+}
+.contact-label {
+  display: block;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  font-weight: 600;
+  color: var(--header-text);
+}
+.contact-optional {
+  font-weight: 400;
+  color: var(--text);
+}
+.contact-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+textarea.contact-input {
+  resize: vertical;
+  line-height: 1.5;
+}
+.contact-input::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+.contact-input:focus {
+  outline: 2px solid var(--theme);
+  outline-offset: 1px;
+  border-color: var(--theme);
+}
+.contact-input:hover {
+  border-color: var(--theme);
+}
+.contact-input[aria-invalid="true"] {
+  border-color: var(--contact-error);
+}
+.contact-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--table-border);
+  border-radius: 8px;
+  background: var(--choice-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.contact-radio:last-of-type {
+  margin-bottom: 0;
+}
+.contact-radio:hover {
+  border-color: var(--theme);
+}
+.contact-radio:has(input:checked) {
+  border-color: var(--theme);
+  background: color-mix(in srgb, var(--theme) 6%, var(--choice-bg));
+  color: var(--header-text);
+  font-weight: 600;
+}
+.contact-radio:has(input:focus-visible) {
+  outline: 2px solid var(--theme);
+  outline-offset: 1px;
+}
+#field-enquiry-type[aria-invalid="true"] .contact-radio {
+  border-color: var(--contact-error);
+}
+.contact-radio input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--theme);
+}
+.post_content .contact-error,
+.post_content .contact-submit-error {
+  margin: 0.4rem 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+  color: var(--contact-error);
+}
+.post_content .contact-submit-error {
+  margin: 0 0 1rem;
+}
+.post_content fieldset .contact-error {
+  margin: 0 0 0.4rem;
+}
+.post_content .contact-preview-note {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: var(--post-bg);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.contact-submit {
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: none;
+  cursor: pointer;
+}
+.contact-submit[disabled] {
+  opacity: 0.7;
+  cursor: wait;
+}
+.post_content .contact-hint {
+  margin: 0.4rem 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  opacity: 0.85;
+}
+.post_content .contact-reply-time {
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--header-text);
+}
+.post_content .contact-reply-time + .contact-privacy {
+  margin-top: 0.25rem;
+}
+.post_content .contact-alternatives {
+  max-width: 37.5rem;
+  margin: 1.5rem auto 0;
+  padding: 0;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--text);
+}
+.post_content .contact-success p {
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+.post_content .contact-privacy {
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--text);
+}
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+}
+.contact-success {
+  text-align: center;
+}
+.contact-success:focus {
+  outline: none;
+}
+@media (max-width: 42rem) {
+  .contact-form,
+  .contact-success {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+  }
+}
+</style>
+
+<script>
+(function () {
+  var form = document.querySelector('.contact-form');
+  if (!form) return;
+  var button = form.querySelector('.contact-submit');
+  var submitError = document.getElementById('contact-submit-error');
+  var success = document.getElementById('contact-success');
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var attempted = false;
+
+  function setError(target, errorId, message) {
+    var error = document.getElementById(errorId);
+    var hint = target.getAttribute('data-hint');
+    error.hidden = !message;
+    if (message) {
+      error.textContent = message;
+      target.setAttribute('aria-invalid', 'true');
+    } else {
+      target.removeAttribute('aria-invalid');
+    }
+    var describedBy = [message ? errorId : '', hint || ''].join(' ').trim();
+    if (describedBy) target.setAttribute('aria-describedby', describedBy);
+    else target.removeAttribute('aria-describedby');
+  }
+
+  // Each check updates its own error and returns the element to focus if invalid.
+  var checks = {
+    'enquiry-type': function () {
+      var ok = !!form.querySelector('input[name="enquiry-type"]:checked');
+      setError(document.getElementById('field-enquiry-type'), 'error-enquiry-type', ok ? '' : 'Please choose an enquiry type.');
+      return ok ? null : form.querySelector('input[name="enquiry-type"]');
+    },
+    name: function () {
+      var name = form.elements.name;
+      var ok = name.value.trim() !== '';
+      setError(name, 'error-name', ok ? '' : 'Please enter your name.');
+      return ok ? null : name;
+    },
+    email: function () {
+      var email = form.elements.email;
+      var value = email.value.trim();
+      var message = value === '' ? 'Please enter your email address.'
+        : (emailPattern.test(value) ? '' : 'Please enter a valid email address, like you@example.com.');
+      setError(email, 'error-email', message);
+      return message ? email : null;
+    },
+    details: function () {
+      var details = form.elements.details;
+      var ok = details.value.trim() !== '';
+      setError(details, 'error-details', ok ? '' : 'Please add a few details about your enquiry.');
+      return ok ? null : details;
+    }
+  };
+
+  function validate() {
+    var firstInvalid = null;
+    Object.keys(checks).forEach(function (key) {
+      var invalid = checks[key]();
+      if (invalid && !firstInvalid) firstInvalid = invalid;
+    });
+    if (firstInvalid) firstInvalid.focus();
+    return !firstInvalid;
+  }
+
+  // After the first submit attempt, re-check a field as soon as it changes.
+  function recheck(event) {
+    if (!attempted || !checks[event.target.name]) return;
+    checks[event.target.name]();
+  }
+  form.addEventListener('input', recheck);
+  form.addEventListener('change', recheck);
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (button.disabled) return;
+    submitError.hidden = true;
+    attempted = true;
+    if (!validate()) return;
+    if (form.hasAttribute('data-local-preview')) {
+      // hugo server answers any POST with 200, which would fake a success.
+      document.getElementById('contact-preview-note').hidden = false;
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    form.setAttribute('aria-busy', 'true');
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(function (response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+    }).catch(function () {
+      submitError.hidden = false;
+      button.disabled = false;
+      button.textContent = 'Send Enquiry';
+      form.removeAttribute('aria-busy');
+    });
+  });
+})();
+</script>
+{{- end }}
