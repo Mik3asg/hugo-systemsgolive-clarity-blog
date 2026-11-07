@@ -1,6 +1,6 @@
 +++
 title = "Services"
-description = "Hands-on cloud and DevOps engineering for growing SaaS teams: contract or scoped project work across cloud architecture and migration, software delivery, reliability and cloud cost."
+description = "Hands-on cloud and DevOps engineering for SaaS companies and software development agencies: defined projects across cloud architecture and migration, software delivery, reliability and cloud cost."
 date = "2026-10-17"
 author = "Mickael Asghar"
 layout = "services"

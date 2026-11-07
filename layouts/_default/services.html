@@ -3,13 +3,15 @@
   <article class="post_content consulting services">
 
     <header class="consulting-hero">
-      <p class="consulting-eyebrow">Senior Cloud &amp; DevOps Engineer</p>
-      <h1 class="consulting-hero-title">Services</h1>
-      <p class="consulting-hero-sub">Hands-on cloud and DevOps engineering for growing SaaS teams: embedded in your team on a contract, or delivering a scoped piece of work with a defined outcome.</p>
+      <h1 class="consulting-hero-title">Cloud &amp; DevOps Consulting</h1>
+      <p class="consulting-hero-sub">Hands-on cloud and DevOps engineering for SaaS companies and software development agencies.</p>
+      <div class="consulting-hero-actions">
+        <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Discuss a project</a>
+      </div>
     </header>
 
     <section class="consulting-section consulting-problems" id="focus">
-      <h2 class="consulting-section-title">What I work on</h2>
+      <h2 class="consulting-section-title">How I can help</h2>
       <div class="consulting-problem-list">
         <article class="consulting-problem-card">
           <span class="consulting-problem-icon" aria-hidden="true">
@@ -47,23 +49,15 @@
       <div class="consulting-process-steps">
         <article class="consulting-process-step">
           <div class="consulting-process-header">
-            <span class="consulting-process-number">01</span>
-            <h3>Contract</h3>
+            <h3>Project-based consulting</h3>
           </div>
-          <p>Working inside your team on a defined engagement, remote or hybrid from Bristol, UK.</p>
-        </article>
-        <article class="consulting-process-step">
-          <div class="consulting-process-header">
-            <span class="consulting-process-number">02</span>
-            <h3>Scoped project</h3>
-          </div>
-          <p>A specific problem with the scope, outcome and timeline agreed up front, then a documented handover.</p>
+          <p>I take on specific cloud and DevOps projects, with the scope, deliverables and timeline agreed up front, followed by a documented handover.</p>
         </article>
       </div>
     </section>
 
     <section class="consulting-section consulting-proof" id="recent-work">
-      <h2 class="consulting-section-title">Recent work</h2>
+      <h2 class="consulting-section-title">Selected work</h2>
       <ul class="services-work-list">
         <li>Migrated a regulated UK care management SaaS platform (50M+ requests/week) to Azure, running the cutover with no data loss.</li>
         <li>Designed a highly available Azure architecture: stateless zone-redundant app tier, Redis-backed sessions and zone-redundant managed MySQL.</li>
@@ -78,7 +72,7 @@
     <section class="consulting-section consulting-final-cta" id="contact">
       <h2 class="consulting-section-title">Contact</h2>
       <p>Book a 15-minute intro call, or get in touch at <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a> or on <a href="https://www.linkedin.com/in/m-asghar/" target="_blank" rel="noopener">LinkedIn</a>.</p>
-      <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Book a 15-minute intro call</a>
+      <a href="https://cal.com/mickael-asghar/15min" class="button consulting-cta" target="_blank" rel="noopener">Discuss a project</a>
     </section>
 
   </article>
@@ -86,9 +80,11 @@
 
 {{ partial "consulting-styles.html" . }}
 <style>
-.services .consulting-problem-list,
-.services .consulting-process-steps {
+.services .consulting-problem-list {
   grid-template-columns: repeat(2, 1fr);
+}
+.services .consulting-process-steps {
+  grid-template-columns: 1fr;
 }
 .post_content.services .services-work-list {
   margin: 0 0 0.25rem;
@@ -106,8 +102,7 @@
   text-decoration: underline;
 }
 @media (max-width: 42rem) {
-  .services .consulting-problem-list,
-  .services .consulting-process-steps {
+  .services .consulting-problem-list {
     grid-template-columns: 1fr;
   }
 }

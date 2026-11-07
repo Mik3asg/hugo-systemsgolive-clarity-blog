@@ -3,7 +3,8 @@
 
     <header class="abouttest-hero">
       <h1 class="abouttest-hero-name">{{ .Params.heroName | default "Mickael Asghar" }}</h1>
-      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "Senior Cloud & DevOps Engineer helping growing SaaS engineering teams fix cloud cost,<br>deployment and reliability problems as their infrastructure gets harder to run." | safeHTML }}</p>
+      <p class="abouttest-hero-role">Cloud &amp; DevOps Consulting</p>
+      <p class="abouttest-hero-tagline">{{ .Params.heroTagline | default "I help SaaS companies and software development agencies build reliable cloud infrastructure,<br>automate deployments and solve operational challenges through hands-on engineering." | safeHTML }}</p>
     </header>
 
     <div class="abouttest-intro">
@@ -14,7 +15,7 @@
         <p class="abouttest-about-text">I write here about real infrastructure work: what was done, what broke and what I'd do differently.</p>
         <p class="abouttest-about-text">Born and raised in France to Pakistani parents, I hold dual British and French citizenship, and live with my Spanish wife and three children. That multicultural, multilingual upbringing helps me connect with people beyond just the technical requirements. Outside of work, you'll usually find me exploring new places and the outdoors, spending time with family, or listening to podcasts.</p>
 
-        <h2 class="abouttest-section-title abouttest-section-title-spaced">Work History</h2>
+        <h2 class="abouttest-section-title abouttest-section-title-spaced">Experience</h2>
         <div class="abouttest-timeline">
 
           <div class="abouttest-timeline-entry">
@@ -105,8 +106,9 @@
     </section>
 
     <section class="abouttest-consulting-cta">
-      <h2 class="abouttest-section-title">Need help with your cloud infrastructure?</h2>
+      <h2 class="abouttest-section-title">Have a cloud or DevOps project in mind?</h2>
       <div class="abouttest-cta-actions">
+        <a href="https://cal.com/mickael-asghar/15min" class="button abouttest-cta-button" target="_blank" rel="noopener">Discuss a project</a>
         <a href="/blog/" class="button abouttest-cta-button">Read the blog</a>
         <a href="/services/" class="button abouttest-cta-button">Services</a>
       </div>
@@ -122,6 +124,12 @@
   line-height: 1.1;
   margin-bottom: 0.5rem;
   color: var(--header-text);
+}
+.abouttest-hero-role {
+  margin: 0 0 0.35rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--theme);
 }
 .abouttest-hero-tagline {
   font-size: 1.15rem;
@@ -150,6 +158,7 @@
 }
 .abouttest-section-title {
   font-size: 1.3rem;
+  font-weight: 600;
   margin: 0 0 1rem;
   color: var(--theme);
 }
