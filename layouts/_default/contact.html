@@ -16,6 +16,7 @@
     <form class="contact-form" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate{{ if hugo.IsServer }} data-local-preview{{ end }}>
       <input type="hidden" name="form-name" value="enquiry">
       <input type="hidden" name="subject" value="Enquiry via systemsgolive.com">
+      <h2 class="consulting-section-title contact-form-title">Send an enquiry</h2>
       <p class="contact-honeypot" aria-hidden="true">
         <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
       </p>
@@ -120,6 +121,10 @@ html[data-mode="dim"] .contact {
   padding: 2.25rem 2rem;
   border-radius: 20px;
   background: var(--post-bg);
+}
+.post_content .contact-form-title {
+  margin: 0 0 1.5rem;
+  font-size: 1.4rem;
 }
 .contact-field {
   margin: 0 0 1.5rem;
