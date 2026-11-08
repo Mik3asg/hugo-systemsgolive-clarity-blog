@@ -5,8 +5,12 @@
     <header class="consulting-hero">
       <h1 class="consulting-hero-title">Tell me about your project</h1>
       <p class="consulting-hero-sub">Have a cloud or DevOps challenge, or looking for a technology partner? Share a few details to get the conversation started.</p>
-      <p class="contact-call">Prefer to talk first? <a href="https://cal.com/mickael-asghar/15min" class="button button_translucent contact-call-button" target="_blank" rel="noopener">Book a 15-minute intro call</a></p>
     </header>
+
+    <div class="contact-call">
+      <p class="contact-call-text">Prefer to talk first?</p>
+      <a href="https://cal.com/mickael-asghar/15min" class="button button_translucent contact-call-button" target="_blank" rel="noopener">Book a 15-minute intro call</a>
+    </div>
 
     {{/* Submitted via Netlify Forms (detected at deploy time from data-netlify). */}}
     <form class="contact-form" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate{{ if hugo.IsServer }} data-local-preview{{ end }}>
@@ -84,15 +88,24 @@ html[data-mode="dim"] .contact {
 .contact .consulting-hero {
   margin-bottom: 2.5rem;
 }
-.post_content .contact-call {
+.contact-call {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem 0.75rem;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  max-width: 37.5rem;
+  margin: 0 auto 1.25rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--theme) 25%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--theme) 6%, var(--choice-bg));
+}
+.post_content .contact-call-text {
   margin: 0;
   padding: 0;
-  color: var(--text);
+  font-weight: 700;
+  color: var(--header-text);
 }
 .contact-call-button {
   text-transform: none;
@@ -273,6 +286,15 @@ textarea.contact-input {
   outline: none;
 }
 @media (max-width: 42rem) {
+  .contact-call {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding: 1rem 1.25rem;
+  }
+  .contact-call-button {
+    justify-content: center;
+  }
   .contact-form,
   .contact-success {
     padding: 1.5rem 1.25rem;
