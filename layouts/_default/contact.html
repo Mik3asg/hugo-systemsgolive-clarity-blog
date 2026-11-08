@@ -390,7 +390,8 @@ textarea.contact-input {
     }
 
     // Netlify uses the "subject" field as the notification email subject.
-    form.elements.subject.value = 'Enquiry via systemsgolive.com: ' + form.querySelector('input[name="enquiry-type"]:checked').value;
+    // It HTML-escapes "&" there, so spell it out to avoid "&amp;".
+    form.elements.subject.value = 'Enquiry via systemsgolive.com: ' + form.querySelector('input[name="enquiry-type"]:checked').value.replace(/&/g, 'and');
 
     button.disabled = true;
     button.textContent = 'Sending…';
