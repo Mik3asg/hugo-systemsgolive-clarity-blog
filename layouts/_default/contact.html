@@ -15,6 +15,7 @@
     {{/* Submitted via Netlify Forms (detected at deploy time from data-netlify). */}}
     <form class="contact-form" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate{{ if hugo.IsServer }} data-local-preview{{ end }}>
       <input type="hidden" name="form-name" value="enquiry">
+      <input type="hidden" name="subject" value="Enquiry via systemsgolive.com">
       <p class="contact-honeypot" aria-hidden="true">
         <label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label>
       </p>
@@ -387,6 +388,9 @@ textarea.contact-input {
       document.getElementById('contact-preview-note').hidden = false;
       return;
     }
+
+    // Netlify uses the "subject" field as the notification email subject.
+    form.elements.subject.value = 'Enquiry via systemsgolive.com: ' + form.querySelector('input[name="enquiry-type"]:checked').value;
 
     button.disabled = true;
     button.textContent = 'Sending…';
