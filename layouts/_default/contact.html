@@ -5,6 +5,7 @@
     <header class="consulting-hero">
       <h1 class="consulting-hero-title">Tell me about your project</h1>
       <p class="consulting-hero-sub">Have a cloud or DevOps challenge, or looking for a technology partner? Share a few details to get the conversation started.</p>
+      <p class="contact-call">Prefer to talk first? <a href="https://cal.com/mickael-asghar/15min" class="button button_translucent contact-call-button" target="_blank" rel="noopener">Book a 15-minute intro call</a></p>
     </header>
 
     {{/* Submitted via Netlify Forms (detected at deploy time from data-netlify). */}}
@@ -56,7 +57,7 @@
       <p class="contact-privacy">Your details will only be used to respond to your enquiry.</p>
     </form>
 
-    <p class="contact-alternatives">Prefer a call? <a href="https://cal.com/mickael-asghar/15min" target="_blank" rel="noopener">Book a 15-minute intro call</a> or email <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a></p>
+    <p class="contact-alternatives">Prefer email? <a href="mailto:mickael.asghar@gmail.com">mickael.asghar@gmail.com</a></p>
 
     <div class="contact-success" id="contact-success" role="status" tabindex="-1" hidden>
       <h2 class="consulting-section-title">Thanks, your enquiry has been sent</h2>
@@ -82,6 +83,21 @@ html[data-mode="dim"] .contact {
 }
 .contact .consulting-hero {
   margin-bottom: 2.5rem;
+}
+.post_content .contact-call {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+}
+.contact-call-button {
+  text-transform: none;
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 .contact-form,
 .contact-success {
