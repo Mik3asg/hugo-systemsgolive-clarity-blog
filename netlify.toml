@@ -22,3 +22,46 @@ command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
 command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
+# The former Portuguese site (/pt/) was removed; send old URLs to the English equivalents.
+[[redirects]]
+  from = "/pt/categories/*"
+  to = "/categories/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pt/tags/*"
+  to = "/tags/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pt/index.xml"
+  to = "/index.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pt/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pt/*"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pt"
+  to = "/"
+  status = 301
+  force = true
+
+# Hugo no longer writes a per-language sitemap; /en/js/ assets must stay reachable.
+[[redirects]]
+  from = "/en/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
