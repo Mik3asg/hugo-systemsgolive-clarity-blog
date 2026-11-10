@@ -1,6 +1,7 @@
 +++
 title = "About"
-description = "DevOps Engineer with 15+ years of experience — background, work history, and what I'm about"
+seoTitle = "SystemsGolive | Independent Cloud & DevOps Consulting"
+description = "Independent Cloud & DevOps consultancy for SaaS companies and software agencies. Defined projects in migration, automation, reliability and security."
 aliases = ["/about/", "/about-us/", "/about-hugo/", "/abouttest/"]
 showdate = false
 showreadtime = false
