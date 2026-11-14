@@ -65,3 +65,16 @@ command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
   to = "/sitemap.xml"
   status = 301
   force = true
+
+# The old empty /archives/ page was removed; the Timeline is the chronological list of posts.
+[[redirects]]
+  from = "/archives/*"
+  to = "/timeline/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/archives"
+  to = "/timeline/"
+  status = 301
+  force = true
