@@ -1,7 +1,7 @@
 +++
 title = "Services"
-seoTitle = "Cloud & DevOps Services for SaaS and Agencies | SystemsGolive"
-description = "Cloud migration, automation, reliability and security projects for SaaS companies, delivered directly or as a partner to software agencies."
+seoTitle = "SystemsGolive | Cloud & DevOps Services"
+description = "Cloud & DevOps consulting for SaaS companies and software agencies. Defined projects covering cloud migrations, automation, reliability and cost optimisation."
 date = "2026-10-17"
 author = "Mickael Asghar"
 layout = "services"

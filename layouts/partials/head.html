@@ -8,8 +8,8 @@
     {{- $title = .Title }}
   {{- end }}
 {{- end }}
-{{- /* Site override: a page can set browserTitle (tab title only) or seoTitle (also used for og/twitter titles) as the full <title>. */}}
-{{- with or .Params.browserTitle .Params.seoTitle }}
+{{- /* Site override: a page can set seoTitle to use as the full <title> (also used for og:title and twitter:title). */}}
+{{- with .Params.seoTitle }}
 <title>{{ . }}</title>
 {{- else }}
 <title>{{ with $title }}{{ . }} {{ $separator }} {{ end }}{{ .Site.Title }}</title>
