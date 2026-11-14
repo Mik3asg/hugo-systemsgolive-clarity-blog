@@ -1,0 +1,80 @@
+{{- /* End-of-article call to action and related reading, shown on blog posts only. */ -}}
+{{- if eq .Section "post" }}
+<aside class="post_cta" aria-label="Work with SystemsGoLive">
+  <p class="post_cta_title">Facing a similar challenge?</p>
+  <p class="post_cta_text">Whether you need expert advice, a second opinion or a project delivered from start to finish, SystemsGoLive can help with your cloud infrastructure and DevOps challenges.</p>
+  <div class="post_cta_actions">
+    <a href="/services/" class="button post_cta_button">See services</a>
+    <a href="/contact/" class="button button_translucent post_cta_button">Get in touch</a>
+  </div>
+  {{- if ne .Params.hideSupport true }}
+  <p class="post_follow">Not ready to talk yet? <a href="https://follow.it/systemsgolive?leanpub" target="_blank" rel="noopener">Get new articles by email</a>.</p>
+  {{- end }}
+</aside>
+{{- $related := first 3 (where (site.RegularPages.Related .) "Section" "post") }}
+<div class="post_related_reads">
+  {{- with $related }}
+  <nav aria-label="Related articles">
+    <p class="post_cta_title">Related articles</p>
+    <ul>
+      {{- range . }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
+  {{- end }}
+</div>
+<style>
+.post_cta {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid color-mix(in srgb, var(--theme) 25%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--theme) 6%, var(--choice-bg));
+}
+.post_content .post_cta_title {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  color: var(--header-text);
+}
+.post_content .post_cta_text {
+  margin: 0 0 1rem;
+}
+.post_cta_actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.post_cta_button {
+  text-transform: none;
+  font-weight: 700;
+}
+.post_related_reads {
+  margin-top: 2rem;
+}
+.post_related_reads ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.post_related_reads li {
+  margin: 0.35rem 0;
+}
+.post_content .post_follow {
+  margin: 1rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid color-mix(in srgb, var(--theme) 15%, transparent);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.post_comments_header {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--table-border);
+}
+.post_content .post_comments_hint {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+</style>
+{{- end }}

@@ -126,7 +126,7 @@
       "mainEntityOfPage":"{{ $permalink }}",
       "name": "{{ $site }}",
       "headline": {{ $title }},
-      "description": {{ $summary }},
+      "description": {{ $summary | plainify | htmlUnescape }},
       "url": "{{ $permalink }}",
       "datePublished": {{ $date  }},
       "dateModified": {{ $lastMod }},

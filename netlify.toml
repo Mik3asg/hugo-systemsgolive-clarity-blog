@@ -78,3 +78,16 @@ command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
   to = "/timeline/"
   status = 301
   force = true
+
+# The empty /archive/ section (theme sample) was removed.
+[[redirects]]
+  from = "/archive/*"
+  to = "/timeline/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/archive"
+  to = "/timeline/"
+  status = 301
+  force = true

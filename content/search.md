@@ -3,4 +3,7 @@ description = "Search SystemsGoLive articles on cloud infrastructure, DevOps, cl
 title = "Search"
 searchPage = true
 type = "search"
+noindex = true
+[sitemap]
+  disable = true
 +++

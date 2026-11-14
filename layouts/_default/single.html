@@ -28,24 +28,8 @@
     <div class="post_body">
       {{- .Content }}
     </div>
+    {{- partial "post-cta.html" . }}
 
-    {{- if ne $p.hideSupport true }}
-    <!-- Divider between article content and support section -->
-    <div style="margin-top: 2rem; border-top: 2px solid #e8e8e8;"></div>
-
-    <!-- Support + follow block -->
-    <div style="margin-top: 1.5rem;">
-      <p style="margin-bottom: 0.6rem; font-size: 0.95rem; font-style: italic;">Found this useful? A coffee helps support more write-ups like this, and following keeps you posted on new ones — no spam.</p>
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
-        <a href="https://ko-fi.com/E1E01VLXPW" target="_blank" rel="noopener">
-          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" alt="Buy me a coffee" style="border: 0; height: 36px;">
-        </a>
-        <a href="https://follow.it/systemsgolive?leanpub" target="_blank" rel="noopener">
-          <img src="/images/14.png" alt="Follow the blog" style="height: 30px;">
-        </a>
-      </div>
-    </div>
-    {{- end }}
 
     {{- $showRelatedInArticle := true }}
     {{- if eq $s.showRelatedInArticle false }}
@@ -64,6 +48,12 @@
       {{- $showComments = false }}
     {{- end }}
     {{- if ne $showComments false }}
+      {{- if eq .Section "post" }}
+      <div class="post_comments_header">
+        <p class="post_cta_title">Comments</p>
+        <p class="post_comments_hint">Questions or feedback on this article? Comments use a GitHub sign-in.</p>
+      </div>
+      {{- end }}
       {{- partial "comments" . }}
     {{- end }}
     {{- partial "i18nlist" . }}

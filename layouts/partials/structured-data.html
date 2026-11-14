@@ -1,0 +1,51 @@
+{{- /* Site-wide identity for search engines and AI assistants (homepage only). */ -}}
+{{- if .IsHome }}
+{{- $base := site.BaseURL }}
+{{- $data := dict
+  "@context" "https://schema.org"
+  "@graph" (slice
+    (dict
+      "@type" "WebSite"
+      "@id" (print $base "#website")
+      "url" $base
+      "name" "SystemsGoLive"
+      "publisher" (dict "@id" (print $base "#business"))
+    )
+    (dict
+      "@type" "ProfessionalService"
+      "@id" (print $base "#business")
+      "name" "SystemsGoLive"
+      "url" $base
+      "logo" (absURL site.Params.logo)
+      "image" (absURL site.Params.logo)
+      "email" "hello@systemsgolive.com"
+      "description" "Independent Cloud & DevOps consultancy for SaaS companies and software agencies, delivering defined projects in cloud migration, automation, reliability and cloud cost optimisation."
+      "founder" (dict "@id" (print $base "#mickael"))
+      "address" (dict "@type" "PostalAddress" "addressLocality" "Paulton" "addressRegion" "Somerset" "addressCountry" "GB")
+      "areaServed" (dict "@type" "Country" "name" "United Kingdom")
+      "knowsAbout" (slice "Cloud migration" "DevOps" "CI/CD" "Infrastructure as Code" "Microsoft Azure" "Amazon Web Services" "Cloud cost optimisation" "Site reliability")
+      "hasOfferCatalog" (dict
+        "@type" "OfferCatalog"
+        "name" "Cloud & DevOps consulting services"
+        "itemListElement" (slice
+          (dict "@type" "Offer" "itemOffered" (dict "@type" "Service" "name" "Cloud Architecture & Migration"))
+          (dict "@type" "Offer" "itemOffered" (dict "@type" "Service" "name" "Software Delivery & Automation"))
+          (dict "@type" "Offer" "itemOffered" (dict "@type" "Service" "name" "Reliable & Scalable Cloud Infrastructure"))
+          (dict "@type" "Offer" "itemOffered" (dict "@type" "Service" "name" "Cloud Cost Optimisation"))
+        )
+      )
+    )
+    (dict
+      "@type" "Person"
+      "@id" (print $base "#mickael")
+      "name" "Mickael Asghar"
+      "jobTitle" "Independent Cloud & DevOps Consultant"
+      "url" $base
+      "image" (absURL "images/mickael-pic-45.png")
+      "worksFor" (dict "@id" (print $base "#business"))
+      "sameAs" (slice "https://www.linkedin.com/in/m-asghar/" "https://github.com/Mik3asg")
+    )
+  )
+}}
+<script type="application/ld+json">{{ $data | jsonify | safeJS }}</script>
+{{- end }}

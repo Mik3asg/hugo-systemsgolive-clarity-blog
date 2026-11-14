@@ -33,3 +33,28 @@ home = ["HTML", "RSS", "JSON"]
 
 [pagination]
   pagerSize = 10
+
+# Also expose static/images to Hugo's asset pipeline so list thumbnails can be resized.
+# Declaring mounts replaces the defaults, so assets/ and static/ are listed explicitly.
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "static/images"
+    target = "assets/images"
+
+# Related articles at the end of each post: match on shared tags and categories, ignoring case.
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    weight = 80

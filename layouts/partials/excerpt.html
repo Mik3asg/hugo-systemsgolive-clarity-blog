@@ -1,0 +1,54 @@
+<li class="post_item">
+  <div class="excerpt">
+    <div class="excerpt_header">
+      <h3 class="post_link">
+        <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title | markdownify  }}</a>
+      </h3>
+      {{ partial "post-meta" . }}
+    </div>
+    {{- with .Params.thumbnail }}
+    <div class="excerpt_footer partition">
+      <div class="excerpt_thumbnail">
+        {{- /* Site override: serve a resized WebP thumbnail instead of the full-size original. */}}
+        {{- with resources.Get (strings.TrimPrefix "/" .) }}
+          {{- $img := . }}
+          {{- /* A few files are WebP saved with a .png name; they can't be decoded as PNG, so use them as-is. */}}
+          {{- $isWebP := eq (substr (os.ReadFile (path.Join "static" .Name)) 0 4) "RIFF" }}
+          {{- if and (not $isWebP) (in (slice "png" "jpeg") .MediaType.SubType) }}
+            {{- if gt .Width 640 }}
+              {{- $img = .Resize "640x webp q80" }}
+            {{- else }}
+              {{- $img = .Process "webp q80" }}
+            {{- end }}
+          {{- end }}
+        <figure>
+          <picture>
+            <img loading="lazy" decoding="async" alt="{{ $.Title }}" class="image_figure image_thumbnail image_internal image_processed" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
+          </picture>
+        </figure>
+        {{- else }}
+        {{- partial "image" (dict "file" . "alt" $.Title "type" "thumbnail" "Page" $.Page ) }}
+        {{- end }}
+      </div>
+      {{ else }}
+      <div class="excerpt_footer">
+        {{- end }}
+        <div class="pale">
+          {{- $summary := truncate 320 .Summary }}
+          {{- if .Params.summary }}
+            {{- $summary = .Params.summary }}
+          {{- else if .Params.abstract }}
+            {{ $summary = .Params.abstract }}
+          {{- end }}
+          {{ if not ( strings.Contains $summary "<p>" ) }}
+            <p>{{ $summary | markdownify }}</p>
+          {{ else }}
+            {{ $summary | markdownify }}
+          {{ end }}
+          <br>
+          {{- $r := T "read_more" }}
+          <a href="{{ .Permalink }}" title="{{ $r }}" class="excerpt_more button">{{ $r }}</a>
+        </div>
+      </div>
+    </div>
+  </li>
