@@ -7,12 +7,12 @@ categories: ['Incident Reports', 'Troubleshooting']
 thumbnail: "images/false-ping-alerts.png"
 summary: 'On Friday 6th September 2024 at 21:31, we received an alert from LogicMonitor indicating one of our production web app servers (Tomcat#3) was down, with the message: "The host Tomcat#3 (i-xxxxxxx) is down". However, shortly after receiving the alert, we attempted to SSH into the VM and confirmed that the server was fully operational. But what did it go wrong?'
 ---
-# Problem Statement 
+## Problem Statement 
 On Friday 6th September 2024 at 21:31, we received an alert from LogicMonitor indicating one of our production web app servers (Tomcat#3) was down, with the message: `"The host Tomcat#3 (i-xxxxxxx) is down"`. However, shortly after receiving the alert, we attempted to SSH into the VM and confirmed that the server was fully operational. But what did it go wrong?
 
 ---
 
-# Root Cause Investigation and Resolution 
+## Root Cause Investigation and Resolution 
 A ticket was promptly raised with our IT service provider, responsible for managing our Cloud Production workloads, immediately following the alert. Their investigation provided the following findings:
 
 - **1. Ping Data:** Ping data from the server stopped reporting at 16:09 on the same day.
@@ -21,34 +21,34 @@ A ticket was promptly raised with our IT service provider, responsible for manag
 
 Upon further analysis by our service provider, it was determined that the ping data had stopped reporting at 16:09, resulting in a delayed false alert at 21:31. The root cause of the issue was traced to a malfunction in the service provider's monitoring tool, which failed to capture ping data properly. Once the issue with the monitoring tool's collector was resolved on Monday, September 9th, ping monitoring resumed, and the false alert was cleared.
 
-## Graph Explanation
+### Graph Explanation
 The graph below shows that the ping metrics, including round-trip time and packet counts, were being reported normally up until 16:09 on September 6th. After that, no new ping data was collected, confirming the issue was related to the monitoring service rather than the server itself.
 
 ![ping-data-loss-webserver#03](images/ping_data_loss_webserver.png)
 
-# In-House Alternative Solution: Fallback Ping Monitoring Script
+## In-House Alternative Solution: Fallback Ping Monitoring Script
 To reduce reliance on third-party monitoring services, I created a fallback ping monitoring script. Running on a separate VM, it pings target servers and sends email alerts if they don’t respond after several attempts. It’s a simple fallback solution for basic connectivity checks.
 
-## Environment setup:
+### Environment setup:
 This fallback ping monitoring solution was implemented and tested in an AWS environment. The setup included 3 EC2 instances:
 - 1 EC2 instance acting as the `ping-monitoring server` (our VM, not a service provider’s monitoring system).
 - 2 EC2 instance as the `target hosts`.
 
-## Implementation steps
+### Implementation steps
 Steps 1 through 3 are the prerequisites before running the ping-failure-alert.sh script on our dedicated VM, which is acting as the monitoring server (not the service provider's monitoring system).
 
-### Step 1 - Allow ICMP Through the Firewall
+#### Step 1 - Allow ICMP Through the Firewall
 - **Monitoring Server (our VM):** Allow outbound ICMP traffic (ping) for all destinations.
 - **Target Servers:** Allow inbound ICMP from the monitoring server’s IP.
 - **Test Connectivity:** Run ping `<target_host_public_IP>` from the monitoring server to ensure reachability.
 
-### Step 2 - Install `mailx` package to enable email notification
+#### Step 2 - Install `mailx` package to enable email notification
 `mailx` is a command-line email client used in Unix-like systems to send and receive emails directly from the terminal or within scripts.
 - For Debian/Ubuntu: `sudo apt-get install mailx`
 - For RHEL/CentOS: `sudo yum install mailx`
 - For Fedora: `sudo dnf install mailx`
 
-### Step 3 - Gmail Configuration for SMTP Authentication
+#### Step 3 - Gmail Configuration for SMTP Authentication
 To ensure that the script can send email notifications using Gmail’s SMTP service, you need to configure Gmail accordingly. Follow these steps:
 1. Enable App Passwords in Gmail if Two-Step Verification is on.
 2. Create an `App Password` under `Google Account > Security > App Passwords`.
@@ -61,7 +61,7 @@ set smtp-auth-password=<your_generated_app_password>    # do not leave any space
 set ssl-verify=ignore
 ```
 
-### Step 4 - Ping Monitoring Script
+#### Step 4 - Ping Monitoring Script
 The bash script below pings the servers and sends alerts via email if they are unreachable.
 - Create the script file and open it for editing (`sudo nano ping-failure-alert.sh`).
 - Ensure the script is executable (`sudo chmod +x ping-failure-alert.sh`).
@@ -144,12 +144,12 @@ else
 fi
 ```
 
-### Key Settings:
+#### Key Settings:
 - **Retry Attempts (retry_count):** The script will try to ping each server 3 times before declaring it unreachable.
 - **Interval Between Retries (retry_interval):** There is a 30-second interval between retries. This ensures that short downtimes (e.g., server reboot) will not trigger immediate false alerts.
 - **Adjust values accordingly to meet your requirements**: `recipient_email`, `cc_recipients`, `target_host_IP`, `target_hostname`
 
-### Step 5 - Set up the Script as a Cron Job
+#### Step 5 - Set up the Script as a Cron Job
 To automate the script, run it as a cron job every 5 minutes:
 
 1. Open Crontab: `sudo crontab -e`
@@ -159,10 +159,10 @@ To automate the script, run it as a cron job every 5 minutes:
 ```
 3. Replace ``/path/to/ping-failure-alert.sh`` with the actual path to your script.
 
-### Avoiding Unnecessary Alerts
+#### Avoiding Unnecessary Alerts
 With 3 retry attempts and a 30-second interval, the script waits ~90 seconds before declaring a server unreachable. This reduces unnecessary alerts for brief downtimes, like reboots.
 
 ---
 
-## Conclusion
+### Conclusion
 The false alert caused by the monitoring collector led us to realize that the server was never down, despite the loss of ping data. Having a fallback ping monitoring script offers a reliable alternative for connectivity checks, ensuring you’re not misled by false positives from external services. This backup system is lightweight, customisable, and independent of the main monitoring service.

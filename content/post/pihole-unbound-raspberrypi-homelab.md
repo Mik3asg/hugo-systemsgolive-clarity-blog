@@ -8,7 +8,7 @@ thumbnail: "images/pihole-unbound-raspberrypi-homelab.png"
 summary: "Run Pi-hole and Unbound on a Raspberry Pi 4 to block ads and tracking domains across every device on your home network, while resolving DNS privately using a local recursive resolver — no third-party DNS provider required."
 ---
 
-# Problem Statement
+## Problem Statement
 
 Every device on a home network performs DNS lookups before connecting to a website. DNS (Domain Name System) is the mechanism that translates a domain name into an IP address – and the operator of the DNS resolver can observe every domain queried.
 
@@ -28,7 +28,7 @@ DNS becomes a record of your activity.
 
 ---
 
-# Goals / Non-Goals
+## Goals / Non-Goals
 
 **Goals**
 
@@ -43,7 +43,7 @@ Installation is not covered. Refer to the official documentation:
 - [Pi-hole Basic Install](https://docs.pi-hole.net/main/basic-install/)
 - [Unbound Setup for Pi-hole](https://docs.pi-hole.net/guides/dns/unbound/)
 
-# Solution
+## Solution
 
 Two services running on a Raspberry Pi 4 address the problem:
 
@@ -52,7 +52,7 @@ Two services running on a Raspberry Pi 4 address the problem:
 | Pi-hole | Blocks ads and trackers across all devices at the DNS level |
 | Unbound | Locally resolves allowed domains using a recursive DNS resolver, eliminating reliance on external DNS resolvers |
 
-# What Is Pi-hole?
+## What Is Pi-hole?
 
 Pi-hole acts as a DNS filtering layer.
 
@@ -72,7 +72,7 @@ With Pi-hole:
 Device → Pi-hole → Blocklist match → 0.0.0.0 / NXDOMAIN returned → Connection fails
 ```
 
-# What Is Unbound?
+## What Is Unbound?
 
 Unbound is a __validating__, __caching recursive DNS resolver__.
 
@@ -80,7 +80,7 @@ It performs the same role as public DNS resolvers but can be hosted locally with
 
 Instead of forwarding queries to an external resolver, Unbound resolves domain names directly by querying the DNS hierarchy (root, Top-Level Domain, and authoritative servers).
 
-## Public DNS vs Recursive Resolver
+### Public DNS vs Recursive Resolver
 
 These terms are often confused.
 
@@ -92,7 +92,7 @@ These terms are often confused.
 Google DNS, Cloudflare DNS, and Unbound all perform recursive resolution.
 The difference is who operates the resolver.
 
-## DNS Resolution with Unbound
+### DNS Resolution with Unbound
 
 The DNS system is organised as a hierarchy. Every domain name maps to a position within this tree:
 
@@ -118,7 +118,7 @@ Public DNS providers such as Google or Cloudflare perform the same recursive pro
 
 When Unbound runs locally, it performs this resolution itself by querying the DNS hierarchy directly instead of forwarding requests to a public resolver. As a result, no single third-party provider receives a complete history of DNS activity. Unbound also caches responses locally, allowing repeated queries to be answered faster and improving overall lookup performance.
 
-# Architecture
+## Architecture
 
 The diagram below compares DNS query flows side by side – with Pi-hole and Unbound on the left, and without on the right – showing exactly where queries are intercepted, filtered, or exposed at each step.
 
@@ -136,26 +136,26 @@ Devices → Pi-hole (filter + cache) → Unbound (recursive resolver) → Root �
 Devices → ISP DNS / Public DNS → Internet
 ```
 
-# How It Works
+## How It Works
 
-## Homelab Setup
+### Homelab Setup
 
 I set up Pi-hole and Unbound on a Raspberry Pi 4, connected to my home broadband router. Pi-hole is assigned a static IP address (`192.168.1.143`) and acts as the DNS server for the entire network.
 
-### Hardware
+#### Hardware
 
 - Raspberry Pi 4 Model B – 4 GB RAM
 - Raspberry Pi OS Lite 64-bit (headless)
 - Static IP address: `192.168.1.143`
 
-### Services
+#### Services
 
 | Component | Address | Purpose |
 |---|---|---|
 | Pi-hole | 192.168.1.143:53 | Network DNS server |
 | Unbound | 127.0.0.1:5335 | Local recursive resolver |
 
-### Router Configuration
+#### Router Configuration
 
 On my broadband router, I disabled DHCP and set the DNS Primary Server to Pi-hole's static IP:
 
@@ -168,7 +168,7 @@ With DHCP disabled on the router, Pi-hole takes over as the DHCP server. All dev
 
 I also pointed the router's own DNS to Pi-hole, so router-originated queries are resolved locally.
 
-### Unbound Binding
+#### Unbound Binding
 
 Unbound listens only on localhost:
 
@@ -182,7 +182,7 @@ This means:
 - Only Pi-hole can query it
 - External access is prevented
 
-### Upstream DNS Configuration
+#### Upstream DNS Configuration
 
 All third-party upstream DNS providers are disabled in Pi-hole.
 
@@ -194,9 +194,9 @@ Only Unbound is configured:
 
 This ensures DNS queries are resolved locally.
 
-## Pi-hole Configuration
+### Pi-hole Configuration
 
-### Blocklist Management
+#### Blocklist Management
 
 Pi-hole includes a default blocklist on installation:
 
@@ -221,7 +221,7 @@ After adding, rebuild the gravity database:
 pihole -g
 ```
 
-### Pi-hole Dashboard
+#### Pi-hole Dashboard
 
 I access the dashboard at:
 
@@ -238,7 +238,7 @@ The dashboard provides:
 
 ![Pi-hole Dashboard](/images/pihole-dashboard.png)
 
-## Pi-hole + Unbound: Why Together?
+### Pi-hole + Unbound: Why Together?
 
 Pi-hole blocks unwanted domains but does not resolve allowed domains itself.
 
@@ -258,7 +258,7 @@ Device → Pi-hole → Unbound → Root → TLD → Authoritative → Response
 
 DNS resolution occurs locally without reliance on public resolvers.
 
-## DNSSEC – Validation
+### DNSSEC – Validation
 
 DNSSEC adds cryptographic signatures to DNS responses.
 
@@ -268,7 +268,7 @@ If validation fails, the response is rejected.
 
 DNSSEC protects against tampered or forged DNS responses.
 
-### Verifying DNSSEC Validation
+#### Verifying DNSSEC Validation
 
 I tested DNSSEC validation directly against Unbound by running:
 
@@ -295,7 +295,7 @@ Summary:
 - `fail01.dnssec.works` → rejected invalid DNSSEC data
 - `dnssec.works` → validated and authenticated successfully
 
-## Privacy vs Encryption
+### Privacy vs Encryption
 
 These concepts address different concerns.
 
@@ -310,7 +310,7 @@ DNS queries themselves remain standard DNS traffic.
 
 Even though Unbound does not rely on the ISP's DNS resolver, DNS queries still traverse the ISP's network connection. This means the ISP may observe outbound DNS traffic at the network level (in-transit), even though no single external resolver receives a complete history of DNS queries.
 
-## Confirming the Setup
+### Confirming the Setup
 
 From a Windows device on my network, I ran:
 
@@ -336,11 +336,11 @@ Interpretation:
 - The request was not sent directly to an ISP or public DNS provider
 - Pi-hole forwarded the request internally to Unbound
 
-### Verifying Pi-hole Uses Unbound as Upstream
+#### Verifying Pi-hole Uses Unbound as Upstream
 
 I ran the following tests to confirm that Pi-hole forwards queries to Unbound and that caching is working correctly.
 
-#### First Query – Recursive Resolution
+##### First Query – Recursive Resolution
 
 I ran:
 
@@ -372,7 +372,7 @@ Explanation:
 
 ![Pi-hole first query – recursive resolution](/images/phole-unbound-first-query-recursive-resolution.png)
 
-#### Second Query – Cached Lookup
+##### Second Query – Cached Lookup
 
 I ran the same query again:
 
@@ -399,7 +399,7 @@ Explanation:
 
 ![Pi-hole second query – cached lookup](/images/phole-unbound-second-query-cached-lookup.png)
 
-# Alternative Approaches
+## Alternative Approaches
 
 DNS over HTTPS (DoH) and DNS over TLS (DoT) are encryption-focused alternatives. Both encrypt DNS queries in transit, preventing ISP-level interception.
 
@@ -413,7 +413,7 @@ The trade-off is centralisation. DoH and DoT hide the content of DNS queries fro
 
 This setup takes a different position: DNS queries are not encrypted in transit, but no single external resolver ever sees the full query history. Queries are distributed across the global DNS hierarchy rather than aggregated by one provider.
 
-# Conclusion
+## Conclusion
 
 The DNS stack is managed locally within the home network:
 
@@ -422,20 +422,20 @@ The DNS stack is managed locally within the home network:
 - **Unbound** → performs recursive DNS resolution locally
 - **DNSSEC** → cryptographically validates DNS responses
 
-### Pi-hole
+#### Pi-hole
 
 - Blocks advertising and tracking domains
 - Operates across all network devices without per-device configuration
 - Prevents unwanted connections before they occur
 
-### Unbound
+#### Unbound
 
 - Performs recursive DNS resolution locally
 - Removes reliance on public DNS providers
 - DNS requests are sent to Unbound (`127.0.0.1#5335`), which walks the DNS hierarchy directly — root → TLD → authoritative servers
 - Distributes DNS queries across the global DNS hierarchy
 
-### Result
+#### Result
 
 - All devices automatically use Pi-hole for DNS resolution
 - Ads and trackers are blocked at the DNS level
