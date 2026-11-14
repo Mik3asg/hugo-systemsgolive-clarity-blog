@@ -1,5 +1,7 @@
 ---
 title: "Pi-hole and Unbound on Raspberry Pi 4: Private DNS and Network-Wide Ad Blocking"
+seoTitle: "Pi-hole and Unbound on a Raspberry Pi 4 | SystemsGoLive"
+description: "Block ads and trackers on every device on your network with Pi-hole, and resolve DNS privately with Unbound as a local recursive resolver on a Raspberry Pi."
 date: 2026-03-01T12:19:06Z
 draft: false
 tags: ["Pi-hole", "Unbound", "DNS", "Raspberry Pi", "Homelab", "Ad Blocking", "Privacy", "DNSSEC", "Recursive DNS", "Self-hosted"]

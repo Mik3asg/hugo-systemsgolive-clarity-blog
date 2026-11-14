@@ -1,5 +1,7 @@
 ---
 title: "LDAP Service Failure After VM Snapshot – Configuration Mismatch Resolution"
+seoTitle: "Fixing OpenLDAP After a VM Snapshot | SystemsGoLive"
+description: "Why OpenLDAP failed on a server built from a VM snapshot, and the fixes: hostname identity, loopback address, olcServerID and leftover replication config."
 date: 2026-03-03T14:30:34Z
 draft: false
 tags: ["LDAP", "OpenLDAP", "Linux", "AlmaLinux", "Troubleshooting", "SLAPD", "CRC32", "VM Snapshot"]

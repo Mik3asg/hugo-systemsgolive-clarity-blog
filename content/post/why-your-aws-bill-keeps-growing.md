@@ -1,5 +1,6 @@
 ---
 title: "Why Your SaaS Cloud Bill Keeps Growing; Where to Look First"
+seoTitle: "Why Your SaaS Cloud Bill Keeps Growing | SystemsGoLive"
 date: 2026-09-26
 draft: false
 description: "A quick diagnosis for early-stage SaaS companies whose AWS bill is growing faster than the business: where to look, what to spot, and what fixing it involves."

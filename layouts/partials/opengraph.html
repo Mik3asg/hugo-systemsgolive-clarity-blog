@@ -125,7 +125,7 @@
       "@type": "BlogPosting",
       "mainEntityOfPage":"{{ $permalink }}",
       "name": "{{ $site }}",
-      "headline": {{ $title }},
+      "headline": {{ .Title }},
       "description": {{ $summary | plainify | htmlUnescape }},
       "url": "{{ $permalink }}",
       "datePublished": {{ $date  }},

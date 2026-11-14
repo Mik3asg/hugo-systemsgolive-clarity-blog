@@ -1,5 +1,7 @@
 ---
 title: "Kubernetes - Zero Downtime Deployments: Blue/Green Strategy"
+seoTitle: "Kubernetes Blue/Green Deployments | SystemsGoLive"
+description: "A step-by-step guide to zero-downtime blue/green deployments in Kubernetes using Deployments and Services, including how to roll back to blue."
 date: 2024-09-09T16:49:36+01:00
 draft: false
 tags: ['Kubernetes', 'Deployment', 'Strategy', 'Service', 'Routing', 'Environment']

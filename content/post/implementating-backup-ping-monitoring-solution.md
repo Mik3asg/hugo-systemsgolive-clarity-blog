@@ -1,5 +1,7 @@
 ---
 title: "Dealing with False Ping Alerts in LogicMonitor: Building a Fallback Ping Monitoring Script for Production VMs"
+seoTitle: "Fallback Ping Monitoring for False Alerts | SystemsGoLive"
+description: "LogicMonitor reported a production VM as down when it wasn't. The root cause, and a simple fallback ping monitoring script with email alerts."
 date: 2024-09-10T16:44:01+01:00
 draft: false
 tags: ['Monitoring', 'Ping', 'Connectivity', 'Alert', 'Incident']

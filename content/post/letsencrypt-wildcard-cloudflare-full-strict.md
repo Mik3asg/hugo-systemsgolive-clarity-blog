@@ -1,5 +1,7 @@
 ---
 title: "Case Study - Automating Let's Encrypt Wildcard Certificates with Cloudflare DNS and Full (Strict) TLS Encryption"
+seoTitle: "Let's Encrypt Wildcard Certs and Cloudflare | SystemsGoLive"
+description: "Automate Let's Encrypt wildcard certificates with Cloudflare DNS validation and run Cloudflare in Full (Strict) mode for end-to-end TLS encryption."
 date: 2026-01-03T23:32:31Z
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Automation', 'Cloudflare']

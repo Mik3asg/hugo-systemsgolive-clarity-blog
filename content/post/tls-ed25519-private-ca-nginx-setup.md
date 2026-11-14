@@ -1,5 +1,7 @@
 ---
 title: "TLS 1.3 with Ed25519 and a Private CA: End-to-End Encrypted Client-Server Communication"
+seoTitle: "TLS 1.3 with Ed25519 and a Private CA | SystemsGoLive"
+description: "Set up TLS 1.3 with Ed25519 certificates and a private certificate authority for encrypted client-server traffic on internal systems and microservices."
 date: 2025-07-10T11:37:03+01:00
 draft: false
 tags: ['TLS', 'SSL', 'Encryption', 'Certificate', 'Ed25519']

@@ -1,5 +1,7 @@
 ---
 title: "Building a simple REST API in Golang with MUX, PostgreSQL and Docker"
+seoTitle: "REST API in Go with PostgreSQL and Docker | SystemsGoLive"
+description: "Build a simple CRUD REST API in Go, with Gorilla Mux for routing, PostgreSQL for data storage and Docker for containerisation."
 date: 2024-02-09T00:17:09Z
 draft: false
 tags: ['Golang', 'Docker', 'PostgreSQL', 'API']

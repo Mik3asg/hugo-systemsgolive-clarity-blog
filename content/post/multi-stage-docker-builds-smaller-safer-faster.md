@@ -1,6 +1,7 @@
 ---
 title: "Multi-Stage Docker Builds: Smaller, Safer, and Faster"
-description: "Multi-stage Docker builds do more than shrink images. Here is how they reduce size, cut your attack surface, make Dockerfiles readable, and speed up builds – with a TypeScript app as a concrete example."
+seoTitle: "Multi-Stage Docker Builds Explained | SystemsGoLive"
+description: "Multi-stage Docker builds shrink images, cut vulnerabilities and speed up builds. A TypeScript example shows an image dropping from 289MB to 167MB."
 date: 2026-06-20T09:15:36+01:00
 slug: "multi-stage-docker-builds-smaller-safer-faster"
 tags: ["dockerfile", "multi-stage", "build", "runtime", "compiler", "typescript", "nodejs", "buildkit"]

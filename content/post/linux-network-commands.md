@@ -2,6 +2,8 @@
 date: '2025-02-04T16:03:45Z'
 draft: false
 title: 'Essential Linux Network Commands: A Practical Guide'
+seoTitle: "Essential Linux Network Commands | SystemsGoLive"
+description: "A practical reference of essential Linux network commands for troubleshooting and configuring networking on AlmaLinux and RHEL systems."
 tags: ['Networking']
 categories: ['Linux']
 thumbnail: "images/linux-networking.png"

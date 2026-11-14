@@ -1,5 +1,7 @@
 ---
 title: "Migrating from ANS to Cloudflare Load Balancer: Zero-Downtime DNS Cutover with Pre-Configuration Strategy"
+seoTitle: "Moving to Cloudflare LB with Zero Downtime | SystemsGoLive"
+description: "How a production SaaS platform moved from ANS to Cloudflare Load Balancer with zero downtime, removing manual SSL renewals and an end-of-life HAProxy."
 date: 2025-11-23T11:44:31+01:00
 draft: false
 tags: ['Cloudflare', 'Load Balancer', 'Migration', 'SSL', 'TLS', 'Certificate Management', 'Zero Downtime']

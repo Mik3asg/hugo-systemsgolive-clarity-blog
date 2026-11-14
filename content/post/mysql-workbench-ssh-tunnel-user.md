@@ -1,5 +1,7 @@
 ---
 title: "Standardised MySQL Access via SSH Tunnel for Workbench in Non-Production Environments"
+seoTitle: "MySQL Workbench Access via SSH Tunnel | SystemsGoLive"
+description: "A secure, standardised way to give MySQL Workbench access to non-production databases over SSH tunnels, with least privilege and tighter access control."
 date: 2025-06-21T15:37:38+01:00 
 draft: false 
 thumbnail: "images/mysql-workbench-ssh-tunnel.png" 

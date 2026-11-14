@@ -1,5 +1,7 @@
 ---
 title: "Flask App deployment into Amazon EKS, using CICD Pipeline with Jenkins and Argo CD"
+seoTitle: "Flask on EKS with Jenkins and Argo CD | SystemsGoLive"
+description: "An end-to-end CI/CD and GitOps pipeline that deploys a Flask app to Amazon EKS, using Jenkins for builds and Argo CD for deployments."
 date: 2024-02-26T21:00:49Z
 draft: false
 tags: ['Flask', 'EKS', 'CICD', 'Jenkins', 'ArgoCD']

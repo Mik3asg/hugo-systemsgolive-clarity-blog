@@ -1,5 +1,7 @@
 ---
 title: "SELinux Context Mismatch: The Hidden Culprit in LDAP Certificate Renewal"
+seoTitle: "SELinux and LDAP Certificate Renewal | SystemsGoLive"
+description: "An OpenLDAP certificate renewal failed despite correct permissions. The cause was an SELinux context mismatch, fixed with restorecon. How to spot it."
 date: 2026-01-28T11:54:16Z
 draft: false
 tags: ["LDAP", "SELinux", "SSL/TLS", "OpenLDAP", "Certificate Management", "Linux Security", "Troubleshooting", "LDAPS"]

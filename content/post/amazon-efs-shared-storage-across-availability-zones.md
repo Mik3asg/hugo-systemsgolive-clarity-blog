@@ -1,5 +1,7 @@
 ---
 title: "Shared Storage Across Availability Zones with Amazon EFS"
+seoTitle: "Amazon EFS: Shared Storage Across AZs | SystemsGoLive"
+description: "How Amazon EFS gives multiple EC2 instances shared storage across availability zones: security groups, TLS mounts, and when to choose EFS over EBS or S3."
 date: 2026-06-03T16:50:55+01:00
 draft: false
 tags: ["AWS", "EFS", "EC2", "Storage", "High Availability", "NFS", "VPC"]

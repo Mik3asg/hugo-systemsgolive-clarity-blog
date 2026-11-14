@@ -1,5 +1,7 @@
 ---
 title: "LogicMonitor: Understanding Why CPUBusyPercent Alert Was Not Triggered"
+seoTitle: "Why a LogicMonitor CPU Alert Didn't Fire | SystemsGoLive"
+description: "A production MySQL server ran at 100% CPU for seven minutes without a LogicMonitor CPUBusyPercent alert. Here's why the threshold didn't trigger."
 date: 2024-08-23T22:05:29+01:00
 draft: false
 tags: ['Monitoring', 'CPU', 'Metrics', 'Alert', 'Threshold', 'MySQL']

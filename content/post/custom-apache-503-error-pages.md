@@ -1,5 +1,7 @@
 ---
 title: "Configuration and Usage of Custom Apache 503 Error Pages for Web Application Instances"
+seoTitle: "Custom Apache 503 Error Pages for Tomcat | SystemsGoLive"
+description: "How to set up custom Apache 503 error pages in front of production Tomcat web applications, so users see a clear message when the app is unavailable."
 date: 2025-05-05T09:41:56+01:00
 draft: false
 tags: ['Infrastructure','Web Applications', 'Apache']

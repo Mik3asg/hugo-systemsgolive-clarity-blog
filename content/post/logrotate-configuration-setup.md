@@ -1,5 +1,7 @@
 ---
 title: "Logrotate Configuration Setup in AlmaLinux 8.9"
+seoTitle: "Logrotate Setup on AlmaLinux | SystemsGoLive"
+description: "How to configure logrotate on AlmaLinux 8.9 to rotate, compress and remove log files automatically, keeping disk usage and system stability under control."
 date: 2024-08-20T13:49:28+01:00
 draft: false
 tags: ['Logrotate', 'Linux', 'SysAdmin', 'DiskSpaceOptimisation', 'LogManagement']

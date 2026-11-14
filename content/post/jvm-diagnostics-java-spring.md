@@ -1,5 +1,7 @@
 ---
 title: "How I Prepared Our Java Spring App Servers to Capture JVM Diagnostics During a CPU Spike"
+seoTitle: "Capturing JVM Diagnostics During a CPU Spike | SystemsGoLive"
+description: "How to safely capture heap and thread dumps on a Java Spring/Tomcat production server during a CPU spike, with a script built on jmap, jstack and jcmd."
 date: 2026-03-07T13:03:06Z
 draft: false
 tags: [JVM, Java, Spring, Tomcat, DevOps, Diagnostics, Performance, Heap Dump, Thread Dump]

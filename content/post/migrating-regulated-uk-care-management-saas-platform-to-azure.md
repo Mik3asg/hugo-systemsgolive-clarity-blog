@@ -1,5 +1,6 @@
 ---
 title: "Migrating a Regulated UK Care Management SaaS Platform to Azure: A Cutover Retrospective"
+seoTitle: "Migrating a UK Care SaaS Platform to Azure | SystemsGoLive"
 date: 2026-10-16T09:00:00+01:00
 draft: false
 description: "How we moved a UK care management platform from private hosting to Azure: the prep work, the problems, and what I'd do differently."

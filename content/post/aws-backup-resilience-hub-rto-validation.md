@@ -1,5 +1,7 @@
 ---
 title: "Building and Validating an AWS Backup Strategy with Resilience Hub"
+seoTitle: "AWS Backup Strategy with Resilience Hub | SystemsGoLive"
+description: "Build a centralised AWS Backup plan for EC2 and S3 with tiered retention and KMS encryption, then measure and validate RTO with AWS Resilience Hub."
 date: 2026-05-29T09:46:26+01:00
 draft: false
 tags: ["AWS", "Backup", "Resilience", "RTO", "RPO"]

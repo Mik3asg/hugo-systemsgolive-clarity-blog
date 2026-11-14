@@ -1,5 +1,7 @@
 ---
 title: "HTTP/2 on Apache Behind HAProxy: Solving Health Check Failures with Dual-Port Architecture"
+seoTitle: "HTTP/2 Behind HAProxy: Fixing Health Checks | SystemsGoLive"
+description: "How HTTP/2 was rolled out on production Apache servers behind HAProxy with zero downtime, using a dual-port design to keep health checks working."
 date: 2025-10-04T15:37:02+01:00
 draft: false
 tags: ['Infrastructure','HTTP/2', 'Apache']

@@ -1,7 +1,8 @@
 ---
 title: "MySQL User Profile Creation Guide" # Title of the blog post.
+seoTitle: "MySQL User Profile Creation Guide | SystemsGoLive"
+description: "Set up MySQL user accounts with role-based access profiles, secure configuration and consistent privilege management across environments."
 date: 2025-06-21T16:52:43+01:00 # Date of post creation.
-description: "Article description." # Description used for search engine.
 draft: false 
 thumbnail: "images/mysql-user-profile-creation.png" 
 summary: "Learn how to set up MySQL user accounts with role-based access profiles, secure configurations, and consistent privilege management across environments."
