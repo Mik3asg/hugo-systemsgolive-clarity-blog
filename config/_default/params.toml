@@ -55,7 +55,7 @@ fallBackOgImage = "images/thumbnail.png"
 #logo = "logos/logo.png"
 #logo = "logos/systemsgolive-logo.png"
 logo = "logos/systemsgolive-logo-transparent_1x.png"
-title = "SystemsGolive"
+title = "SystemsGoLive"
 
 # center logo on navbar
 centerLogo = false # Set to "true" for centering or "false" for left aligned.

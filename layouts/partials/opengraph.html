@@ -24,14 +24,14 @@
 {{- if not $summary }}
   {{- if eq .Kind "term" }}
     {{- if eq .Data.Plural "tags" }}
-      {{- $summary = printf "Articles tagged %s on SystemsGolive: practical writing on cloud infrastructure and DevOps from real project work." .Title }}
+      {{- $summary = printf "Articles tagged %s on SystemsGoLive: practical writing on cloud infrastructure and DevOps from real project work." .Title }}
     {{- else }}
-      {{- $summary = printf "Articles in the %s category on SystemsGolive: practical writing on cloud infrastructure and DevOps from real project work." .Title }}
+      {{- $summary = printf "Articles in the %s category on SystemsGoLive: practical writing on cloud infrastructure and DevOps from real project work." .Title }}
     {{- end }}
   {{- else if eq .Kind "taxonomy" }}
-    {{- $summary = printf "Browse all %s used across SystemsGolive articles on cloud infrastructure and DevOps." (lower .Title) }}
+    {{- $summary = printf "Browse all %s used across SystemsGoLive articles on cloud infrastructure and DevOps." (lower .Title) }}
   {{- else if eq .Kind "section" }}
-    {{- $summary = printf "%s: SystemsGolive articles on cloud infrastructure and DevOps." .Title }}
+    {{- $summary = printf "%s: SystemsGoLive articles on cloud infrastructure and DevOps." .Title }}
   {{- end }}
 {{- end }}
 {{- $site := .Site.Title }}
