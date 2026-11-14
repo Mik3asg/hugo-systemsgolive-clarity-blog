@@ -17,8 +17,8 @@
     <div class="archive_toolbar">
       {{ partial "blog_view_toggle.html" (dict "active" "blog") }}
     </div>
-    <h1 class="post_title">{{ .Params.heading | default .Title }}</h1>
     {{ end }}
+    <h1 class="post_title">{{ .Params.heading | default .Title }}</h1>
     <ul class="posts" id="posts">
       {{- range (.Paginate $pages).Pages }}
         {{ partial "excerpt" . }}
