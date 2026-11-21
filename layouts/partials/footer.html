@@ -31,4 +31,16 @@ END ORIGINAL FOOTER -->
   gap: 1rem;
   flex-wrap: wrap;
 }
-</style>
+</style><script>
+/* GA4 conversion events: enquiry and booking intent. No-op if gtag is not loaded. */
+document.addEventListener('click', function (e) {
+  if (typeof gtag !== 'function') return;
+  var a = e.target.closest && e.target.closest('a[href]');
+  if (!a) return;
+  var href = a.getAttribute('href');
+  var params = { link_text: (a.textContent || '').trim(), page_path: location.pathname };
+  if (href.indexOf('cal.com/') !== -1) gtag('event', 'book_call_click', params);
+  else if (href.indexOf('mailto:') === 0) gtag('event', 'email_click', params);
+  else if (/^\/contact\/?(#.*)?$/.test(href)) gtag('event', 'contact_cta_click', params);
+});
+</script>

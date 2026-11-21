@@ -408,6 +408,9 @@ textarea.contact-input {
       body: new URLSearchParams(new FormData(form)).toString()
     }).then(function (response) {
       if (!response.ok) throw new Error('HTTP ' + response.status);
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { form_name: 'enquiry', enquiry_type: form.querySelector('input[name="enquiry-type"]:checked').value });
+      }
       form.hidden = true;
       success.hidden = false;
       success.focus();
